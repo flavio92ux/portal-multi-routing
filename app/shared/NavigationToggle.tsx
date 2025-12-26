@@ -12,7 +12,7 @@ export function NavigationToggle() {
     const portalHostname = process.env.NEXT_PUBLIC_PORTAL_HOSTNAME;
     const recipesHostname = process.env.NEXT_PUBLIC_RECIPES_HOSTNAME;
 
-    debugger
+    console.log('hostname:', hostname)
 
     if (!portalHostname || !recipesHostname) return;
 
