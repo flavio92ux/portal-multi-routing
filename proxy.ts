@@ -5,7 +5,6 @@ export function proxy(request: NextRequest) {
   const url = request.nextUrl;
   const hostname = request.headers.get('host');
 
-  // Define o redirecionamento interno baseado no domínio
   if (hostname === process.env.RECIPES_HOSTNAME) {
     url.pathname = `/receitas${url.pathname}`;
     return NextResponse.rewrite(url);
@@ -16,3 +15,15 @@ export function proxy(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 }
+
+export const config = {
+  matcher: [
+    /*
+     * Ignora todos os caminhos que não sejam rotas de página:
+     * - _next/static (arquivos compilados)
+     * - _next/image (otimização de imagens)
+     * - favicon.ico, etc.
+     */
+    '/((?!_next/static|_next/image|favicon.ico|api).*)',
+  ],
+};
