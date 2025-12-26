@@ -1,5 +1,9 @@
+import { NavigationToggle } from "./shared/NavigationToggle";
+
 export default function Home() {
   return (
-    <div>Raiz!</div>
+    <div>Raiz!
+      <NavigationToggle />
+    </div>
   );
 }

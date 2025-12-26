@@ -28,12 +28,13 @@ export function NavigationToggle() {
   if (!target) return null;
 
   return (
-    <button
-      onClick={handleNavigate}
-      disabled={isLoading}
-      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
-    >
-      {isLoading ? 'Carregando...' : `Ir para ${target === 'portal' ? 'Portal' : 'Receitas'}`}
-    </button>
+    <h1>Ola</h1>
+    // <button
+    //   onClick={handleNavigate}
+    //   disabled={isLoading}
+    //   className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+    // >
+    //   {isLoading ? 'Carregando...' : `Ir para ${target === 'portal' ? 'Portal' : 'Receitas'}`}
+    // </button>
   );
 }
