@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       NODE_ENV: production
-      PORTAL_HOSTNAME: portal:3000
-      RECIPES_HOSTNAME: receitas:3000
+      NEXT_PUBLIC_PORTAL_HOSTNAME: portal:3000
+      NEXT_PUBLIC_RECIPES_HOSTNAME: receitas:3000
       NEXT_TELEMETRY_DISABLED: "1"
       PORT: "3000"
