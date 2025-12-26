@@ -3,16 +3,23 @@
 import { useEffect, useState } from 'react';
 
 export function NavigationToggle() {
-  const [target, setTarget] = useState<'portal' | 'receitas' | null>(null);
+  const [target, setTarget] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const hostname = window.location.hostname;
 
-    if (hostname.includes('receitas')) {
-      setTarget('portal');
-    } else if (hostname.includes('portal')) {
-      setTarget('receitas');
+    const portalHostname = process.env.NEXT_PUBLIC_PORTAL_HOSTNAME;
+    const recipesHostname = process.env.NEXT_PUBLIC_RECIPES_HOSTNAME;
+
+    debugger
+
+    if (!portalHostname || !recipesHostname) return;
+
+    if (portalHostname.includes(hostname)) {
+      setTarget(recipesHostname);
+    } else {
+      setTarget(portalHostname);
     }
   }, []);
 
@@ -21,7 +28,7 @@ export function NavigationToggle() {
 
     setIsLoading(true);
 
-    window.location.href = `http://${target}:3000/`;
+    window.location.href = `http://${target}`;
   };
 
   if (!target) return null;
@@ -32,7 +39,7 @@ export function NavigationToggle() {
       disabled={isLoading}
       className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {isLoading ? 'Carregando...' : `Ir para ${target === 'portal' ? 'Portal' : 'Receitas'}`}
+      {isLoading ? 'Carregando...' : `Ir para ${target.includes('portal') ? 'Portal' : 'Receitas'}`}
     </button>
   );
 }

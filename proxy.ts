@@ -5,12 +5,12 @@ export function proxy(request: NextRequest) {
   const url = request.nextUrl;
   const hostname = request.headers.get('host');
 
-  if (hostname === process.env.RECIPES_HOSTNAME) {
+  if (hostname === process.env.NEXT_PUBLIC_RECIPES_HOSTNAME) {
     url.pathname = `/receitas${url.pathname}`;
     return NextResponse.rewrite(url);
   }
 
-  if (hostname === process.env.PORTAL_HOSTNAME) {
+  if (hostname === process.env.NEXT_PUBLIC_PORTAL_HOSTNAME) {
     url.pathname = `/portal${url.pathname}`;
     return NextResponse.rewrite(url);
   }
