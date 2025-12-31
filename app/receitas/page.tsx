@@ -1,6 +1,6 @@
 'use client';
 
-import { NavigationToggle } from '@/app/shared/NavigationToggle';
+import { NavigationToggle } from '@/components/ui/NavigationToggle';
 
 export default function Home() {
   const handleClick = () => {

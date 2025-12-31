@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "title": "Futebol - Esportes",
+    "description": "Tudo sobre o mundo da bola.",
+    "type": "category"
+  },
+  "content": {
+    "name": "Futebol",
+    "parent_category": "Esportes",
+    "articles": [
+      { "id": 202, "title": "Final do campeonato paulista definida", "thumb": "/img.jpg" }
+    ]
+  }
+}

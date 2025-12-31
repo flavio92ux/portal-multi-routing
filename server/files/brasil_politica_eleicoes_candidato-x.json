@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "title": "Perfil do Candidato X",
+    "description": "Trajetória política e propostas.",
+    "type": "article"
+  },
+  "content": {
+    "author": "Maria Souza",
+    "published_at": "2023-10-27T14:30:00Z",
+    "body": "Conteúdo detalhado aqui...",
+    "breadcrumbs": [
+      { "label": "Brasil", "url": "/brasil" },
+      { "label": "Política", "url": "/brasil/politica" },
+      { "label": "Eleições", "url": "/brasil/politica/eleicoes" }
+    ]
+  }
+}
