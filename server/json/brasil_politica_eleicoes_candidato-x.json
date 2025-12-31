@@ -1,0 +1,85 @@
+{
+  "id": "art-2025-001",
+  "metadata": {
+    "type": "article",
+    "title": "O impacto da Inteligência Artificial no mercado de trabalho em 2025",
+    "description": "Especialistas analisam como a automação está criando novas categorias de emprego enquanto transforma setores tradicionais.",
+    "canonical": "https://seuportal.com.br/tecnologia/ia/impacto-mercado-trabalho",
+    "keywords": ["IA", "Mercado de Trabalho", "Tecnologia", "Carreira"],
+    "og_image": "https://seuportal.com.br/images/posts/ia-trabalho-social.jpg"
+  },
+  "content": {
+    "slug": "impacto-mercado-trabalho",
+    "kicker": "TECNOLOGIA",
+    "headline": "O impacto da Inteligência Artificial no mercado de trabalho em 2025",
+    "subheadline": "Relatório aponta que 30% das funções atuais serão assistidas por agentes autônomos até o fim do ano.",
+    "author": {
+      "id": "auth-123",
+      "name": "Beatriz Matos",
+      "role": "Repórter de Tecnologia",
+      "avatar": "/authors/beatriz.jpg",
+      "twitter": "@beatriz_tech"
+    },
+    "dates": {
+      "published_at": "2025-12-31T08:00:00Z",
+      "updated_at": "2025-12-31T14:20:00Z"
+    },
+    "media": {
+      "main": {
+        "type": "image",
+        "url": "/images/posts/ia-capa.jpg",
+        "alt": "Profissional utilizando óculos de realidade aumentada em escritório moderno",
+        "caption": "A integração entre humanos e máquinas atingiu novo patamar este ano.",
+        "credit": "Getty Images"
+      }
+    },
+    "body": [
+      {
+        "type": "paragraph",
+        "content": "Desde o início de 2025, o cenário corporativo tem passado por uma transição sem precedentes..."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "content": "As áreas mais afetadas"
+      },
+      {
+        "type": "paragraph",
+        "content": "Setores como jurídico e análise de dados foram os primeiros a notar a eficiência dos novos modelos."
+      },
+      {
+        "type": "quote",
+        "content": "A IA não vai substituir o profissional, mas o profissional que usa IA substituirá o que não usa.",
+        "author": "Dr. Carlos Eduardo, pesquisador do MIT"
+      },
+      {
+        "type": "image",
+        "url": "/images/posts/grafico-vagas.png",
+        "alt": "Gráfico mostrando crescimento de vagas em tecnologia",
+        "caption": "Aumento na demanda por engenheiros de prompt e curadores de dados."
+      },
+      {
+        "type": "paragraph",
+        "content": "Concluindo, a adaptação constante é a única saída para os novos desafios do mercado."
+      }
+    ],
+    "tags": [
+      { "label": "Inteligência Artificial", "slug": "ia" },
+      { "label": "Carreira", "slug": "carreira" }
+    ],
+    "related": [
+      {
+        "id": "art-002",
+        "title": "5 ferramentas de IA para aumentar sua produtividade",
+        "url": "/tecnologia/dicas/ferramentas-ia",
+        "thumb": "/thumbs/ferramentas.jpg"
+      },
+      {
+        "id": "art-003",
+        "title": "O futuro do trabalho remoto em 2026",
+        "url": "/carreira/futuro-trabalho-remoto",
+        "thumb": "/thumbs/remoto.jpg"
+      }
+    ]
+  }
+}

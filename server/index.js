@@ -22,7 +22,7 @@ app.get('/api/content', (req, res) => {
   }
 
   // Sanitizar o path para evitar path traversal attacks
-  const sanitizedPath = String(contentPath).replace(/\.\./g, '');
+  const sanitizedPath = String(contentPath).replace(/\.\./g, '').replace(/[\/]/g, '_');
   
   // Construir o caminho do arquivo JSON
   const filePath = path.join(__dirname, 'json', `${sanitizedPath}.json`);
