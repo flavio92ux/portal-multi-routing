@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  /* No v4, você define a variável e o Tailwind cria a classe automaticamente */
+  --color-primary: hsl(221.2 83.2% 53.3%); /* Azul */
+  --color-secondary: #0f172a;
+}
+
+/* Estilos globais específicos do Portal se necessário */
+:root {
+  --brand-name: "Portal de Notícias";
+}
