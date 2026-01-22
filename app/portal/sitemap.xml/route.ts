@@ -2,11 +2,14 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
 
+const randomNumber = Math.random();
+
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      <!-- Página inicial -->
+      <!-- ${randomNumber} -->
+      
       <url>
-        <loc>https://portal.flavio-franco-tester.funxxx</loc>
+        <loc>https://portal.flavio-franco-tester.fun</loc>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
       </url>
