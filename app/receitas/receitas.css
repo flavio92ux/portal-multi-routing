@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: hsl(142.1 76.2% 36.3%); /* Verde */
+  --color-secondary: #064e3b;
+}
+
+:root {
+  --brand-name: "Livro de Receitas";
+}
