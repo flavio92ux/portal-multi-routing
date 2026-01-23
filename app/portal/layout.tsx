@@ -1,12 +1,16 @@
-import type { Metadata } from "next";
-import "./portal.css";
+import type { Metadata } from 'next';
+import './portal.css';
 
 export const metadata: Metadata = {
-  title: "Portal",
-  description: "Site Portal",
+  title: 'Portal',
+  description: 'Site Portal',
 };
 
-export default function PortalLayout({ children }: { children: React.ReactNode }) {
+export default function PortalLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt-br">
       {/* A classe 'bg-primary' agora é o Azul definido no portal.css */}
