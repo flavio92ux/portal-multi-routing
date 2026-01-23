@@ -1,16 +1,25 @@
 @import "tailwindcss";
 @import "../../styles/shadcn-base.css";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%; /* Azul Portal */
-    --primary-foreground: 210 40% 98%;
-    --card: 0 0% 100%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
-  }
+@theme {
+  --color-primary: #0000ff;
+  --color-secondary: #0000FF;
+  --color-flavio: #FF0000;
+  --color-primary-foreground: #F7F3F2;
+  --color-background: #FFFFFF;
+  --color-foreground: #1A0F0A;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1A0F0A;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #1A0F0A;
+  --color-muted: #F5F3F1;
+  --color-muted-foreground: #8B7F7C;
+  --color-accent: #F75A5A;
+  --color-accent-foreground: #FF8533;
+  --color-destructive: #F75A5A;
+  --color-destructive-foreground: #F7F3F2;
+  --color-border: #E8E0D9;
+  --color-input: #E8E0D9;
+  --color-ring: #FF8533;
+  --radius-base: 1rem;
 }

@@ -2,20 +2,24 @@
 @import "../../styles/shadcn-base.css";
 
 @theme {
-  --color-primary: #ff0000; /* Verde */
-  --color-secondary: #ff0000;
-}
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --primary: #ff0000; /* Verde Receitas */
-    --primary-foreground: #ff0000;
-    --card: 0 0% 100%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
-    --radius: 1rem; /* Bordas mais arredondadas para receitas */
-  }
+  --color-primary: #ffa500;
+  --color-secondary: #0000FF;
+  --color-flavio: #FF0000;
+  --color-primary-foreground: #F7F3F2;
+  --color-background: #FFFFFF;
+  --color-foreground: #1A0F0A;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1A0F0A;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #1A0F0A;
+  --color-muted: #F5F3F1;
+  --color-muted-foreground: #8B7F7C;
+  --color-accent: #F5F3F1;
+  --color-accent-foreground: #FF8533;
+  --color-destructive: #F75A5A;
+  --color-destructive-foreground: #F7F3F2;
+  --color-border: #E8E0D9;
+  --color-input: #E8E0D9;
+  --color-ring: #FF8533;
+  --radius-base: 1rem;
 }

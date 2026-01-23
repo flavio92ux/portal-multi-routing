@@ -11,7 +11,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
     <html lang="pt-br">
       {/* A classe 'bg-primary' agora é o Azul definido no portal.css */}
       <body className="bg-slate-50 text-slate-900">
-        <nav className="bg-primary p-4 text-white shadow-lg">
+        <nav className="bg-secondary p-4 text-white shadow-lg">
           <span className="font-bold">Portal News</span>
         </nav>
         <main className="p-6">{children}</main>
