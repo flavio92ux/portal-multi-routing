@@ -1,12 +1,16 @@
 @import "tailwindcss";
+@import "../../styles/shadcn-base.css";
 
-@theme {
-  /* No v4, você define a variável e o Tailwind cria a classe automaticamente */
-  --color-primary: hsl(221.2 83.2% 53.3%); /* Azul */
-  --color-secondary: #0f172a;
-}
-
-/* Estilos globais específicos do Portal se necessário */
-:root {
-  --brand-name: "Portal de Notícias";
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%; /* Azul Portal */
+    --primary-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
 }
