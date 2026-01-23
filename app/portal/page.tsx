@@ -6,7 +6,7 @@ export default function Home() {
         <div className="p-6">
           <div className="flex gap-4">
             <NavigationToggle />
-            <Button variant="default">Botão shadcn/ui Receitas Portal</Button>
+            <Button variant="default">Botão shadcn/ui Receitas</Button>
           </div>
         </div>
   );

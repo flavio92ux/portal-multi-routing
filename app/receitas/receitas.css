@@ -1,12 +1,17 @@
 @import "tailwindcss";
 @import "../../styles/shadcn-base.css";
 
+@theme {
+  --color-primary: #ff0000; /* Verde */
+  --color-secondary: #ff0000;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
-    --primary: 142.1 76.2% 36.3%; /* Verde Receitas */
-    --primary-foreground: 355.7 100% 97.3%;
+    --primary: #ff0000; /* Verde Receitas */
+    --primary-foreground: #ff0000;
     --card: 0 0% 100%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
