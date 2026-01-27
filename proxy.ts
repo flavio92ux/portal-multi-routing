@@ -6,12 +6,12 @@ export function proxy(request: NextRequest) {
   const hostname = request.headers.get('host');
 
   if (hostname === process.env.NEXT_PUBLIC_RECIPES_HOSTNAME) {
-    url.pathname = `/receitas${url.pathname}`;
+    url.pathname = `/band-receitas${url.pathname}`;
     return NextResponse.rewrite(url);
   }
 
   if (hostname === process.env.NEXT_PUBLIC_PORTAL_HOSTNAME) {
-    url.pathname = `/portal${url.pathname}`;
+    url.pathname = `/band${url.pathname}`;
     return NextResponse.rewrite(url);
   }
 }
