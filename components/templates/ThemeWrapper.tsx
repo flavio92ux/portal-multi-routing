@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ThemeConfig {
-  primary: string;
+  primary: string | null;
   primaryForeground: string;
   secondary: string;
   secondaryForeground: string;
@@ -28,7 +28,7 @@ export function ThemeWrapper({
   children: React.ReactNode;
 }) {
   const dynamicStyles = {
-    '--primary': theme.primary,
+    '--primary': theme.primary || '#ff0084',
     '--primary-foreground': theme.primaryForeground,
     '--secondary': theme.secondary,
     '--secondary-foreground': theme.secondaryForeground,

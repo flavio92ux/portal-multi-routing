@@ -2,7 +2,7 @@ import { ThemeWrapper } from '@/components/templates/ThemeWrapper';
 import { Button } from '@/components/ui/button';
 
 const theme = {
-  primary: '#008000',
+  primary: null,
   primaryForeground: '#f7f3f2',
   secondary: '#4b1230',
   secondaryForeground: '#ffffff',
