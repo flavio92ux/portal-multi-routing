@@ -1,9 +1,10 @@
+// app/band/[...slug]/page.tsx
 import { ThemeWrapper } from '@/components/templates/ThemeWrapper';
 import { Button } from '@/components/ui/button';
 
-export default function LocationPage() {
+export default async function Page() {
   const theme = {
-    primary: '#9d00ff', // Purpura
+    primary: '#ff0000', // Vermelho
     primaryForeground: '#f7f3f2',
     secondary: '#4b1230',
     secondaryForeground: '#ffffff',
@@ -23,23 +24,11 @@ export default function LocationPage() {
   };
 
   return (
-    <>
-      <ThemeWrapper theme={theme}>
-        <div className="p-6">
-          <div className="flex gap-4">
-            <Button variant="default">
-              portal:3000/politica usando variaveis fixas
-            </Button>
-          </div>
-        </div>
-      </ThemeWrapper>
-      <div className="p-6">
-        <div className="flex gap-4">
-          <Button variant="default">
-            portal:3000/politica usando variaveis fixas
-          </Button>
-        </div>
-      </div>
-    </>
+    <ThemeWrapper theme={theme}>
+      <Button variant="default">
+        portal:3000/cidades usando variaveis dinamicas passando para portal.css
+        na raiz de band, cor padrão roxa, cor personalizada vermelho
+      </Button>
+    </ThemeWrapper>
   );
 }
