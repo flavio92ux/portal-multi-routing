@@ -4,7 +4,11 @@ import ArticlePage from '@/components/templates/ArticlePage';
 import CategoryPage from '@/components/templates/CategoryPage';
 import GeneralLayout from '@/components/templates/GeneralLayout';
 
-export default async function DynamicPage({ params }: { params: { slug: string[] } }) {
+export default async function DynamicPage({
+  params,
+}: {
+  params: { slug: string[] };
+}) {
   const resolvedParams = await params;
 
   const path = resolvedParams.slug.join('/');
