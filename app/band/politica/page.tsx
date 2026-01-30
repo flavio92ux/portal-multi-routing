@@ -33,13 +33,6 @@ export default function LocationPage() {
           </div>
         </div>
       </ThemeWrapper>
-      <div className="p-6">
-        <div className="flex gap-4">
-          <Button variant="default">
-            portal:3000/politica usando variaveis fixas
-          </Button>
-        </div>
-      </div>
     </>
   );
 }

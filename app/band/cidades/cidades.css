@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+@import '../../../styles/shadcn-base.css';
+
+@theme {
+  --color-primary: #9f2b68;
+  --color-secondary: #0000ff;
+  --color-flavio: #ff0000;
+  --color-primary-foreground: #f7f3f2;
+  --color-background: #ffffff;
+  --color-foreground: #1a0f0a;
+  --color-card: #ffffff;
+  --color-card-foreground: #1a0f0a;
+  --color-popover: var(--popover, #ffffff);
+  --color-popover-foreground: #1a0f0a;
+  --color-muted: #f5f3f1;
+  --color-muted-foreground: #8b7f7c;
+  --color-accent: #f75a5a;
+  --color-accent-foreground: #ff8533;
+  --color-destructive: #f75a5a;
+  --color-destructive-foreground: #f7f3f2;
+  --color-border: #e8e0d9;
+  --color-input: #e8e0d9;
+  --color-ring: #ff8533;
+  --radius-base: 1rem;
+}
