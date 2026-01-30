@@ -6,7 +6,17 @@
     "description": "Especialistas analisam como a automação está criando novas categorias de emprego enquanto transforma setores tradicionais.",
     "canonical": "https://seuportal.com.br/tecnologia/ia/impacto-mercado-trabalho",
     "keywords": ["IA", "Mercado de Trabalho", "Tecnologia", "Carreira"],
-    "og_image": "https://seuportal.com.br/images/posts/ia-trabalho-social.jpg"
+    "og_image": "https://seuportal.com.br/images/posts/ia-trabalho-social.jpg",
+    "theme": {
+      "primary": "#9f2b68",
+      "primaryForeground": "#f7f3f2",
+      "background": "#ffffff",
+      "foreground": "#1a0f0a",
+      "card": "#ffffff",
+      "border": "#e8e0d9",
+      "ring": "#ff8533",
+      "radius": "0.5rem"
+    }
   },
   "content": {
     "slug": "impacto-mercado-trabalho",

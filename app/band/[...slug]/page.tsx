@@ -4,7 +4,7 @@ import ArticlePage from '@/components/templates/ArticlePage';
 import CategoryPage from '@/components/templates/CategoryPage';
 import GeneralLayout from '@/components/templates/GeneralLayout';
 
-export default async function DynamicPage({
+export default async function SlugPage({
   params,
 }: {
   params: { slug: string[] };
@@ -14,7 +14,9 @@ export default async function DynamicPage({
   const path = resolvedParams.slug.join('/');
   const data = await getPageData(path);
 
-  if (!data) return notFound();
+  if (!data || !data.metadata) {
+    return notFound();
+  }
 
   switch (data.metadata.type) {
     case 'article':

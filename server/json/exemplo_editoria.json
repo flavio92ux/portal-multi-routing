@@ -3,7 +3,17 @@
     "type": "category",
     "title": "Brasil: Notícias sobre política, economia e sociedade",
     "description": "Acompanhe o que acontece no Brasil com análises e reportagens exclusivas.",
-    "canonical": "https://seuportal.com.br/brasil"
+    "canonical": "https://seuportal.com.br/brasil",
+    "theme": {
+      "primary": "#9f2b68",
+      "primaryForeground": "#f7f3f2",
+      "background": "#ffffff",
+      "foreground": "#1a0f0a",
+      "card": "#ffffff",
+      "border": "#e8e0d9",
+      "ring": "#ff8533",
+      "radius": "0.5rem"
+    }
   },
   "content": {
     "id": "cat-brasil",
@@ -39,9 +49,24 @@
       }
     ],
     "latest_news": [
-      { "id": "art-004", "title": "Nova variante de gripe preocupa Rio", "url": "/brasil/saude/gripe-rio", "time": "10 min atrás" },
-      { "id": "art-005", "title": "Leilão de rodovias arrecada R$ 2 bi", "url": "/brasil/economia/leilao-rodovias", "time": "45 min atrás" },
-      { "id": "art-006", "title": "Matrículas para rede pública começam segunda", "url": "/brasil/educacao/matriculas-2026", "time": "1h atrás" }
+      {
+        "id": "art-004",
+        "title": "Nova variante de gripe preocupa Rio",
+        "url": "/brasil/saude/gripe-rio",
+        "time": "10 min atrás"
+      },
+      {
+        "id": "art-005",
+        "title": "Leilão de rodovias arrecada R$ 2 bi",
+        "url": "/brasil/economia/leilao-rodovias",
+        "time": "45 min atrás"
+      },
+      {
+        "id": "art-006",
+        "title": "Matrículas para rede pública começam segunda",
+        "url": "/brasil/educacao/matriculas-2026",
+        "time": "1h atrás"
+      }
     ]
   }
 }

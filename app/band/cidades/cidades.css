@@ -3,14 +3,14 @@
 
 @theme {
   --color-primary: #9f2b68;
-  --color-secondary: #9f2b68;
+  --color-secondary: #0000ff;
   --color-flavio: #ff0000;
   --color-primary-foreground: #f7f3f2;
   --color-background: #ffffff;
   --color-foreground: #1a0f0a;
   --color-card: #ffffff;
   --color-card-foreground: #1a0f0a;
-  --color-popover: #ffffff;
+  --color-popover: var(--popover, #ffffff);
   --color-popover-foreground: #1a0f0a;
   --color-muted: #f5f3f1;
   --color-muted-foreground: #8b7f7c;
