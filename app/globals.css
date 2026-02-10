@@ -112,4 +112,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  a {
+    @apply text-primary underline hover:opacity-80;
+  }
 }
