@@ -1,12 +1,9 @@
 /**
- * Verifica se uma URL/path é de um artigo
- * Artigos terminam com o padrão: -YYYYMMDDHHMM (hífen seguido de 14 dígitos)
- * Exemplo: /noticias/brasil-mantem-pior-posicao-....-202602100800
- *
- * @param path - O caminho ou URL a ser verificado
- * @returns true se é um artigo, false caso contrário
+ * Checks if a URL ends with a valid 12-digit article slug (YYYYMMDDHHmm).
+ * @param url - The URL string to validate.
+ * @returns True if the slug pattern is found at the end of the URL.
  */
-export function isArticleUrl(path: string): boolean {
-  const articlePattern = /-\d{14}$/;
-  return articlePattern.test(path);
+export function isValidArticleSlug(url: string): boolean {
+  const slugRegex = /\d{12}$/;
+  return slugRegex.test(url);
 }

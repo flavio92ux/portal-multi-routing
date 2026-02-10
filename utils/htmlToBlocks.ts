@@ -1,69 +1,54 @@
-import { ArticleBlock } from '@/types/article-blocks';
+import { JSDOM } from 'jsdom';
 
-export function htmlToBlocks(html: string): ArticleBlock[] {
+export function htmlToBlocks(html: string = '') {
   if (!html) return [];
 
-  const blocks: ArticleBlock[] = [];
+  try {
+    const dom = new JSDOM(html);
+    const doc = dom.window.document;
 
-  const parser =
-    typeof window === 'undefined'
-      ? new (require('jsdom').JSDOM)(html).window.DOMParser()
-      : new DOMParser();
+    const blocks: any[] = [];
 
-  const doc = parser.parseFromString(html, 'text/html');
+    doc.body.childNodes.forEach((node: any) => {
+      if (node.nodeType !== 1) return;
 
-  doc.body.childNodes.forEach((node: any) => {
-    if (node.nodeType !== 1) return;
+      const text = node.textContent?.trim();
 
-    switch (node.tagName) {
-      case 'P':
+      if (node.tagName === 'P' && text) {
         blocks.push({
           type: 'paragraph',
-          text: node.textContent?.trim() || '',
+          content: text,
         });
-        break;
-
-      case 'H2':
-      case 'H3':
-      case 'H4':
-        blocks.push({
-          type: 'heading',
-          level: Number(node.tagName.replace('H', '')) as 2 | 3 | 4,
-          text: node.textContent?.trim() || '',
-        });
-        break;
-
-      case 'BLOCKQUOTE':
-        blocks.push({
-          type: 'quote',
-          text: node.textContent?.trim() || '',
-        });
-        break;
-
-      case 'FIGURE': {
-        const img = node.querySelector('img');
-        const figcaption = node.querySelector('figcaption');
-
-        if (img) {
-          blocks.push({
-            type: 'image',
-            src: img.getAttribute('src') || '',
-            alt: img.getAttribute('alt') || undefined,
-            caption: figcaption?.textContent?.trim(),
-          });
-        }
-        break;
       }
 
-      case 'IMG':
+      if (/H[1-6]/.test(node.tagName) && text) {
+        blocks.push({
+          type: 'heading',
+          level: Number(node.tagName.replace('H', '')),
+          content: text,
+        });
+      }
+
+      if (node.tagName === 'BLOCKQUOTE' && text) {
+        blocks.push({
+          type: 'quote',
+          content: text,
+        });
+      }
+
+      if (node.tagName === 'IMG') {
         blocks.push({
           type: 'image',
-          src: node.getAttribute('src') || '',
-          alt: node.getAttribute('alt') || undefined,
+          url: node.getAttribute('src'),
+          alt: node.getAttribute('alt') || '',
+          caption: node.getAttribute('title') || '',
         });
-        break;
-    }
-  });
+      }
+    });
 
-  return blocks;
+    return blocks;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }

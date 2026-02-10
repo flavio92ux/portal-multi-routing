@@ -1,60 +1,153 @@
-import { ArticleBlock } from './article-blocks';
-
-export type Article = {
+/**
+ * Root Article model
+ * Representa o retorno final do mapper mapVibraArticleToExample
+ */
+export interface Article {
   id: string;
+
+  metadata: ArticleMetadata;
+
+  content: ArticleContent;
+}
+
+/* ============================================================
+ * METADATA
+ * ============================================================ */
+
+export interface ArticleMetadata {
   type: 'article' | 'category' | 'home';
-  slug: string;
-  url: string;
 
-  seo: ArticleSEO;
-
-  header: ArticleHeader;
-
-  cover?: ArticleMedia;
-
-  content: ArticleBlock[];
-
-  tags?: ArticleTag[];
-
-  related?: RelatedArticle[];
-};
-
-export type ArticleSEO = {
   title: string;
   description?: string;
-  image?: string;
-  robots?: string;
-};
+  canonical?: string;
+  keywords?: string[];
+  og_image?: string;
 
-export type ArticleHeader = {
-  editorial?: string;
+  theme: ArticleTheme;
+}
+
+export interface ArticleTheme {
+  primary: string;
+  primaryForeground: string;
+  background: string;
+  foreground: string;
+  card: string;
+  border: string;
+  ring: string;
+  radius: string;
+}
+
+/* ============================================================
+ * CONTENT
+ * ============================================================ */
+
+export interface ArticleContent {
+  slug: string;
   kicker?: string;
-  title: string;
-  subtitle?: string;
-  author?: {
-    name: string;
-    avatar?: string;
-  };
-  publishedAt?: string;
-  updatedAt?: string;
-};
 
-export type ArticleMedia = {
+  headline: string;
+  subheadline?: string;
+
+  author: ArticleAuthor;
+
+  dates: ArticleDates;
+
+  media?: ArticleMedia;
+
+  body: ArticleBlock[];
+
+  tags: ArticleTag[];
+
+  related: RelatedArticle[];
+}
+
+/* ============================================================
+ * AUTHOR
+ * ============================================================ */
+
+export interface ArticleAuthor {
+  id: string;
+  name: string;
+  role?: string;
+  avatar?: string | null;
+  twitter?: string | null;
+}
+
+/* ============================================================
+ * DATES
+ * ============================================================ */
+
+export interface ArticleDates {
+  published_at: string; // ISO 8601
+  updated_at?: string; // ISO 8601
+}
+
+/* ============================================================
+ * MEDIA
+ * ============================================================ */
+
+export interface ArticleMedia {
+  main: ArticleMediaItem;
+}
+
+export interface ArticleMediaItem {
   type: 'image' | 'video';
-  src: string;
+  url: string;
   alt?: string;
   caption?: string;
   credit?: string;
-};
+}
 
-export type ArticleTag = {
+/* ============================================================
+ * BODY BLOCKS
+ * ============================================================ */
+
+export type ArticleBlock =
+  | ParagraphBlock
+  | HeadingBlock
+  | QuoteBlock
+  | ImageBlock;
+
+export interface ParagraphBlock {
+  type: 'paragraph';
+  content: string;
+}
+
+export interface HeadingBlock {
+  type: 'heading';
+  level: 1 | 2 | 3 | 4 | 5 | 6;
+  content: string;
+}
+
+export interface QuoteBlock {
+  type: 'quote';
+  content: string;
+  author?: string;
+}
+
+export interface ImageBlock {
+  type: 'image';
+  url: string;
+  alt?: string;
+  caption?: string;
+}
+
+/* ============================================================
+ * TAGS
+ * ============================================================ */
+
+export interface ArticleTag {
   label: string;
   slug: string;
-};
+}
 
-export type RelatedArticle = {
+/* ============================================================
+ * RELATED ARTICLES
+ * ============================================================ */
+
+export interface RelatedArticle {
   id: string;
   title: string;
   url: string;
-  image?: string;
-};
+  thumb?: string;
+}
