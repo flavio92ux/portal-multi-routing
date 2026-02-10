@@ -1,6 +1,7 @@
 import { getPageData } from '@/services/api';
 import { ThemeWrapper } from '@/components/templates/ThemeWrapper';
 import { notFound } from 'next/navigation';
+import { isValidArticleSlug } from '@/lib/url';
 
 export default async function SlugLayout({
   children,
@@ -9,12 +10,20 @@ export default async function SlugLayout({
   children: React.ReactNode;
   params: Promise<{ slug: string[] }>;
 }) {
-  // const { slug } = await params;
-  // const data = await getPageData(slug.join('/'));
+  const resolvedParams = await params;
+  const path = resolvedParams.slug.join('/');
 
-  // if (!data || !data.metadata) {
-  //   return notFound();
-  // }
+  let data;
+  const isArticle = isValidArticleSlug(path);
 
-  return { children };
+  if (isArticle === true) {
+    data = await getPageData(path);
+  }
+
+  if (!data || !data.metadata || !data.metadata.theme) {
+    return notFound();
+  }
+
+  const theme = data.metadata.theme;
+  return <ThemeWrapper theme={theme}>{children}</ThemeWrapper>;
 }

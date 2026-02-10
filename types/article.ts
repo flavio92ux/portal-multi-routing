@@ -29,9 +29,19 @@ export interface ArticleMetadata {
 export interface ArticleTheme {
   primary: string;
   primaryForeground: string;
+  secondary: string;
+  secondaryForeground: string;
   background: string;
   foreground: string;
+  cardForeground: string;
+  muted: string;
+  mutedForeground: string;
+  accent: string;
   card: string;
+  accentForeground: string;
+  destructive: string;
+  destructiveForeground: string;
+  input: string;
   border: string;
   ring: string;
   radius: string;

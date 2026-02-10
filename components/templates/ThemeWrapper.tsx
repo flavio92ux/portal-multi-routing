@@ -1,30 +1,11 @@
+import { ArticleTheme } from '@/types/article';
 import React from 'react';
-
-interface ThemeConfig {
-  primary: string | null;
-  primaryForeground: string;
-  secondary: string;
-  secondaryForeground: string;
-  background: string;
-  foreground: string;
-  card: string;
-  cardForeground: string;
-  muted: string;
-  mutedForeground: string;
-  accent: string;
-  accentForeground: string;
-  destructive: string;
-  destructiveForeground: string;
-  border: string;
-  input: string;
-  ring: string;
-}
 
 export function ThemeWrapper({
   theme,
   children,
 }: {
-  theme: ThemeConfig;
+  theme: ArticleTheme;
   children: React.ReactNode;
 }) {
   const dynamicStyles = {

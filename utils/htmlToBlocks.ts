@@ -9,7 +9,8 @@ export function htmlToBlocks(html: string = '') {
 
     const blocks: any[] = [];
 
-    doc.body.childNodes.forEach((node: any) => {
+    // Converter NodeList para array para garantir compatibilidade
+    Array.from(doc.body.childNodes).forEach((node: any) => {
       if (node.nodeType !== 1) return;
 
       const text = node.textContent?.trim();

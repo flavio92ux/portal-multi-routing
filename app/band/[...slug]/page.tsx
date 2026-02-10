@@ -27,14 +27,12 @@ export default async function SlugPage({
 
   const stringfyded = JSON.stringify(data);
 
-  return <p>Não encontrado</p>;
-
-  // switch (data.metadata.type) {
-  //   case 'article':
-  //     return <ArticlePage data={data} />;
-  //   case 'category':
-  //     return <CategoryPage data={data} />;
-  //   default:
-  //     return <p>Não encontrado</p>;
-  // }
+  switch (data.metadata.type) {
+    case 'article':
+      return <ArticlePage data={data} />;
+    case 'category':
+      return <CategoryPage data={data} />;
+    default:
+      return <p>Não encontrado</p>;
+  }
 }

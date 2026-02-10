@@ -26,6 +26,16 @@ export function mapVibraToCleanArticle(vibraData: any): Article {
         border: '#e5e5e5',
         ring: '#ff8533',
         radius: '0.5rem',
+        secondary: '',
+        secondaryForeground: '',
+        cardForeground: '',
+        muted: '',
+        mutedForeground: '',
+        accent: '',
+        accentForeground: '',
+        destructive: '',
+        destructiveForeground: '',
+        input: '',
       },
     },
     content: {
@@ -55,7 +65,7 @@ export function mapVibraToCleanArticle(vibraData: any): Article {
             },
           }
         : undefined,
-      body: htmlToBlocks(data.text),
+      body: htmlToBlocks(data.text) || [],
       tags: (data.tags || []).map((tag: any) => ({
         label: tag.name,
         slug: slugify(tag.name),
