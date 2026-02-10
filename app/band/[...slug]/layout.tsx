@@ -9,12 +9,12 @@ export default async function SlugLayout({
   children: React.ReactNode;
   params: Promise<{ slug: string[] }>;
 }) {
-  const { slug } = await params;
-  const data = await getPageData(slug.join('/'));
+  // const { slug } = await params;
+  // const data = await getPageData(slug.join('/'));
 
-  if (!data || !data.metadata) {
-    return notFound();
-  }
+  // if (!data || !data.metadata) {
+  //   return notFound();
+  // }
 
-  return <ThemeWrapper theme={data.metadata.theme}>{children}</ThemeWrapper>;
+  return { children };
 }

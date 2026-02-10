@@ -1,24 +1,46 @@
 import { Article } from '@/types/article';
+import { htmlToBlocks } from '@/utils/htmlToBlocks';
+import { slugify } from '@/utils/slugify';
 
 export function mapVibraToCleanArticle(vibraData: any): Article {
+  const data = vibraData.config.order.data;
+
   return {
     id: vibraData._id,
-    metadata: {
-      title: vibraData.route?.title || '',
-      description: vibraData.route?.description || '',
-      ogImage: vibraData.route?.image || '', // Exemplo de caminho
+    type: 'article',
+    slug: vibraData.url,
+    url: `/${vibraData.url}`,
+
+    seo: {
+      title: vibraData.config.seo.title,
+      description: vibraData.config.seo.description,
+      image: vibraData.config.seo.image?.url,
+      robots: vibraData.config.seo.robots,
     },
-    content: {
-      headline: vibraData.route?.title, // Na Vibra o título principal costuma estar aqui
-      author: vibraData.author?.name || 'Redação Band',
-      publishedAt: vibraData.created_at,
-      // Simulando a extração do corpo que no Angular vem em blocos de config
-      body: (vibraData.route?.map?.template?.config?.order || [])
-        .filter((item: any) => item.data?.component === 'text')
-        .map((item: any) => ({
-          type: 'paragraph',
-          content: item.data?.content || '',
-        })),
+
+    header: {
+      editorial: 'Band Minas',
+      title: data.title,
+      subtitle: data.subTitle,
+      author: {
+        name: data.redactor,
+      },
+      publishedAt: vibraData.createdAt,
+      updatedAt: vibraData.updatedAt,
     },
+
+    cover: {
+      type: 'image',
+      src: data.image?.url,
+      alt: data.image?.title,
+      credit: data.image?.credit,
+    },
+
+    content: htmlToBlocks(data.text),
+
+    tags: data.tags?.map((tag: any) => ({
+      label: tag.name,
+      slug: slugify(tag.name),
+    })),
   };
 }
