@@ -6,12 +6,6 @@
       "type": "node-terminal",
       "request": "launch",
       "command": "npm run dev -- --inspect"
-    },
-    {
-      "name": "CMS Mock",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "npm run server"
     }
   ]
 }
