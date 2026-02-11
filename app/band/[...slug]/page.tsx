@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { getPageData } from '@/services/api';
 import ArticlePage from '@/components/templates/ArticlePage';
 import CategoryPage from '@/components/templates/CategoryPage';
-import GeneralLayout from '@/components/templates/GeneralLayout';
 import { isValidArticleSlug } from '@/lib/url';
 
 export default async function SlugPage({
@@ -25,7 +24,7 @@ export default async function SlugPage({
     return notFound();
   }
 
-  const stringfyded = JSON.stringify(data);
+  // const stringfyded = JSON.stringify(data);
 
   switch (data.metadata.type) {
     case 'article':

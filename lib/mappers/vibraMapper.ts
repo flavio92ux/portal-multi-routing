@@ -5,6 +5,8 @@ import { slugify } from '@/utils/slugify';
 export function mapVibraToCleanArticle(vibraData: any): Article {
   const data = vibraData?.config?.order?.data ?? {};
   const seo = vibraData?.config?.seo ?? {};
+  const cssPrimaryColorByTheme =
+    vibraData?.route?.map?.template?.config?.theme?.css[0]?.value ?? '';
 
   return {
     id: vibraData.id ?? vibraData._id,
@@ -18,24 +20,7 @@ export function mapVibraToCleanArticle(vibraData: any): Article {
       keywords: (data.tags || []).map((t: any) => t.name),
       og_image: seo.image?.url || data.image?.url,
       theme: {
-        primary: '#9f2b68',
-        primaryForeground: '#ffffff',
-        background: '#ffffff',
-        foreground: '#1a1a1a',
-        card: '#ffffff',
-        border: '#e5e5e5',
-        ring: '#ff8533',
-        radius: '0.5rem',
-        secondary: '',
-        secondaryForeground: '',
-        cardForeground: '',
-        muted: '',
-        mutedForeground: '',
-        accent: '',
-        accentForeground: '',
-        destructive: '',
-        destructiveForeground: '',
-        input: '',
+        primary: cssPrimaryColorByTheme,
       },
     },
     content: {
