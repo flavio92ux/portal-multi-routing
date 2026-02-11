@@ -17,13 +17,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Ignora todos os caminhos que não sejam rotas de página:
-     * - _next/static (arquivos compilados)
-     * - _next/image (otimização de imagens)
-     * - favicon.ico, etc.
-     */
-    '/((?!_next/static|_next/image|favicon.ico|api).*)',
-  ],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|api|monitoring).*)'],
 };

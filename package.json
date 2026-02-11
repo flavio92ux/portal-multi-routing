@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "server": "node server/index.js",
     "lint": "eslint"
   },
   "dependencies": {
@@ -16,6 +15,7 @@
     "clsx": "^2.1.1",
     "express": "^5.2.1",
     "fs": "^0.0.1-security",
+    "jsdom": "^28.0.0",
     "lucide-react": "^0.563.0",
     "next": "16.1.1",
     "react": "19.2.3",
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/jsdom": "^27.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
