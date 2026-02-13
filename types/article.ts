@@ -118,20 +118,30 @@ export type ArticleBlock =
   | QuoteBlock
   | ImageBlock;
 
+/* ============================================================
+ * INLINE NODE
+ * ============================================================ */
+
+export interface InlineNode {
+  type: 'text';
+  value: string;
+  marks?: ('bold' | 'italic' | 'link')[];
+}
+
 export interface ParagraphBlock {
   type: 'paragraph';
-  content: string;
+  content: InlineNode[];
 }
 
 export interface HeadingBlock {
   type: 'heading';
   level: 1 | 2 | 3 | 4 | 5 | 6;
-  content: string;
+  content: InlineNode[];
 }
 
 export interface QuoteBlock {
   type: 'quote';
-  content: string;
+  content: InlineNode[];
   author?: string;
 }
 

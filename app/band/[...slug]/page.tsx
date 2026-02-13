@@ -24,6 +24,8 @@ export default async function SlugPage({
     return notFound();
   }
 
+  const stringfyded = JSON.stringify(data);
+
   switch (data.metadata.type) {
     case 'article':
       return <ArticlePage data={data} />;

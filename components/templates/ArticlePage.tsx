@@ -1,3 +1,42 @@
+import { JSX } from 'react';
+
+interface InlineNode {
+  type: 'text';
+  value: string;
+  marks?: ('bold' | 'italic' | 'link')[];
+  url?: string;
+}
+
+function renderInlineNodes(nodes: InlineNode[]) {
+  if (!Array.isArray(nodes)) {
+    return nodes;
+  }
+
+  return nodes.map((node, idx) => {
+    let element: string | JSX.Element = node.value;
+
+    if (node.marks?.includes('bold')) {
+      element = <strong key={`${idx}-bold`}>{element}</strong>;
+    }
+    if (node.marks?.includes('italic')) {
+      element = <em key={`${idx}-italic`}>{element}</em>;
+    }
+    if (node.marks?.includes('link')) {
+      element = (
+        <a
+          key={`${idx}-link`}
+          href={node.url || '#'}
+          className="text-primary underline hover:no-underline"
+        >
+          {element}
+        </a>
+      );
+    }
+
+    return element || null;
+  });
+}
+
 export default function ArticlePage({ data }: { data: any }) {
   const { content } = data;
 
@@ -75,11 +114,11 @@ export default function ArticlePage({ data }: { data: any }) {
           {content.body.map((block: any, idx: number) => {
             switch (block.type) {
               case 'paragraph':
-                return <p key={idx}>{block.content}</p>;
+                return <p key={idx}>{renderInlineNodes(block.content)}</p>;
               case 'heading':
                 return (
                   <h2 key={idx} className="mt-8 text-3xl font-bold">
-                    {block.content}
+                    {renderInlineNodes(block.content)}
                   </h2>
                 );
               case 'quote':
@@ -88,7 +127,9 @@ export default function ArticlePage({ data }: { data: any }) {
                     key={idx}
                     className="my-8 border-l-4 border-red-500 pl-4 italic"
                   >
-                    <p className="text-2xl">"{block.content}"</p>
+                    <p className="text-2xl">
+                      "{renderInlineNodes(block.content)}"
+                    </p>
                     {block.author && (
                       <cite className="mt-2 block text-sm">
                         — {block.author}
