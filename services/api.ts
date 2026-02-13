@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
 import { Article } from '@/types/article';
 
@@ -8,12 +9,26 @@ export async function getPageData(path: string): Promise<Article | null> {
     const response = await fetch(URL_FETCH, { next: { revalidate: 60 } });
 
     if (!response.ok) {
-      console.error('[API ERROR] Fetch failed', {
+      const errorContext = {
         status: response.status,
         statusText: response.statusText,
         url: URL_FETCH,
         path,
-      });
+      };
+
+      console.error('[API ERROR] Fetch failed', errorContext);
+
+      Sentry.captureException(
+        new Error(
+          `API Fetch Failed: ${response.status} ${response.statusText}`
+        ),
+        {
+          contexts: {
+            api: errorContext,
+          },
+        }
+      );
+
       return null;
     }
 
@@ -21,12 +36,20 @@ export async function getPageData(path: string): Promise<Article | null> {
     return mapVibraToCleanArticle(rawData);
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error('[API ERROR] Failed to fetch page data', {
+    const errorContext = {
       error: errorMessage,
       url: URL_FETCH,
       path,
-      stack: error instanceof Error ? error.stack : undefined,
+    };
+
+    console.error('[API ERROR] Failed to fetch page data', errorContext);
+
+    Sentry.captureException(error, {
+      contexts: {
+        api: errorContext,
+      },
     });
+
     return null;
   }
 }
