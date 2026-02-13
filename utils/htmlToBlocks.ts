@@ -1,51 +1,51 @@
-import { JSDOM } from 'jsdom';
+import * as cheerio from 'cheerio';
 
 export function htmlToBlocks(html: string = '') {
   if (!html) return [];
 
   try {
-    const dom = new JSDOM(html);
-    const doc = dom.window.document;
-
+    const $ = cheerio.load(html);
     const blocks: any[] = [];
 
-    // Converter NodeList para array para garantir compatibilidade
-    Array.from(doc.body.childNodes).forEach((node: any) => {
-      if (node.nodeType !== 1) return;
+    // Iterar sobre os elementos filhos diretos do body
+    $('body')
+      .children()
+      .each((_: any, element: any) => {
+        const $el = $(element);
+        const tagName = element.name.toUpperCase();
+        const text = $el.text().trim();
 
-      const text = node.textContent?.trim();
+        if (tagName === 'P' && text) {
+          blocks.push({
+            type: 'paragraph',
+            content: text,
+          });
+        }
 
-      if (node.tagName === 'P' && text) {
-        blocks.push({
-          type: 'paragraph',
-          content: text,
-        });
-      }
+        if (/H[1-6]/.test(tagName) && text) {
+          blocks.push({
+            type: 'heading',
+            level: Number(tagName.replace('H', '')),
+            content: text,
+          });
+        }
 
-      if (/H[1-6]/.test(node.tagName) && text) {
-        blocks.push({
-          type: 'heading',
-          level: Number(node.tagName.replace('H', '')),
-          content: text,
-        });
-      }
+        if (tagName === 'BLOCKQUOTE' && text) {
+          blocks.push({
+            type: 'quote',
+            content: text,
+          });
+        }
 
-      if (node.tagName === 'BLOCKQUOTE' && text) {
-        blocks.push({
-          type: 'quote',
-          content: text,
-        });
-      }
-
-      if (node.tagName === 'IMG') {
-        blocks.push({
-          type: 'image',
-          url: node.getAttribute('src'),
-          alt: node.getAttribute('alt') || '',
-          caption: node.getAttribute('title') || '',
-        });
-      }
-    });
+        if (tagName === 'IMG') {
+          blocks.push({
+            type: 'image',
+            url: $el.attr('src'),
+            alt: $el.attr('alt') || '',
+            caption: $el.attr('title') || '',
+          });
+        }
+      });
 
     return blocks;
   } catch (error) {
