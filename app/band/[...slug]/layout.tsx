@@ -1,5 +1,6 @@
 import { getPageData } from '@/services/api';
 import { ThemeWrapper } from '@/components/templates/ThemeWrapper';
+import { BandHeader } from '@/components/band/BandHeader';
 import { notFound } from 'next/navigation';
 import { isValidArticleSlug } from '@/lib/url';
 
@@ -25,5 +26,10 @@ export default async function SlugLayout({
   }
 
   const theme = data.metadata.theme;
-  return <ThemeWrapper theme={theme}>{children}</ThemeWrapper>;
+  return (
+    <ThemeWrapper theme={theme}>
+      <BandHeader />
+      {children}
+    </ThemeWrapper>
+  );
 }
