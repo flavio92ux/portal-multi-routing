@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { isValidArticleSlug } from '@/lib/url';
 import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
 import { Article } from '@/types/article';
+import { BandFooter } from '@/components/templates/footer/BandFooter';
 
 export default async function SlugLayout({
   children,
@@ -34,6 +35,7 @@ export default async function SlugLayout({
     <ThemeWrapper theme={theme}>
       <BandHeader />
       {children}
+      <BandFooter />
     </ThemeWrapper>
   );
 }
