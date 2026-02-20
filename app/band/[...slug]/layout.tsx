@@ -1,7 +1,10 @@
 import { getPageData } from '@/services/api';
 import { ThemeWrapper } from '@/components/templates/ThemeWrapper';
+import { BandHeader } from '@/components/templates/header/BandHeader';
 import { notFound } from 'next/navigation';
 import { isValidArticleSlug } from '@/lib/url';
+import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
+import { Article } from '@/types/article';
 
 export default async function SlugLayout({
   children,
@@ -13,17 +16,24 @@ export default async function SlugLayout({
   const resolvedParams = await params;
   const path = resolvedParams.slug.join('/');
 
-  let data;
+  let dataRaw;
   const isArticle = isValidArticleSlug(path);
 
   if (isArticle === true) {
-    data = await getPageData(path);
+    dataRaw = await getPageData(path);
   }
 
-  if (!data || !data.metadata || !data.metadata.theme) {
+  const articleData: Article = mapVibraToCleanArticle(dataRaw);
+
+  if (!articleData || !articleData.metadata || !articleData.metadata.theme) {
     return notFound();
   }
 
-  const theme = data.metadata.theme;
-  return <ThemeWrapper theme={theme}>{children}</ThemeWrapper>;
+  const theme = articleData.metadata.theme;
+  return (
+    <ThemeWrapper theme={theme}>
+      <BandHeader />
+      {children}
+    </ThemeWrapper>
+  );
 }
