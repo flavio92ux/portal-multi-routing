@@ -1,13 +1,13 @@
 import { JSX } from 'react';
 import Link from 'next/link';
-import { SocialShareSidebar } from './article/SocialShareSidebar';
-import { ShareBar } from './article/ShareBar';
-import { MaisLidas } from './article/MaisLidas';
-import { Newsletter } from './article/Newsletter';
-import { RelatedTopics } from './article/RelatedTopics';
-import { BandplayBanner } from './article/BandplayBanner';
-import { RelatedVideos } from './article/RelatedVideos';
-import { BandFooter } from './footer/BandFooter';
+import { SocialShareSidebar } from './SocialShareSidebar';
+import { ShareBar } from './ShareBar';
+import { MaisLidas } from './MaisLidas';
+import { Newsletter } from './Newsletter';
+import { RelatedTopics } from './RelatedTopics';
+import { BandplayBanner } from './BandplayBanner';
+import { RelatedVideos } from './RelatedVideos';
+import { BandFooter } from '../footer/BandFooter';
 import { Article } from '@/types/article';
 
 interface InlineNode {
@@ -65,7 +65,7 @@ export default function ArticlePage({ data }: { data: Article }) {
       {/* Kicker bar */}
       {content.kicker && (
         <div className="bg-primary py-1.5 text-center">
-          <span className="text-xs font-bold tracking-widest text-primary-foreground uppercase">
+          <span className="text-primary-foreground text-xs font-bold tracking-widest uppercase">
             {content.kicker}
           </span>
         </div>
@@ -73,21 +73,21 @@ export default function ArticlePage({ data }: { data: Article }) {
 
       {/* Breadcrumb */}
       <nav
-        className="border-b border-border bg-background"
+        className="border-border bg-background border-b"
         aria-label="Breadcrumb"
       >
         <div className="mx-auto max-w-5xl px-4 py-2">
-          <ol className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <ol className="text-muted-foreground flex items-center gap-1.5 text-xs">
             <li>
               <Link
                 href="/band"
-                className="text-muted-foreground no-underline hover:text-foreground"
+                className="text-muted-foreground hover:text-foreground no-underline"
               >
                 Band
               </Link>
             </li>
             <li aria-hidden="true">{'>'}</li>
-            <li className="truncate text-primary no-underline">
+            <li className="text-primary truncate no-underline">
               {content.headline}
             </li>
           </ol>
@@ -97,12 +97,12 @@ export default function ArticlePage({ data }: { data: Article }) {
       {/* Main content area */}
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
         {/* Article title section */}
-        <h1 className="mb-2 text-2xl font-extrabold leading-tight text-foreground md:text-3xl">
+        <h1 className="text-foreground mb-2 text-2xl leading-tight font-extrabold md:text-3xl">
           {content.headline}
         </h1>
 
         {content.subheadline && (
-          <p className="mb-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+          <p className="text-muted-foreground mb-4 text-sm leading-relaxed md:text-base">
             {content.subheadline}
           </p>
         )}
@@ -110,11 +110,11 @@ export default function ArticlePage({ data }: { data: Article }) {
         {/* Author & date */}
         {content.author && (
           <div className="mb-6">
-            <p className="text-xs font-bold uppercase text-primary no-underline">
+            <p className="text-primary text-xs font-bold uppercase no-underline">
               {content.author.name}
             </p>
             {content.dates?.published_at && (
-              <p className="text-xs text-muted-foreground">
+              <p className="text-muted-foreground text-xs">
                 {formatDate(content.dates.published_at)}
                 {content.dates.updated_at &&
                   ` - Atualizado em ${formatDate(content.dates.updated_at)}`}
@@ -142,8 +142,8 @@ export default function ArticlePage({ data }: { data: Article }) {
                     alt={content.media.main.alt || ''}
                     className="h-auto w-full rounded object-cover"
                   />
-                  <figcaption className="mt-2 flex items-start gap-2 text-xs text-muted-foreground">
-                    <span className="inline-block h-full w-0.5 shrink-0 self-stretch bg-foreground" />
+                  <figcaption className="text-muted-foreground mt-2 flex items-start gap-2 text-xs">
+                    <span className="bg-foreground inline-block h-full w-0.5 shrink-0 self-stretch" />
                     <span>
                       {content.media.main.caption}
                       {content.media.main.credit &&
@@ -162,7 +162,7 @@ export default function ArticlePage({ data }: { data: Article }) {
                         return (
                           <p
                             key={idx}
-                            className="text-sm leading-relaxed text-foreground"
+                            className="text-foreground text-sm leading-relaxed"
                           >
                             {renderInlineNodes(block.content)}
                           </p>
@@ -171,7 +171,7 @@ export default function ArticlePage({ data }: { data: Article }) {
                         return (
                           <h2
                             key={idx}
-                            className="mt-6 text-xl font-bold text-foreground"
+                            className="text-foreground mt-6 text-xl font-bold"
                           >
                             {renderInlineNodes(block.content)}
                           </h2>
@@ -180,15 +180,15 @@ export default function ArticlePage({ data }: { data: Article }) {
                         return (
                           <blockquote
                             key={idx}
-                            className="my-6 border-l-4 border-primary pl-4 italic"
+                            className="border-primary my-6 border-l-4 pl-4 italic"
                           >
-                            <p className="text-lg text-foreground">
+                            <p className="text-foreground text-lg">
                               {'"'}
                               {renderInlineNodes(block.content)}
                               {'"'}
                             </p>
                             {block.author && (
-                              <cite className="mt-1 block text-sm text-muted-foreground">
+                              <cite className="text-muted-foreground mt-1 block text-sm">
                                 {'-- '}
                                 {block.author}
                               </cite>
@@ -204,7 +204,7 @@ export default function ArticlePage({ data }: { data: Article }) {
                               className="w-full rounded"
                             />
                             {block.caption && (
-                              <figcaption className="mt-2 text-center text-xs text-muted-foreground">
+                              <figcaption className="text-muted-foreground mt-2 text-center text-xs">
                                 {block.caption}
                               </figcaption>
                             )}

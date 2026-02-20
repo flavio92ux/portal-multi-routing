@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getPageData } from '@/services/api';
-import ArticlePage from '@/components/templates/ArticlePage';
+import ArticlePage from '@/components/templates/article/ArticlePage';
 import { isValidArticleSlug } from '@/lib/url';
 import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
 import { Article } from '@/types/article';
