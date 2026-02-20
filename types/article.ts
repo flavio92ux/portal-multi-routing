@@ -126,6 +126,8 @@ export interface InlineNode {
   type: 'text';
   value: string;
   marks?: ('bold' | 'italic' | 'link')[];
+  // URL to use when rendering a link-marked node (may come from CMS)
+  url?: string;
 }
 
 export interface ParagraphBlock {
