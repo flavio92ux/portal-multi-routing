@@ -1,11 +1,11 @@
-import { BandHeader } from "@/components/band/BandHeader";
+import { BandHeader } from '@/components/templates/header/BandHeader';
 
 export default function PreviewPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <BandHeader />
       <main className="mx-auto max-w-3xl px-4 py-10">
-        <span className="text-sm font-bold tracking-widest uppercase text-[#00784C]">
+        <span className="text-sm font-bold tracking-widest text-[#00784C] uppercase">
           Esportes
         </span>
         <h1 className="mt-2 mb-4 text-4xl leading-tight font-extrabold text-gray-900">

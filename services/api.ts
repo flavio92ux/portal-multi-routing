@@ -1,8 +1,6 @@
 import * as Sentry from '@sentry/nextjs';
-import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
-import { Article } from '@/types/article';
 
-export async function getPageData(path: string): Promise<Article | null> {
+export async function getPageData(path: string): Promise<any> {
   const URL_FETCH = `${process.env.PROXY_VIBRA_ELASTIC}/api/v1/BandArticle/${path}`;
 
   try {
@@ -33,7 +31,8 @@ export async function getPageData(path: string): Promise<Article | null> {
     }
 
     const rawData = await response.json();
-    return mapVibraToCleanArticle(rawData);
+
+    return rawData;
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     const errorContext = {

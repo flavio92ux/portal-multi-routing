@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import { Menu } from "lucide-react";
-import { headerMock } from "@/mocks/header-mock";
-import { BandMobileMenu } from "./BandMobileMenu";
+import { useState } from 'react';
+import Link from 'next/link';
+import { Menu } from 'lucide-react';
+import { headerMock } from '@/mocks/header-mock';
+import { BandMobileMenu } from './BandMobileMenu';
 
 export function BandHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

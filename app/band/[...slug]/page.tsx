@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
 import { getPageData } from '@/services/api';
 import ArticlePage from '@/components/templates/ArticlePage';
-import CategoryPage from '@/components/templates/CategoryPage';
 import { isValidArticleSlug } from '@/lib/url';
+import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
+import { Article } from '@/types/article';
 
 export default async function SlugPage({
   params,
@@ -13,24 +14,22 @@ export default async function SlugPage({
 
   const path = resolvedParams.slug.join('/');
 
-  let data;
+  let dataRaw;
   const isArticle = isValidArticleSlug(path);
 
   if (isArticle === true) {
-    data = await getPageData(path);
+    dataRaw = await getPageData(path);
   }
 
-  if (!data || !data.metadata || !data.metadata.type) {
+  const articleData: Article = mapVibraToCleanArticle(dataRaw);
+
+  if (!articleData || !articleData.metadata || !articleData.metadata.type) {
     return notFound();
   }
 
-  const stringfyded = JSON.stringify(data);
-
-  switch (data.metadata.type) {
+  switch (articleData.metadata.type) {
     case 'article':
-      return <ArticlePage data={data} />;
-    case 'category':
-      return <CategoryPage data={data} />;
+      return <ArticlePage data={articleData} />;
     default:
       return <p>Não encontrado</p>;
   }
