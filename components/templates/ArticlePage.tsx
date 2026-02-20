@@ -62,9 +62,18 @@ export default function ArticlePage({ data }: { data: Article }) {
 
   return (
     <div className="flex min-h-screen flex-col">
+      {/* Kicker bar */}
+      {content.kicker && (
+        <div className="bg-primary py-1.5 text-center">
+          <span className="text-xs font-bold tracking-widest text-primary-foreground uppercase">
+            {content.kicker}
+          </span>
+        </div>
+      )}
+
       {/* Breadcrumb */}
       <nav
-        className="border-b border-gray-200 bg-white"
+        className="border-b border-border bg-background"
         aria-label="Breadcrumb"
       >
         <div className="mx-auto max-w-5xl px-4 py-2">
@@ -78,21 +87,12 @@ export default function ArticlePage({ data }: { data: Article }) {
               </Link>
             </li>
             <li aria-hidden="true">{'>'}</li>
-            <li className="text-primary truncate font-medium no-underline">
+            <li className="truncate text-primary no-underline">
               {content.headline}
             </li>
           </ol>
         </div>
       </nav>
-
-      {/* Kicker bar */}
-      {content.kicker && (
-        <div className="bg-primary py-1.5 text-center">
-          <span className="text-xs font-bold tracking-widest text-white uppercase">
-            {content.kicker}
-          </span>
-        </div>
-      )}
 
       {/* Main content area */}
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">

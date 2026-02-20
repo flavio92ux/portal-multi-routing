@@ -2,34 +2,35 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import { headerMock } from '@/mocks/header-mock';
 import { BandMobileMenu } from './BandMobileMenu';
 
 export function BandHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { navItems, liveStream, user } = headerMock;
+  const { logo, navItems, liveStream, user } = headerMock;
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-[#00784C]">
-        <div className="flex h-12 items-center justify-between px-4">
+      <header className="sticky top-0 z-50 w-full bg-primary">
+        <div className="mx-auto flex h-11 max-w-5xl items-center justify-between px-4">
           {/* Left side: hamburger + nav */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-5">
             <button
               onClick={() => setIsMenuOpen(true)}
               aria-label="Abrir menu"
-              className="flex items-center justify-center text-white"
+              className="flex items-center justify-center text-primary-foreground"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5" />
             </button>
 
-            <nav className="hidden items-center gap-5 md:flex">
+            <nav className="hidden items-center gap-4 md:flex" aria-label="Menu principal">
               {navItems.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-sm font-medium text-white no-underline hover:text-white/80"
+                  className="text-xs font-medium text-primary-foreground no-underline hover:text-primary-foreground/80"
                 >
                   {item.label}
                 </Link>
@@ -39,38 +40,45 @@ export function BandHeader() {
 
           {/* Center: logo */}
           <Link
-            href="/band"
+            href={logo.href}
             className="absolute left-1/2 -translate-x-1/2 no-underline"
-            aria-label="Band.com.br - Pagina Inicial"
+            aria-label={logo.alt}
           >
-            <BandLogo />
+            <Image
+              src={logo.src}
+              alt={logo.alt}
+              width={100}
+              height={28}
+              className="h-7 w-auto"
+              priority
+            />
           </Link>
 
           {/* Right side: AO VIVO + user */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {liveStream.isLive && (
               <Link
                 href={liveStream.href}
-                className="hidden items-center gap-2 text-sm font-semibold text-white no-underline hover:text-white/80 md:flex"
+                className="hidden items-center gap-1.5 rounded-sm bg-white/15 px-2.5 py-1 text-xs font-bold text-primary-foreground no-underline hover:bg-white/25 md:flex"
               >
-                <span className="relative flex h-2.5 w-2.5">
+                <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-600" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
                 </span>
                 {liveStream.label}
               </Link>
             )}
 
-            <div className="hidden h-6 w-px bg-white/30 md:block" />
+            <div className="hidden h-5 w-px bg-primary-foreground/30 md:block" />
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <div
-                className="flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-white"
+                className="flex h-7 w-7 items-center justify-center rounded-full border border-primary-foreground/30 text-xs font-bold text-primary-foreground"
                 style={{ backgroundColor: user.avatarColor }}
               >
                 {user.initials}
               </div>
-              <span className="hidden text-sm font-medium text-white md:inline">
+              <span className="hidden text-xs font-medium text-primary-foreground md:inline">
                 {user.name}
               </span>
             </div>
@@ -83,46 +91,5 @@ export function BandHeader() {
         onClose={() => setIsMenuOpen(false)}
       />
     </>
-  );
-}
-
-function BandLogo() {
-  return (
-    <svg
-      viewBox="0 0 160 50"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-8 w-auto"
-      aria-hidden="true"
-    >
-      {/* BAND text */}
-      <text
-        x="80"
-        y="28"
-        textAnchor="middle"
-        fill="white"
-        fontFamily="Arial Black, Arial, sans-serif"
-        fontWeight="900"
-        fontSize="30"
-        letterSpacing="2"
-      >
-        BAND
-      </text>
-      {/* Dot */}
-      <circle cx="133" cy="12" r="5" fill="white" />
-      {/* .com.br */}
-      <text
-        x="80"
-        y="46"
-        textAnchor="middle"
-        fill="white"
-        fontFamily="Arial, sans-serif"
-        fontWeight="400"
-        fontSize="11"
-        letterSpacing="0.5"
-      >
-        .com.br
-      </text>
-    </svg>
   );
 }

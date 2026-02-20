@@ -3,6 +3,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.band.uol.com.br",
+      },
+    ],
+  },
 };
 
 export default withSentryConfig(nextConfig, {
