@@ -35,26 +35,31 @@ export default function ArticlePage({ data }: { data: Article }) {
         )}
 
         {/* Two-column layout: article + sidebar */}
-        <div className="flex flex-col gap-8 lg:flex-row">
-          {/* Left column: article content */}
-          <div className="relative flex flex-1 gap-4">
-            {/* Social share sidebar (absolutely positioned, sticky) */}
-            <div className="absolute top-0 -left-16 hidden pt-2 md:block">
-              <div className="sticky top-16 w-12">
+        <div className="relative">
+          {/* Social share sidebar - Agora usando sticky corretamente */}
+          <div className="hidden md:block">
+            <div className="absolute top-0 -left-16 h-full">
+              {' '}
+              <div className="sticky top-20 w-12">
+                {' '}
                 <SocialShareSidebar />
               </div>
             </div>
-
-            {/* Article body */}
-            <article className="min-w-0 flex-1">
-              <ArticleBody content={content} />
-            </article>
           </div>
 
-          {/* Right sidebar */}
-          <aside className="w-full shrink-0 lg:w-64">
-            <MaisLidas />
-          </aside>
+          <div className="flex flex-col gap-8 lg:flex-row">
+            {/* Coluna da Esquerda: Conteúdo */}
+            <div className="relative flex flex-1 gap-4">
+              <article className="min-w-0 flex-1">
+                <ArticleBody content={content} />
+              </article>
+            </div>
+
+            {/* Sidebar Direita */}
+            <aside className="w-full shrink-0 lg:w-64">
+              <MaisLidas />
+            </aside>
+          </div>
         </div>
       </main>
 
