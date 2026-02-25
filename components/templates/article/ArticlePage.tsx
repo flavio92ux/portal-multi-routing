@@ -19,7 +19,7 @@ export default function ArticlePage({ data }: { data: Article }) {
       {/* Main content area */}
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
         {/* Article title section */}
-        <h1 className="font-caladea text-foreground mb-2 text-2xl leading-tight font-bold md:text-3xl lg:text-5xl lg:leading-14.5">
+        <h1 className="font-caladea mb-2 text-2xl leading-tight font-bold text-slate-950 md:text-3xl lg:text-5xl lg:leading-14.5">
           {content.headline}
         </h1>
 

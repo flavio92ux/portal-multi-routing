@@ -32,6 +32,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-slate-950: var(--slate-950);
 
   --font-caladea: var(--font-caladea-family);
 }
@@ -68,6 +69,7 @@
   --border: #e5e7eb;
   --input: #e5e7eb;
   --ring: #ff8533;
+  --slate-950: #1f2328;
 }
 
 /* ===============================
@@ -100,6 +102,7 @@
   --border: #27272a;
   --input: #27272a;
   --ring: #fb7185;
+  --slate-950: #1f2328;
 }
 
 /* ===============================
