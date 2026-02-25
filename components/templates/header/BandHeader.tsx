@@ -4,12 +4,17 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
-import { headerMock } from '@/mocks/header-mock';
+import { HeaderData } from '@/types/menu-header';
 import { BandMobileMenu } from './BandMobileMenu';
+import { KickerBar } from './KickerBar';
 
-export function BandHeader() {
+interface BandHeaderProps {
+  headerData: HeaderData;
+}
+
+export function BandHeader({ headerData }: BandHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { logo, navItems, liveStream, user } = headerMock;
+  const { logo, navItems, liveStream, user, menuSections } = headerData;
 
   return (
     <>
@@ -89,9 +94,12 @@ export function BandHeader() {
         </div>
       </header>
 
+      {menuSections[0].title && <KickerBar kicker={menuSections[0].title} />}
+
       <BandMobileMenu
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
+        headerData={headerData}
       />
     </>
   );

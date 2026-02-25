@@ -4,8 +4,6 @@ import { BandplayBanner } from './BandplayBanner';
 import { RelatedVideos } from './RelatedVideos';
 import { Article } from '@/types/article';
 import { ArticleBody } from './ArticleBody';
-
-import { KickerBar } from './KickerBar';
 import { Breadcrumb } from './Breadcrumb';
 import { AuthorInfo } from './AuthorInfo';
 
@@ -16,8 +14,6 @@ export default function ArticlePage({ data }: { data: Article }) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      {content.kicker && <KickerBar kicker={content.kicker} />}
-
       <Breadcrumb headline={content.headline} />
 
       {/* Main content area */}

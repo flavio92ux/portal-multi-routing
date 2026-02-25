@@ -19,6 +19,10 @@ export default async function SlugPage({
 
   if (isArticle === true) {
     dataRaw = await getPageData(path);
+
+    if (!dataRaw) {
+      return notFound();
+    }
   }
 
   const articleData: Article = mapVibraToCleanArticle(dataRaw);
