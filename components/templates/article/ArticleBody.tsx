@@ -129,9 +129,6 @@ export function ArticleBody({ content }: ArticleBodyProps) {
       <div className="mt-8">
         <Newsletter />
       </div>
-
-      {/* Related topics (moved from parent) */}
-      <RelatedTopics tags={content.tags} />
     </>
   );
 }
