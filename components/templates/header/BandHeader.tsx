@@ -67,7 +67,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
             {liveStream.isLive && (
               <Link
                 href={liveStream.href}
-                className="text-primary-foreground text-sm14 hidden items-center gap-1.5 rounded-sm px-2.5 py-1 leading-2.5 font-extrabold uppercase no-underline hover:bg-white/25 md:flex"
+                className="text-primary-foreground hidden items-center gap-1.5 rounded-sm px-2.5 py-1 text-[14px] leading-2.5 leading-[24px] font-extrabold uppercase no-underline hover:bg-white/25 md:flex"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
@@ -86,7 +86,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
               >
                 {user.initials}
               </div>
-              <span className="text-primary-foreground text-sm14 hidden font-medium md:inline">
+              <span className="text-primary-foreground hidden text-[14px] leading-[24px] font-medium md:inline">
                 {user.name}
               </span>
             </div>

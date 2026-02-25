@@ -16,13 +16,13 @@ export function Breadcrumb({ headline }: BreadcrumbProps) {
           <li>
             <Link
               href="/band"
-              className="text-muted-foreground hover:text-foreground text-sm14 leading-4 no-underline"
+              className="text-muted-foreground hover:text-foreground text-[14px] leading-4 leading-[24px] no-underline"
             >
               Band
             </Link>
           </li>
           <li aria-hidden="true">{'>'}</li>
-          <li className="text-primary text-sm14 truncate leading-4.75 font-bold no-underline">
+          <li className="text-primary truncate text-[14px] leading-4.75 leading-[24px] font-bold no-underline">
             {headline}
           </li>
         </ol>

@@ -2,7 +2,6 @@
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
-
 /* ===============================
    TOKENS DO TAILWIND (MAPEAMENTO)
 ================================ */
@@ -33,6 +32,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  --font-caladea: var(--font-caladea-family);
 }
 
 /* ===============================

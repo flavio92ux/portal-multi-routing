@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Caladea } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
+const caladea = Caladea({ weight: ['400', '700'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Band - Portal de Noticias',
@@ -16,7 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
+    <html
+      lang="pt-br"
+      style={
+        {
+          '--font-caladea-family': caladea.style.fontFamily,
+        } as React.CSSProperties
+      }
+    >
       <body className={inter.className}>{children}</body>
     </html>
   );
