@@ -19,7 +19,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
   return (
     <>
       <header className="bg-primary sticky top-0 z-50 w-full">
-        <div className="mx-auto flex h-11 max-w-5xl items-center justify-between px-4">
+        <div className="mx-auto flex h-17 max-w-5xl items-center justify-between px-4">
           {/* Left side: hamburger + nav */}
           <div className="flex items-center gap-5">
             <button
@@ -27,7 +27,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
               aria-label="Abrir menu"
               className="text-primary-foreground flex items-center justify-center"
             >
-              <Menu className="h-5 w-5" />
+              <Menu className="h-8 w-8" />
             </button>
 
             <nav
@@ -38,7 +38,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-primary-foreground hover:text-primary-foreground/80 text-xs font-medium no-underline"
+                  className="hover:text-primary-foreground/80 text-sm leading-6 font-medium text-white no-underline"
                 >
                   {item.label}
                 </Link>
@@ -56,8 +56,8 @@ export function BandHeader({ headerData }: BandHeaderProps) {
               src="https://img.band.com.br/image/2025/08/25/logo-da-band-10589.webp"
               alt={logo.alt}
               width={100}
-              height={28}
-              className="h-7 w-auto"
+              height={50}
+              className="h-10 w-auto"
               priority
             />
           </Link>
@@ -67,7 +67,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
             {liveStream.isLive && (
               <Link
                 href={liveStream.href}
-                className="text-primary-foreground hidden items-center gap-1.5 rounded-sm bg-white/15 px-2.5 py-1 text-xs font-bold no-underline hover:bg-white/25 md:flex"
+                className="text-primary-foreground text-sm14 hidden items-center gap-1.5 rounded-sm px-2.5 py-1 leading-2.5 font-extrabold uppercase no-underline hover:bg-white/25 md:flex"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
@@ -86,7 +86,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
               >
                 {user.initials}
               </div>
-              <span className="text-primary-foreground hidden text-xs font-medium md:inline">
+              <span className="text-primary-foreground text-sm14 hidden font-medium md:inline">
                 {user.name}
               </span>
             </div>
@@ -94,13 +94,13 @@ export function BandHeader({ headerData }: BandHeaderProps) {
         </div>
       </header>
 
-      {menuSections[0].title && <KickerBar kicker={menuSections[0].title} />}
-
       <BandMobileMenu
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
         headerData={headerData}
       />
+
+      {menuSections[0].title && <KickerBar kicker={menuSections[0].title} />}
     </>
   );
 }

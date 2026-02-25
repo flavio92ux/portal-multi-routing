@@ -4,8 +4,8 @@ interface KickerBarProps {
 
 export function KickerBar({ kicker }: KickerBarProps) {
   return (
-    <div className="bg-primary py-1.5 text-center">
-      <span className="text-primary-foreground text-xs font-bold tracking-widest uppercase">
+    <div className="flex items-center justify-center border-b bg-white py-4.5 text-center">
+      <span className="text-primary text-2xl leading-5 font-bold uppercase">
         {kicker}
       </span>
     </div>

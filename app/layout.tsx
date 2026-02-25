@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Band - Portal de Noticias',
-  description: 'Portal de noticias Band - Jornalismo, Esportes, Entretenimento e mais.',
+  description:
+    'Portal de noticias Band - Jornalismo, Esportes, Entretenimento e mais.',
 };
 
 export default function RootLayout({
@@ -13,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
