@@ -24,7 +24,8 @@
   --color-secondary-foreground: var(--secondary-foreground);
 
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-cinza: var(--cinza);
+  --color-cinza-secundario: var(--cinza-secundario);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
 
@@ -59,7 +60,8 @@
   --secondary-foreground: #111827;
 
   --muted: #f3f4f6;
-  --muted-foreground: #6b7280;
+  --cinza: #3c444e;
+  --cinza-secundario: #737b8b;
 
   --accent: #f75a5a;
   --accent-foreground: #ffffff;
@@ -92,7 +94,7 @@
   --secondary-foreground: #fafafa;
 
   --muted: #27272a;
-  --muted-foreground: #a1a1aa;
+  --cinza-secundario: #a1a1aa;
 
   --accent: #fb7185;
   --accent-foreground: #0f0f0f;

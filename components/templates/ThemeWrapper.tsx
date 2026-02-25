@@ -18,7 +18,7 @@ export function ThemeWrapper({
     // '--card': theme.card,
     // '--card-foreground': theme.cardForeground,
     // '--muted': theme.muted,
-    // '--muted-foreground': theme.mutedForeground,
+    // '--cinza-secundario': theme.mutedForeground,
     // '--accent': theme.accent,
     // '--accent-foreground': theme.accentForeground,
     // '--destructive': theme.destructive,

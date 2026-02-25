@@ -13,7 +13,11 @@ function renderInlineNodes(nodes: InlineNode[]) {
     let element: string | React.ReactNode = node.value;
 
     if (node.marks?.includes('bold')) {
-      element = <strong key={`${idx}-bold`}>{element}</strong>;
+      element = (
+        <strong key={`${idx}-bold`} className="text-primary">
+          {' ' + element + ' '}
+        </strong>
+      );
     }
     if (node.marks?.includes('italic')) {
       element = <em key={`${idx}-italic`}>{element}</em>;
@@ -49,7 +53,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
             alt={content.media.main.alt || ''}
             className="h-auto w-full rounded object-cover"
           />
-          <figcaption className="text-muted-foreground mt-2 flex items-start gap-2 text-xs">
+          <figcaption className="text-cinza-secundario mt-2 flex items-start gap-2 text-xs">
             <span className="bg-foreground inline-block h-full w-0.5 shrink-0 self-stretch" />
             <span>
               {content.media.main.caption}
@@ -67,19 +71,13 @@ export function ArticleBody({ content }: ArticleBodyProps) {
             switch (block.type) {
               case 'paragraph':
                 return (
-                  <p
-                    key={idx}
-                    className="text-foreground text-sm leading-relaxed"
-                  >
+                  <p key={idx} className="text-cinza text-[20px] leading-7.5">
                     {renderInlineNodes(block.content)}
                   </p>
                 );
               case 'heading':
                 return (
-                  <h2
-                    key={idx}
-                    className="text-foreground mt-6 text-xl font-bold"
-                  >
+                  <h2 key={idx} className="text-cinza text-[20px] leading-7.5">
                     {renderInlineNodes(block.content)}
                   </h2>
                 );
@@ -95,7 +93,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                       {'"'}
                     </p>
                     {block.author && (
-                      <cite className="text-muted-foreground mt-1 block text-sm">
+                      <cite className="text-cinza-secundario mt-1 block text-sm">
                         {'-- '}
                         {block.author}
                       </cite>
@@ -111,7 +109,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                       className="w-full rounded"
                     />
                     {block.caption && (
-                      <figcaption className="text-muted-foreground mt-2 text-center text-xs">
+                      <figcaption className="text-cinza-secundario mt-2 text-center text-xs">
                         {block.caption}
                       </figcaption>
                     )}

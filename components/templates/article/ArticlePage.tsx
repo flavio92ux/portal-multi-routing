@@ -24,7 +24,7 @@ export default function ArticlePage({ data }: { data: Article }) {
         </h1>
 
         {content.subheadline && (
-          <p className="text-muted-foreground mb-4 text-sm leading-relaxed md:text-base">
+          <p className="text-cinza-secundario mb-4 text-sm leading-relaxed md:text-base lg:text-[20px] lg:leading-7.5">
             {content.subheadline}
           </p>
         )}
@@ -36,11 +36,13 @@ export default function ArticlePage({ data }: { data: Article }) {
 
         {/* Two-column layout: article + sidebar */}
         <div className="flex flex-col gap-8 lg:flex-row">
-          {/* Left column: social share icons + article content */}
-          <div className="flex flex-1 gap-4">
-            {/* Social share sidebar (desktop only) */}
-            <div className="hidden shrink-0 pt-2 md:block">
-              <SocialShareSidebar />
+          {/* Left column: article content */}
+          <div className="relative flex flex-1 gap-4">
+            {/* Social share sidebar (absolutely positioned, sticky) */}
+            <div className="absolute top-0 -left-16 hidden pt-2 md:block">
+              <div className="sticky top-16 w-12">
+                <SocialShareSidebar />
+              </div>
             </div>
 
             {/* Article body */}

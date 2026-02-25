@@ -13,11 +13,11 @@ interface AuthorInfoProps {
 export function AuthorInfo({ author, dates }: AuthorInfoProps) {
   return (
     <div className="mb-6">
-      <p className="text-primary text-xs font-bold uppercase no-underline">
+      <p className="text-primary text-xs leading-normal font-bold uppercase underline">
         {author.name}
       </p>
       {dates?.published_at && (
-        <p className="text-muted-foreground text-xs">
+        <p className="text-cinza text-[14px] leading-normal font-semibold">
           {formatDate(dates.published_at)}
           {dates.updated_at &&
             ` - Atualizado em ${formatDate(dates.updated_at)}`}

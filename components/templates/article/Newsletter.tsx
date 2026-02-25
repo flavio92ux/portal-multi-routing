@@ -20,22 +20,20 @@ export function Newsletter() {
 
   const toggleTopic = (topic: string) => {
     setSelectedTopics((prev) =>
-      prev.includes(topic)
-        ? prev.filter((t) => t !== topic)
-        : [...prev, topic]
+      prev.includes(topic) ? prev.filter((t) => t !== topic) : [...prev, topic]
     );
   };
 
   return (
     <div className="rounded border border-gray-200 p-5">
-      <h3 className="mb-1 text-base font-bold text-foreground">
+      <h3 className="text-foreground mb-1 text-base font-bold">
         Newsletter Noticias
       </h3>
-      <p className="mb-1 text-xs text-muted-foreground">
+      <p className="text-cinza-secundario mb-1 text-xs">
         Inscreva-se na nossa newsletter e receba as noticias mais importantes do
         dia direto no seu e-mail.
       </p>
-      <p className="mb-3 text-xs font-semibold text-foreground">
+      <p className="text-foreground mb-3 text-xs font-semibold">
         Selecione os seus temas favoritos:
       </p>
 
@@ -47,7 +45,7 @@ export function Newsletter() {
             className={`rounded-full border px-3 py-1 text-xs transition-colors ${
               selectedTopics.includes(topic)
                 ? 'border-primary bg-primary text-white'
-                : 'border-gray-300 bg-white text-foreground hover:border-gray-400'
+                : 'text-foreground border-gray-300 bg-white hover:border-gray-400'
             }`}
           >
             {topic}
@@ -61,15 +59,15 @@ export function Newsletter() {
           placeholder="E-mail*"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 rounded border border-gray-300 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+          className="text-foreground placeholder:text-cinza-secundario focus:border-primary flex-1 rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none"
         />
-        <button className="flex items-center gap-1.5 rounded bg-gray-200 px-4 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-gray-300">
+        <button className="text-foreground flex items-center gap-1.5 rounded bg-gray-200 px-4 py-2 text-xs font-semibold transition-colors hover:bg-gray-300">
           <Mail className="h-3.5 w-3.5" />
           Assinar gratis
         </button>
       </div>
 
-      <p className="mt-3 text-xs text-muted-foreground">
+      <p className="text-cinza-secundario mt-3 text-xs">
         Li e concordo com os{' '}
         <a href="#" className="text-primary underline">
           Termos de Uso
