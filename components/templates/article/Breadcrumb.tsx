@@ -11,7 +11,7 @@ export function Breadcrumb({ headline }: BreadcrumbProps) {
       className="bg-background flex justify-center py-6"
       aria-label="Breadcrumb"
     >
-      <div className="mx-auto max-w-5xl px-4 py-2">
+      <div className="mx-auto max-w-325 px-4 py-2">
         <ol className="text-cinza-secundario flex items-center gap-1.5 text-xs">
           <li>
             <Link

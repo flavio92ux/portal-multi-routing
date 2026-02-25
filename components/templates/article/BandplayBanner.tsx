@@ -40,7 +40,8 @@ const slides: BannerSlide[] = [
   {
     id: 1,
     title: 'Liga Saudita',
-    description: 'Duelo quente entre Al Okhdood x Al-Qadsiah. Quem leva a melhor?',
+    description:
+      'Duelo quente entre Al Okhdood x Al-Qadsiah. Quem leva a melhor?',
     href: '#',
     leftLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=AO',
     rightLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=AQ',
@@ -65,7 +66,7 @@ export function BandplayBanner() {
 
   return (
     <section className="relative overflow-hidden bg-[#0d0d2b] py-8">
-      <div className="mx-auto flex max-w-5xl items-center px-4">
+      <div className="mx-auto flex max-w-325 items-center px-4">
         {/* Left arrow */}
         <button
           onClick={prev}
@@ -86,7 +87,7 @@ export function BandplayBanner() {
             </p>
             <Link
               href={slide.href}
-              className="mt-3 inline-block rounded bg-white px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#0d0d2b] no-underline transition-opacity hover:opacity-90"
+              className="mt-3 inline-block rounded bg-white px-5 py-2 text-xs font-bold tracking-wider text-[#0d0d2b] uppercase no-underline transition-opacity hover:opacity-90"
             >
               ASSISTA GRATUITAMENTE
             </Link>

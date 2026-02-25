@@ -17,7 +17,7 @@ export default function ArticlePage({ data }: { data: Article }) {
       <Breadcrumb headline={content.headline} />
 
       {/* Main content area */}
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+      <main className="mx-auto w-full max-w-325 flex-1 px-4 py-8">
         {/* Article title section */}
         <h1 className="font-caladea mb-2 text-2xl leading-tight font-bold text-slate-950 md:text-3xl lg:text-5xl lg:leading-14.5">
           {content.headline}
@@ -47,16 +47,16 @@ export default function ArticlePage({ data }: { data: Article }) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-8 lg:flex-row">
+          <div className="flex flex-col gap-5 lg:flex-row">
             {/* Coluna da Esquerda: Conteúdo */}
-            <div className="relative flex flex-1 gap-4">
-              <article className="min-w-0 flex-1">
+            <div className="flex">
+              <article>
                 <ArticleBody content={content} />
               </article>
             </div>
 
             {/* Sidebar Direita */}
-            <aside className="w-full shrink-0 lg:w-64">
+            <aside className="w-full shrink-0 lg:w-77.5">
               <MaisLidas />
             </aside>
           </div>

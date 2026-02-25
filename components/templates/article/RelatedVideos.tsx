@@ -51,7 +51,7 @@ export function RelatedVideos() {
 
   return (
     <section className="bg-[#f5f5f5] py-8">
-      <div className="mx-auto max-w-5xl px-4">
+      <div className="mx-auto max-w-325 px-4">
         <div className="mb-5 flex items-center justify-between">
           <h2 className="text-foreground text-lg font-bold">
             Videos Relacionados

@@ -90,7 +90,7 @@ function BandeirantesLogo() {
 export function BandFooter() {
   return (
     <footer className="bg-[#1a1a2e] py-10">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 px-4">
+      <div className="mx-auto flex max-w-325 flex-col items-center gap-5 px-4">
         <BandeirantesLogo />
 
         <nav className="flex items-center gap-2 text-xs text-gray-400">

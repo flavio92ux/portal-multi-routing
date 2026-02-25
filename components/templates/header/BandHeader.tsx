@@ -19,7 +19,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
   return (
     <>
       <header className="bg-primary sticky top-0 z-50 w-full">
-        <div className="mx-auto flex h-17 max-w-5xl items-center justify-between px-4">
+        <div className="mx-auto flex h-17 max-w-325 items-center justify-between px-4">
           {/* Left side: hamburger + nav */}
           <div className="flex items-center gap-5">
             <button
