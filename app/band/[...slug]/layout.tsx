@@ -4,6 +4,7 @@ import { BandHeader } from '@/components/templates/header/BandHeader';
 import { notFound } from 'next/navigation';
 import { isValidArticleSlug } from '@/lib/url';
 import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
+import { mapVibraToHeaderData } from '@/lib/mappers/menuMapper';
 import { Article } from '@/types/article';
 import { BandFooter } from '@/components/templates/footer/BandFooter';
 
@@ -22,9 +23,14 @@ export default async function SlugLayout({
 
   if (isArticle === true) {
     dataRaw = await getPageData(path);
+
+    if (!dataRaw) {
+      return notFound();
+    }
   }
 
   const articleData: Article = mapVibraToCleanArticle(dataRaw);
+  const headerData = mapVibraToHeaderData(dataRaw);
 
   if (!articleData || !articleData.metadata || !articleData.metadata.theme) {
     return notFound();
@@ -33,7 +39,7 @@ export default async function SlugLayout({
   const theme = articleData.metadata.theme;
   return (
     <ThemeWrapper theme={theme}>
-      <BandHeader />
+      <BandHeader headerData={headerData} />
       {children}
       <BandFooter />
     </ThemeWrapper>

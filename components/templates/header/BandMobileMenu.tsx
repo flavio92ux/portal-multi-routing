@@ -1,27 +1,32 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import Link from "next/link";
-import { X, ChevronRight, UserCircle, Pencil, LogOut } from "lucide-react";
-import { headerMock } from "@/mocks/header-mock";
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { X, ChevronRight, UserCircle, Pencil, LogOut } from 'lucide-react';
+import { HeaderData } from '@/types/menu-header';
 
 interface BandMobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  headerData: HeaderData;
 }
 
-export function BandMobileMenu({ isOpen, onClose }: BandMobileMenuProps) {
-  const { user, menuSections, userMenuActions } = headerMock;
+export function BandMobileMenu({
+  isOpen,
+  onClose,
+  headerData,
+}: BandMobileMenuProps) {
+  const { user, menuSections, userMenuActions } = headerData;
 
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     }
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
@@ -30,7 +35,7 @@ export function BandMobileMenu({ isOpen, onClose }: BandMobileMenuProps) {
       {/* Overlay */}
       <div
         className={`fixed inset-0 z-[60] bg-black/40 transition-opacity duration-300 ${
-          isOpen ? "opacity-100" : "pointer-events-none opacity-0"
+          isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
         onClick={onClose}
         aria-hidden="true"
@@ -39,7 +44,7 @@ export function BandMobileMenu({ isOpen, onClose }: BandMobileMenuProps) {
       {/* Slide-in Panel */}
       <aside
         className={`fixed top-0 left-0 z-[70] flex h-full w-full max-w-[400px] flex-col bg-white shadow-xl transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         role="dialog"
         aria-modal="true"
@@ -72,9 +77,7 @@ export function BandMobileMenu({ isOpen, onClose }: BandMobileMenuProps) {
               {user.initials}
             </div>
             <div>
-              <p className="text-lg font-semibold text-gray-900">
-                {"Ola,"}
-              </p>
+              <p className="text-lg font-semibold text-gray-900">{'Ola,'}</p>
               <p className="text-lg font-semibold text-gray-900">
                 {user.name}!
               </p>

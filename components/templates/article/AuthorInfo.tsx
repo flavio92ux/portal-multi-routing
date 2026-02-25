@@ -1,5 +1,4 @@
-import React from 'react';
-import { formatDate } from './formatDate';
+import { formatDate } from '@/utils/formatDate';
 
 interface AuthorInfoProps {
   author: {
