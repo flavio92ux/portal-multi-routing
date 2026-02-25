@@ -10,37 +10,32 @@ interface MaisLidasItem {
 const maisLidasMock: MaisLidasItem[] = [
   {
     id: 1,
-    title: 'Policia do Reino Unido prende ex-principe Andrew, irmao de rei Charles III',
+    title: 'Suspensao de direitos: 14 razoes que o voto de 900 desembargadores em Juiz de Fora',
     href: '#',
-    thumb: 'https://placehold.co/300x200/1a365d/ffffff?text=1',
+    thumb: 'https://placehold.co/220x140/1a365d/ffffff?text=1',
   },
   {
     id: 2,
-    title: 'Fim da escala 6x1: proposta de reducao de jornada pros abriu nas conversoes',
+    title: 'Reclassificacao pos reforma legislativa que afeta o mercado estudantil',
     href: '#',
   },
   {
     id: 3,
-    title: 'Video: Neres bloqueou zagueiros, invadiu a area adversa e cobrou de chegancamento',
+    title: 'Brasil Pra La e Pra Ca: O que se esta mais a dominar hoje',
     href: '#',
   },
   {
     id: 4,
-    title: 'Trio assassino que adolescente capaz de matar descrito "lamentavel e triste"',
-    href: '#',
-  },
-  {
-    id: 5,
-    title: 'STF abre acao contra Eduardo Bolsonaro por obstrucao de justica',
+    title: 'Vitoria conseguiu reter tres jovens grandes artistas estrangeiros',
     href: '#',
   },
 ];
 
 export function MaisLidas() {
   return (
-    <aside className="w-full">
-      <div className="bg-primary px-4 py-2">
-        <h3 className="text-sm font-bold text-white">Mais Lidas</h3>
+    <div className="w-full">
+      <div className="bg-primary px-3 py-1.5">
+        <h3 className="text-[13px] font-bold text-white">Mais Lidas</h3>
       </div>
 
       {/* Featured image for first item */}
@@ -49,28 +44,25 @@ export function MaisLidas() {
           <img
             src={maisLidasMock[0].thumb}
             alt={maisLidasMock[0].title}
-            className="h-40 w-full object-cover"
+            className="h-32 w-full object-cover"
           />
         </Link>
       )}
 
-      <ol className="mt-0 divide-y divide-gray-100">
+      <ol className="mt-0 divide-y divide-[#eaeaea]">
         {maisLidasMock.map((item) => (
           <li key={item.id}>
             <Link
               href={item.href}
-              className="flex items-start gap-3 px-3 py-3 no-underline transition-colors hover:bg-gray-50"
+              className="flex items-start gap-2 px-2 py-2.5 no-underline transition-colors hover:bg-[#f5f5f5]"
             >
-              <span className="text-lg font-bold text-primary">
-                {item.id}
-              </span>
-              <span className="text-xs leading-snug text-foreground">
+              <span className="text-[11px] leading-snug text-[#3c444e]">
                 {item.title}
               </span>
             </Link>
           </li>
         ))}
       </ol>
-    </aside>
+    </div>
   );
 }

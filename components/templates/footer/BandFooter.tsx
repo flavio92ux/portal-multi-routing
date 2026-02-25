@@ -89,54 +89,54 @@ function BandeirantesLogo() {
 
 export function BandFooter() {
   return (
-    <footer className="bg-[#1a1a2e] py-10">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-5 px-4">
+    <footer className="bg-[#21262d] py-8">
+      <div className="mx-auto flex max-w-[960px] flex-col items-center gap-4 px-4">
         <BandeirantesLogo />
 
-        <nav className="flex items-center gap-2 text-xs text-gray-400">
+        <nav className="flex items-center gap-2 text-[11px] text-[#9a9a9a]">
           <Link
             href="#"
-            className="text-gray-400 no-underline transition-colors hover:text-white"
+            className="text-[#9a9a9a] no-underline transition-colors hover:text-white"
           >
             PROGRAMACAO
           </Link>
-          <span className="text-gray-600">{'|'}</span>
+          <span className="text-[#444444]">{'|'}</span>
           <Link
             href="#"
-            className="text-gray-400 no-underline transition-colors hover:text-white"
+            className="text-[#9a9a9a] no-underline transition-colors hover:text-white"
           >
             POLITICA DE PRIVACIDADE
           </Link>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3.5">
           <Link
             href="#"
             aria-label="X (Twitter)"
-            className="text-white no-underline transition-opacity hover:opacity-70"
+            className="text-[#d1d3d1] no-underline transition-opacity hover:opacity-70"
           >
-            <XIcon className="h-5 w-5" />
+            <XIcon className="h-4 w-4" />
           </Link>
           <Link
             href="#"
             aria-label="Facebook"
-            className="text-white no-underline transition-opacity hover:opacity-70"
+            className="text-[#d1d3d1] no-underline transition-opacity hover:opacity-70"
           >
-            <FacebookIcon className="h-5 w-5" />
+            <FacebookIcon className="h-4 w-4" />
           </Link>
           <Link
             href="#"
             aria-label="Instagram"
-            className="text-white no-underline transition-opacity hover:opacity-70"
+            className="text-[#d1d3d1] no-underline transition-opacity hover:opacity-70"
           >
-            <InstagramIcon className="h-5 w-5" />
+            <InstagramIcon className="h-4 w-4" />
           </Link>
           <Link
             href="#"
             aria-label="YouTube"
-            className="text-white no-underline transition-opacity hover:opacity-70"
+            className="text-[#d1d3d1] no-underline transition-opacity hover:opacity-70"
           >
-            <YouTubeIcon className="h-5 w-5" />
+            <YouTubeIcon className="h-4 w-4" />
           </Link>
         </div>
       </div>

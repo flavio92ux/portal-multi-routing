@@ -18,14 +18,14 @@ export function BandHeader({ headerData }: BandHeaderProps) {
 
   return (
     <>
-      <header className="bg-primary sticky top-0 z-50 w-full">
-        <div className="mx-auto flex h-11 max-w-5xl items-center justify-between px-4">
+      <header className="sticky top-0 z-50 w-full bg-[#21262d]">
+        <div className="mx-auto flex h-11 max-w-[960px] items-center justify-between px-4">
           {/* Left side: hamburger + nav */}
           <div className="flex items-center gap-5">
             <button
               onClick={() => setIsMenuOpen(true)}
               aria-label="Abrir menu"
-              className="text-primary-foreground flex items-center justify-center"
+              className="flex items-center justify-center text-white"
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -38,7 +38,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-primary-foreground hover:text-primary-foreground/80 text-xs font-medium no-underline"
+                  className="text-[11px] font-medium text-white no-underline hover:text-white/80"
                 >
                   {item.label}
                 </Link>
@@ -67,26 +67,26 @@ export function BandHeader({ headerData }: BandHeaderProps) {
             {liveStream.isLive && (
               <Link
                 href={liveStream.href}
-                className="text-primary-foreground hidden items-center gap-1.5 rounded-sm bg-white/15 px-2.5 py-1 text-xs font-bold no-underline hover:bg-white/25 md:flex"
+                className="hidden items-center gap-1.5 rounded-sm bg-white/15 px-2.5 py-1 text-[11px] font-bold text-white no-underline hover:bg-white/25 md:flex"
               >
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#f23030] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#f23030]" />
                 </span>
                 {liveStream.label}
               </Link>
             )}
 
-            <div className="bg-primary-foreground/30 hidden h-5 w-px md:block" />
+            <div className="hidden h-5 w-px bg-white/30 md:block" />
 
             <div className="flex items-center gap-1.5">
               <div
-                className="border-primary-foreground/30 text-primary-foreground flex h-7 w-7 items-center justify-center rounded-full border text-xs font-bold"
+                className="flex h-7 w-7 items-center justify-center rounded-full border border-white/30 text-[11px] font-bold text-white"
                 style={{ backgroundColor: user.avatarColor }}
               >
                 {user.initials}
               </div>
-              <span className="text-primary-foreground hidden text-xs font-medium md:inline">
+              <span className="hidden text-[11px] font-medium text-white md:inline">
                 {user.name}
               </span>
             </div>

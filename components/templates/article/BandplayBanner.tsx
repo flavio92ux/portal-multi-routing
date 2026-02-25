@@ -32,26 +32,25 @@ interface BannerSlide {
   title: string;
   description: string;
   href: string;
-  leftLogo: string;
-  rightLogo: string;
+  image: string;
 }
 
 const slides: BannerSlide[] = [
   {
     id: 1,
-    title: 'Liga Saudita',
-    description: 'Duelo quente entre Al Okhdood x Al-Qadsiah. Quem leva a melhor?',
+    title: 'Bora Brasil',
+    description:
+      'Comece o dia bem informado, acompanhando o que aconteceu no pais e em varios cantos do mundo.',
     href: '#',
-    leftLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=AO',
-    rightLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=AQ',
+    image: 'https://placehold.co/400x200/070d31/ffffff?text=Bora+Brasil',
   },
   {
     id: 2,
-    title: 'Champions League',
-    description: 'Os melhores momentos da rodada. Confira os gols.',
+    title: 'Jornal da Band',
+    description:
+      'As principais noticias do dia com a credibilidade da Band.',
     href: '#',
-    leftLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=CL',
-    rightLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=CL',
+    image: 'https://placehold.co/400x200/070d31/ffffff?text=Jornal+da+Band',
   },
 ];
 
@@ -64,46 +63,40 @@ export function BandplayBanner() {
   const slide = slides[current];
 
   return (
-    <section className="relative overflow-hidden bg-[#0d0d2b] py-8">
-      <div className="mx-auto flex max-w-5xl items-center px-4">
+    <section className="relative overflow-hidden bg-[#070d31] py-8">
+      <div className="mx-auto flex max-w-[960px] items-center px-4">
         {/* Left arrow */}
         <button
           onClick={prev}
           aria-label="Slide anterior"
-          className="mr-4 shrink-0 text-white/60 transition-colors hover:text-white"
+          className="mr-4 shrink-0 text-white/50 transition-colors hover:text-white"
         >
-          <ChevronLeft className="h-8 w-8" />
+          <ChevronLeft className="h-6 w-6" />
         </button>
 
         {/* Content */}
         <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:items-center md:justify-between">
           {/* Text */}
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
-            <BandplayLogo className="mb-2 h-5 w-auto" />
+            <BandplayLogo className="mb-2 h-4 w-auto" />
             <h3 className="text-lg font-bold text-white">{slide.title}</h3>
-            <p className="mt-1 max-w-xs text-sm text-gray-300">
+            <p className="mt-1 max-w-xs text-[13px] leading-relaxed text-[#a6a6a6]">
               {slide.description}
             </p>
             <Link
               href={slide.href}
-              className="mt-3 inline-block rounded bg-white px-5 py-2 text-xs font-bold uppercase tracking-wider text-[#0d0d2b] no-underline transition-opacity hover:opacity-90"
+              className="mt-3 inline-block rounded bg-[#f23030] px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-white no-underline transition-opacity hover:opacity-90"
             >
               ASSISTA GRATUITAMENTE
             </Link>
           </div>
 
-          {/* Team logos */}
-          <div className="flex items-center gap-4">
+          {/* Banner image */}
+          <div className="shrink-0">
             <img
-              src={slide.leftLogo}
-              alt=""
-              className="h-20 w-20 rounded-full object-contain md:h-28 md:w-28"
-            />
-            <span className="text-2xl font-bold text-white">X</span>
-            <img
-              src={slide.rightLogo}
-              alt=""
-              className="h-20 w-20 rounded-full object-contain md:h-28 md:w-28"
+              src={slide.image}
+              alt={slide.title}
+              className="h-32 w-auto rounded object-cover md:h-40"
             />
           </div>
         </div>
@@ -112,9 +105,9 @@ export function BandplayBanner() {
         <button
           onClick={next}
           aria-label="Proximo slide"
-          className="ml-4 shrink-0 text-white/60 transition-colors hover:text-white"
+          className="ml-4 shrink-0 text-white/50 transition-colors hover:text-white"
         >
-          <ChevronRight className="h-8 w-8" />
+          <ChevronRight className="h-6 w-6" />
         </button>
       </div>
 

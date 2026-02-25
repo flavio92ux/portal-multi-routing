@@ -23,7 +23,7 @@ function renderInlineNodes(nodes: InlineNode[]) {
         <a
           key={`${idx}-link`}
           href={node.url || '#'}
-          className="text-primary underline hover:no-underline"
+          className="font-bold text-primary underline hover:no-underline"
         >
           {element}
         </a>
@@ -43,14 +43,14 @@ export function ArticleBody({ content }: ArticleBodyProps) {
     <>
       {/* Main image */}
       {content.media?.main && (
-        <figure className="mb-6">
+        <figure className="mb-5">
           <img
             src={content.media.main.url}
             alt={content.media.main.alt || ''}
-            className="h-auto w-full rounded object-cover"
+            className="h-auto w-full object-cover"
           />
-          <figcaption className="text-muted-foreground mt-2 flex items-start gap-2 text-xs">
-            <span className="bg-foreground inline-block h-full w-0.5 shrink-0 self-stretch" />
+          <figcaption className="mt-2 flex items-start gap-2 text-[11px] text-[#647083]">
+            <span className="inline-block w-0.5 shrink-0 self-stretch bg-[#1f2328]" />
             <span>
               {content.media.main.caption}
               {content.media.main.credit &&
@@ -62,14 +62,14 @@ export function ArticleBody({ content }: ArticleBodyProps) {
 
       {/* Body blocks */}
       {Array.isArray(content.body) && content.body.length > 0 && (
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           {content.body.map((block: ArticleBlock, idx: number) => {
             switch (block.type) {
               case 'paragraph':
                 return (
                   <p
                     key={idx}
-                    className="text-foreground text-sm leading-relaxed"
+                    className="text-[14px] leading-relaxed text-[#3c444e]"
                   >
                     {renderInlineNodes(block.content)}
                   </p>
@@ -78,7 +78,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 return (
                   <h2
                     key={idx}
-                    className="text-foreground mt-6 text-xl font-bold"
+                    className="mt-4 text-lg font-bold text-[#1d1d1d]"
                   >
                     {renderInlineNodes(block.content)}
                   </h2>
@@ -87,15 +87,15 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 return (
                   <blockquote
                     key={idx}
-                    className="border-primary my-6 border-l-4 pl-4 italic"
+                    className="my-4 border-l-4 border-primary pl-4 italic"
                   >
-                    <p className="text-foreground text-lg">
+                    <p className="text-base text-[#3c444e]">
                       {'"'}
                       {renderInlineNodes(block.content)}
                       {'"'}
                     </p>
                     {block.author && (
-                      <cite className="text-muted-foreground mt-1 block text-sm">
+                      <cite className="mt-1 block text-sm text-[#939daa]">
                         {'-- '}
                         {block.author}
                       </cite>
@@ -104,14 +104,14 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 );
               case 'image':
                 return (
-                  <figure key={idx} className="my-6">
+                  <figure key={idx} className="my-4">
                     <img
                       src={block.url}
                       alt={block.alt || ''}
-                      className="w-full rounded"
+                      className="w-full"
                     />
                     {block.caption && (
-                      <figcaption className="text-muted-foreground mt-2 text-center text-xs">
+                      <figcaption className="mt-2 text-center text-[11px] text-[#939daa]">
                         {block.caption}
                       </figcaption>
                     )}
@@ -122,7 +122,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
             }
           })}
 
-          {/* Share bar after first few paragraphs */}
+          {/* Share bar after body */}
           <ShareBar />
         </div>
       )}

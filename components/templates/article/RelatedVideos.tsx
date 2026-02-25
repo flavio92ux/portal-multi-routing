@@ -47,26 +47,28 @@ export function RelatedVideos() {
   const [scrollPos, setScrollPos] = useState(0);
 
   return (
-    <section className="bg-[#f5f5f5] py-8">
-      <div className="mx-auto max-w-5xl px-4">
+    <section className="bg-[#30343a] py-8">
+      <div className="mx-auto max-w-[960px] px-4">
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-foreground">Videos Relacionados</h2>
+          <h2 className="text-[15px] font-bold text-white">
+            Videos Relacionados
+          </h2>
           <div className="flex gap-1">
             <button
               onClick={() => setScrollPos(Math.max(0, scrollPos - 1))}
               aria-label="Videos anteriores"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-gray-500 transition-colors hover:bg-gray-300"
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-[#444444] text-[#9a9a9a] transition-colors hover:bg-[#554f5d]"
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className="h-3.5 w-3.5" />
             </button>
             <button
               onClick={() =>
                 setScrollPos(Math.min(videosMock.length - 1, scrollPos + 1))
               }
               aria-label="Proximos videos"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white transition-colors hover:opacity-80"
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-white transition-colors hover:opacity-80"
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>
@@ -85,15 +87,18 @@ export function RelatedVideos() {
                   className="aspect-video w-full object-cover transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/40">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90">
-                    <Play className="h-5 w-5 text-foreground" fill="currentColor" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90">
+                    <Play
+                      className="h-4 w-4 text-[#1d1d1d]"
+                      fill="currentColor"
+                    />
                   </div>
                 </div>
               </div>
-              <h3 className="mt-2 text-xs font-bold leading-snug text-foreground">
+              <h3 className="mt-2 text-[11px] font-bold leading-snug text-white">
                 {video.title}
               </h3>
-              <p className="mt-1 text-[10px] text-muted-foreground">
+              <p className="mt-0.5 text-[10px] text-[#9a9a9a]">
                 {video.date}
               </p>
             </Link>

@@ -26,20 +26,22 @@ function TelegramIcon({ className }: { className?: string }) {
 
 export function ShareBar() {
   return (
-    <div className="flex items-center justify-between border-y border-gray-200 py-3">
-      <span className="text-sm font-bold text-foreground">Compartilhar</span>
-      <div className="flex items-center gap-2">
+    <div className="flex items-center justify-between border-y border-[#dee2e7] py-3">
+      <span className="text-[13px] font-bold text-[#1d1d1d]">
+        Compartilhar
+      </span>
+      <div className="flex items-center gap-1.5">
         <button
           aria-label="Compartilhar no WhatsApp"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366] text-white transition-opacity hover:opacity-80"
+          className="flex h-7 w-7 items-center justify-center rounded-full bg-[#4fd036] text-white transition-opacity hover:opacity-80"
         >
-          <WhatsAppIcon className="h-4 w-4" />
+          <WhatsAppIcon className="h-3.5 w-3.5" />
         </button>
         <button
           aria-label="Compartilhar no Telegram"
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0088cc] text-white transition-opacity hover:opacity-80"
+          className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0075ff] text-white transition-opacity hover:opacity-80"
         >
-          <TelegramIcon className="h-4 w-4" />
+          <TelegramIcon className="h-3.5 w-3.5" />
         </button>
       </div>
     </div>

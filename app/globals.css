@@ -42,31 +42,31 @@
   --radius: 0.625rem;
 
   --background: #ffffff;
-  --foreground: #1a0f0a;
+  --foreground: #1d1d1d;
 
   --card: #ffffff;
-  --card-foreground: #1a0f0a;
+  --card-foreground: #1d1d1d;
 
   --popover: #ffffff;
   --popover-foreground: #1a0f0a;
 
-  --primary: #2b5b9f;
+  --primary: #005daa;
   --primary-foreground: #ffffff;
 
-  --secondary: #e5e7eb;
-  --secondary-foreground: #111827;
+  --secondary: #eaeaea;
+  --secondary-foreground: #1f2328;
 
-  --muted: #f3f4f6;
-  --muted-foreground: #6b7280;
+  --muted: #eeeeee;
+  --muted-foreground: #737b8b;
 
-  --accent: #f75a5a;
+  --accent: #f23030;
   --accent-foreground: #ffffff;
 
-  --destructive: #dc2626;
+  --destructive: #f23030;
 
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #ff8533;
+  --border: #dee2e7;
+  --input: #ced3db;
+  --ring: #005daa;
 }
 
 /* ===============================
@@ -114,6 +114,6 @@
   }
 
   a {
-    @apply text-primary underline hover:opacity-80;
+    @apply text-primary no-underline hover:opacity-80;
   }
 }
