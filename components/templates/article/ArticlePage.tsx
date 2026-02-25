@@ -17,14 +17,14 @@ export default function ArticlePage({ data }: { data: Article }) {
       <Breadcrumb headline={content.headline} />
 
       {/* Main content area */}
-      <main className="mx-auto w-full max-w-[960px] flex-1 px-4 pt-6 pb-8">
+      <main className="mx-auto w-full max-w-[1060px] flex-1 px-4 pt-6 pb-8">
         {/* Article title section */}
-        <h1 className="mb-2 text-[22px] leading-tight font-extrabold text-[#1d1d1d] md:text-[28px]">
+        <h1 className="mb-3 text-2xl leading-tight font-extrabold text-[#1d1d1d] md:text-[32px] md:leading-[1.15]">
           {content.headline}
         </h1>
 
         {content.subheadline && (
-          <p className="mb-3 text-[13px] leading-relaxed text-[#647083] md:text-sm">
+          <p className="mb-4 text-sm leading-relaxed text-[#647083] md:text-base">
             {content.subheadline}
           </p>
         )}
@@ -50,7 +50,7 @@ export default function ArticlePage({ data }: { data: Article }) {
           </div>
 
           {/* Right sidebar */}
-          <aside className="w-full shrink-0 lg:w-[220px]">
+          <aside className="w-full shrink-0 lg:w-[260px]">
             <MaisLidas />
           </aside>
         </div>

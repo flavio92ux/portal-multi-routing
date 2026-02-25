@@ -28,24 +28,24 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export function SocialShareSidebar() {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-2">
       <button
         aria-label="Compartilhar no Facebook"
-        className="flex h-7 w-7 items-center justify-center rounded-full bg-[#4267b2] text-white transition-opacity hover:opacity-80"
+        className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4267b2] text-white transition-opacity hover:opacity-80"
       >
-        <Facebook className="h-3.5 w-3.5" fill="currentColor" />
+        <Facebook className="h-4 w-4" fill="currentColor" />
       </button>
       <button
         aria-label="Compartilhar no X"
-        className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1f2328] text-white transition-opacity hover:opacity-80"
+        className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1f2328] text-white transition-opacity hover:opacity-80"
       >
-        <XIcon className="h-3.5 w-3.5" />
+        <XIcon className="h-4 w-4" />
       </button>
       <button
         aria-label="Compartilhar no WhatsApp"
-        className="flex h-7 w-7 items-center justify-center rounded-full bg-[#4fd036] text-white transition-opacity hover:opacity-80"
+        className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4fd036] text-white transition-opacity hover:opacity-80"
       >
-        <WhatsAppIcon className="h-3.5 w-3.5" />
+        <WhatsAppIcon className="h-4 w-4" />
       </button>
     </div>
   );

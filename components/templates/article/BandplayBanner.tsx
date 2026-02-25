@@ -64,28 +64,28 @@ export function BandplayBanner() {
 
   return (
     <section className="relative overflow-hidden bg-[#070d31] py-8">
-      <div className="mx-auto flex max-w-[960px] items-center px-4">
+      <div className="mx-auto flex max-w-[1060px] items-center px-4">
         {/* Left arrow */}
         <button
           onClick={prev}
           aria-label="Slide anterior"
           className="mr-4 shrink-0 text-white/50 transition-colors hover:text-white"
         >
-          <ChevronLeft className="h-6 w-6" />
+          <ChevronLeft className="h-7 w-7" />
         </button>
 
         {/* Content */}
         <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:items-center md:justify-between">
           {/* Text */}
           <div className="flex flex-col items-center text-center md:items-start md:text-left">
-            <BandplayLogo className="mb-2 h-4 w-auto" />
-            <h3 className="text-lg font-bold text-white">{slide.title}</h3>
-            <p className="mt-1 max-w-xs text-[13px] leading-relaxed text-[#a6a6a6]">
+            <BandplayLogo className="mb-2 h-5 w-auto" />
+            <h3 className="text-xl font-bold text-white">{slide.title}</h3>
+            <p className="mt-1 max-w-sm text-sm leading-relaxed text-[#a6a6a6]">
               {slide.description}
             </p>
             <Link
               href={slide.href}
-              className="mt-3 inline-block rounded bg-[#f23030] px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-white no-underline transition-opacity hover:opacity-90"
+              className="mt-4 inline-block rounded bg-[#f23030] px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white no-underline transition-opacity hover:opacity-90"
             >
               ASSISTA GRATUITAMENTE
             </Link>
@@ -96,7 +96,7 @@ export function BandplayBanner() {
             <img
               src={slide.image}
               alt={slide.title}
-              className="h-32 w-auto rounded object-cover md:h-40"
+              className="h-36 w-auto rounded object-cover md:h-44"
             />
           </div>
         </div>
@@ -107,7 +107,7 @@ export function BandplayBanner() {
           aria-label="Proximo slide"
           className="ml-4 shrink-0 text-white/50 transition-colors hover:text-white"
         >
-          <ChevronRight className="h-6 w-6" />
+          <ChevronRight className="h-7 w-7" />
         </button>
       </div>
 

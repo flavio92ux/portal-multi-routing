@@ -7,6 +7,8 @@
    TOKENS DO TAILWIND (MAPEAMENTO)
 ================================ */
 @theme inline {
+  --font-sans: 'Open Sans', 'Open Sans Fallback', Arial, Helvetica, sans-serif;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

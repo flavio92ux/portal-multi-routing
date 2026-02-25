@@ -49,7 +49,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
             alt={content.media.main.alt || ''}
             className="h-auto w-full object-cover"
           />
-          <figcaption className="mt-2 flex items-start gap-2 text-[11px] text-[#647083]">
+          <figcaption className="mt-2 flex items-start gap-2 text-xs text-[#647083]">
             <span className="inline-block w-0.5 shrink-0 self-stretch bg-[#1f2328]" />
             <span>
               {content.media.main.caption}
@@ -69,7 +69,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 return (
                   <p
                     key={idx}
-                    className="text-[14px] leading-relaxed text-[#3c444e]"
+                    className="text-[15px] leading-relaxed text-[#3c444e]"
                   >
                     {renderInlineNodes(block.content)}
                   </p>
@@ -111,7 +111,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                       className="w-full"
                     />
                     {block.caption && (
-                      <figcaption className="mt-2 text-center text-[11px] text-[#939daa]">
+                      <figcaption className="mt-2 text-center text-xs text-[#939daa]">
                         {block.caption}
                       </figcaption>
                     )}

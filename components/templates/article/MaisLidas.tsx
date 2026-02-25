@@ -34,8 +34,8 @@ const maisLidasMock: MaisLidasItem[] = [
 export function MaisLidas() {
   return (
     <div className="w-full">
-      <div className="bg-primary px-3 py-1.5">
-        <h3 className="text-[13px] font-bold text-white">Mais Lidas</h3>
+      <div className="bg-primary px-3 py-2">
+        <h3 className="text-sm font-bold text-white">Mais Lidas</h3>
       </div>
 
       {/* Featured image for first item */}
@@ -44,7 +44,7 @@ export function MaisLidas() {
           <img
             src={maisLidasMock[0].thumb}
             alt={maisLidasMock[0].title}
-            className="h-32 w-full object-cover"
+            className="h-36 w-full object-cover"
           />
         </Link>
       )}
@@ -56,7 +56,7 @@ export function MaisLidas() {
               href={item.href}
               className="flex items-start gap-2 px-2 py-2.5 no-underline transition-colors hover:bg-[#f5f5f5]"
             >
-              <span className="text-[11px] leading-snug text-[#3c444e]">
+              <span className="text-xs leading-snug text-[#3c444e]">
                 {item.title}
               </span>
             </Link>
