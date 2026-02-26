@@ -18,6 +18,8 @@ export function BandFooter() {
               width={200}
               height={50}
               className="h-auto w-48 opacity-90"
+              loading="lazy"
+              priority={false}
             />
           </Link>
         </div>

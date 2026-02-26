@@ -27,6 +27,8 @@ export default async function SlugLayout({
     if (!dataRaw) {
       return notFound();
     }
+  } else {
+    return notFound();
   }
 
   const articleData: Article = mapVibraToCleanArticle(dataRaw);

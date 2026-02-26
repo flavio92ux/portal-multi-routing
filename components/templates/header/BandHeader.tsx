@@ -59,6 +59,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
               height={50}
               className="h-10 w-auto"
               priority
+              loading="eager"
             />
           </Link>
 

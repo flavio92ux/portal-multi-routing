@@ -166,6 +166,8 @@ export function ArticleBody({ content }: ArticleBodyProps) {
           width={750}
           height={250}
           className="h-auto w-full opacity-90"
+          loading="lazy"
+          priority={false}
         />
       </div>
 

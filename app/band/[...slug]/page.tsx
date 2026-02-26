@@ -23,6 +23,8 @@ export default async function SlugPage({
     if (!dataRaw) {
       return notFound();
     }
+  } else {
+    return notFound();
   }
 
   const articleData: Article = mapVibraToCleanArticle(dataRaw);
