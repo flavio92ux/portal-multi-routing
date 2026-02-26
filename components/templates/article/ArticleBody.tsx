@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import Image from 'next/image';
 import { ArticleContent, ArticleBlock, InlineNode } from '@/types/article';
 import { ShareBar } from './ShareBar';
 import { Newsletter } from './Newsletter';
 import { RelatedTopics } from './RelatedTopics';
+import {
+  injectAdBlocksEveryNParagraphs,
+  AdBlockWithId,
+} from '@/utils/injectAdBlocks';
+import AdBlock from '@/components/ui/ad-block';
 
 function renderInlineNodes(nodes: InlineNode[]) {
   if (!Array.isArray(nodes)) {
@@ -43,6 +49,18 @@ interface ArticleBodyProps {
 }
 
 export function ArticleBody({ content }: ArticleBodyProps) {
+  // Processa blocos com ads injetados após 1º parágrafo e depois a cada 3 parágrafos
+  const processedBlocks = useMemo(
+    () =>
+      Array.isArray(content.body) && content.body.length > 0
+        ? injectAdBlocksEveryNParagraphs(content.body, 3, {
+            width: 300,
+            height: 250,
+          })
+        : [],
+    [content.body]
+  );
+
   return (
     <>
       {/* Main image */}
@@ -65,20 +83,40 @@ export function ArticleBody({ content }: ArticleBodyProps) {
       )}
 
       {/* Body blocks */}
-      {Array.isArray(content.body) && content.body.length > 0 && (
+      {processedBlocks.length > 0 && (
         <div className="space-y-4">
-          {content.body.map((block: ArticleBlock, idx: number) => {
-            switch (block.type) {
+          {processedBlocks.map((block: AdBlockWithId, idx: number) => {
+            // Renderiza blocos de ads
+            if (block.__isAd) {
+              return (
+                <div
+                  key={`ad-block-${idx}`}
+                  className="my-6 flex justify-center"
+                >
+                  <AdBlock
+                    width={block.__adConfig?.width || '100%'}
+                    height={block.__adConfig?.height || 400}
+                  />
+                </div>
+              );
+            }
+
+            // Renderiza blocos normais
+            const articleBlock = block as ArticleBlock;
+            switch (articleBlock.type) {
               case 'paragraph':
                 return (
                   <p key={idx} className="text-cinza text-[20px] leading-7.5">
-                    {renderInlineNodes(block.content)}
+                    {renderInlineNodes(articleBlock.content)}
                   </p>
                 );
               case 'heading':
                 return (
-                  <h2 key={idx} className="text-cinza text-[20px] leading-7.5">
-                    {renderInlineNodes(block.content)}
+                  <h2
+                    key={idx}
+                    className="text-primary text-3xl leading-9.25 font-bold"
+                  >
+                    {renderInlineNodes(articleBlock.content)}
                   </h2>
                 );
               case 'quote':
@@ -89,13 +127,13 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                   >
                     <p className="text-foreground text-lg">
                       {'"'}
-                      {renderInlineNodes(block.content)}
+                      {renderInlineNodes(articleBlock.content)}
                       {'"'}
                     </p>
-                    {block.author && (
+                    {articleBlock.author && (
                       <cite className="text-cinza-secundario mt-1 block text-sm">
                         {'-- '}
-                        {block.author}
+                        {articleBlock.author}
                       </cite>
                     )}
                   </blockquote>
@@ -104,13 +142,13 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 return (
                   <figure key={idx} className="my-6">
                     <img
-                      src={block.url}
-                      alt={block.alt || ''}
+                      src={articleBlock.url}
+                      alt={articleBlock.alt || ''}
                       className="w-full rounded"
                     />
-                    {block.caption && (
+                    {articleBlock.caption && (
                       <figcaption className="text-cinza-secundario mt-2 text-center text-xs">
-                        {block.caption}
+                        {articleBlock.caption}
                       </figcaption>
                     )}
                   </figure>
@@ -119,11 +157,21 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 return null;
             }
           })}
-
-          {/* Share bar after first few paragraphs */}
-          <ShareBar />
         </div>
       )}
+
+      <div className="my-7 flex justify-center">
+        <Image
+          src="https://img.band.com.br/image/2024/03/18/banner-whatsapp-82436.png"
+          alt="Band"
+          width={750}
+          height={250}
+          className="h-auto w-full opacity-90"
+        />
+      </div>
+
+      {/* Share bar after first few paragraphs */}
+      <ShareBar />
 
       {/* Newsletter (moved from parent) */}
       <div className="mt-8">

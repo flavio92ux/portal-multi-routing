@@ -9,7 +9,7 @@ import { AuthorInfo } from './AuthorInfo';
 import AdBlock from '@/components/ui/ad-block';
 
 export default function ArticlePage({ data }: { data: Article }) {
-  const { content, metadata } = data;
+  const { content } = data;
 
   if (!content) return null;
 

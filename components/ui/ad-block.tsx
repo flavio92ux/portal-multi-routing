@@ -26,15 +26,15 @@ export const AdBlock: React.FC<AdBlockProps> = ({
 
   return (
     <div
-      className={`flex items-center justify-center bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg ${className}`}
+      className={`flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-100 ${className}`}
       style={{
         width: widthStyle,
         height: heightStyle,
       }}
     >
       <div className="text-center">
-        <p className="text-gray-500 font-semibold">Espaço Publicitário</p>
-        <p className="text-gray-400 text-sm">
+        <p className="font-semibold text-gray-500">Espaço Publicitário</p>
+        <p className="text-sm text-gray-400">
           {widthStyle} × {heightStyle}
         </p>
       </div>
