@@ -64,7 +64,9 @@ export default function ArticlePage({ data }: { data: Article }) {
             <aside className="flex w-full shrink-0 flex-col gap-4 lg:w-77.5">
               <AdBlock width={300} height={250} />
               <MaisLidas />
-              <AdBlock width={300} height={600} />
+              <div className="sticky top-1">
+                <AdBlock width={300} height={600} />
+              </div>
             </aside>
           </div>
         </div>

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { ArticleContent, ArticleBlock, InlineNode } from '@/types/article';
 import { ShareBar } from './ShareBar';
 import { Newsletter } from './Newsletter';
-import { RelatedTopics } from './RelatedTopics';
 import {
   injectAdBlocksEveryNParagraphs,
   AdBlockWithId,
