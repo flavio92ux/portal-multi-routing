@@ -36,15 +36,6 @@ export default function Home() {
           href={
             'http://' +
             process.env.NEXT_PUBLIC_PORTAL_HOSTNAME +
-            '/politica/eleicoes/2026/o-que-acontece-se-eu-nao-votar-e-nao-justificar-veja-o-valor-da-multa'
-          }
-        >
-          O que acontece se eu não votar e não justificar
-        </Link>
-        <Link
-          href={
-            'http://' +
-            process.env.NEXT_PUBLIC_PORTAL_HOSTNAME +
             '/ciencia-e-tecnologia/noticias/crimes-ciberneticos-sobem-28-em-2025-abuso-infantil-e-misoginia-disparam-202602101057'
           }
         >

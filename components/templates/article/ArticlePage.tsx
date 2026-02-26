@@ -6,6 +6,7 @@ import { Article } from '@/types/article';
 import { ArticleBody } from './ArticleBody';
 import { Breadcrumb } from './Breadcrumb';
 import { AuthorInfo } from './AuthorInfo';
+import AdBlock from '@/components/ui/ad-block';
 
 export default function ArticlePage({ data }: { data: Article }) {
   const { content, metadata } = data;
@@ -15,6 +16,10 @@ export default function ArticlePage({ data }: { data: Article }) {
   return (
     <div className="flex min-h-screen flex-col">
       <Breadcrumb headline={content.headline} />
+
+      <div className="flex justify-center">
+        <AdBlock width={970} height={250} />
+      </div>
 
       {/* Main content area */}
       <main className="mx-auto w-full max-w-325 flex-1 px-4 py-8">
@@ -56,8 +61,10 @@ export default function ArticlePage({ data }: { data: Article }) {
             </div>
 
             {/* Sidebar Direita */}
-            <aside className="w-full shrink-0 lg:w-77.5">
+            <aside className="flex w-full shrink-0 flex-col gap-4 lg:w-77.5">
+              <AdBlock width={300} height={250} />
               <MaisLidas />
+              <AdBlock width={300} height={600} />
             </aside>
           </div>
         </div>
