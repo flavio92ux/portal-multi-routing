@@ -29,7 +29,7 @@ function renderInlineNodes(nodes: InlineNode[]) {
           href={node.url || '#'}
           className="text-primary underline hover:no-underline"
         >
-          {element}
+          {' ' + element + ' '}
         </a>
       );
     }

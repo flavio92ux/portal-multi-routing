@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'img.band.com.br',
       },
+      {
+        protocol: 'https',
+        hostname: 'pubimg.band.com.br',
+      },
     ],
   },
 };
