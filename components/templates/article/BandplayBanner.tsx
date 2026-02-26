@@ -1,136 +1,203 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
 
-function BandplayLogo({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 120 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
-    >
-      <text
-        x="0"
-        y="15"
-        fill="white"
-        fontFamily="Arial, sans-serif"
-        fontWeight="700"
-        fontSize="14"
-      >
-        {'▷ Bandplay'}
-      </text>
-    </svg>
-  );
-}
-
-interface BannerSlide {
-  id: number;
+interface BannerItem {
+  id: string;
   title: string;
   description: string;
-  href: string;
-  leftLogo: string;
-  rightLogo: string;
+  logo: string;
+  image: string;
+  cta_text: string;
+  cta_link: string;
 }
 
-const slides: BannerSlide[] = [
+const bannersMock: BannerItem[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Liga Saudita',
-    description:
-      'Duelo quente entre Al Okhdood x Al-Qadsiah. Quem leva a melhor?',
-    href: '#',
-    leftLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=AO',
-    rightLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=AQ',
+    description: 'Assista Al Fateh x Damac em partida válida pela Liga Saudita',
+    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
+    image: 'https://placehold.co/1200x400/1f3a7d/fff?text=Liga+Saudita+1',
+    cta_text: 'ASSISTA GRATUITAMENTE',
+    cta_link: '#',
   },
   {
-    id: 2,
-    title: 'Champions League',
-    description: 'Os melhores momentos da rodada. Confira os gols.',
-    href: '#',
-    leftLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=CL',
-    rightLogo: 'https://placehold.co/120x120/1a1a2e/e94560?text=CL',
+    id: '2',
+    title: 'Libertadores 2026',
+    description: 'Acompanhe os melhores momentos da Libertadores',
+    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
+    image: 'https://placehold.co/1200x400/1f3a7d/fff?text=Libertadores+2026',
+    cta_text: 'ASSISTA GRATUITAMENTE',
+    cta_link: '#',
+  },
+  {
+    id: '3',
+    title: 'Campeonato Brasileiro',
+    description: 'Os melhores gols e lances do Brasileirão',
+    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
+    image: 'https://placehold.co/1200x400/1f3a7d/fff?text=Brasileirao',
+    cta_text: 'ASSISTA GRATUITAMENTE',
+    cta_link: '#',
+  },
+  {
+    id: '4',
+    title: 'Futebol Internacional',
+    description: 'Grandes ligas europeias ao vivo',
+    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
+    image:
+      'https://placehold.co/1200x400/1f3a7d/fff?text=Football+Internacional',
+    cta_text: 'ASSISTA GRATUITAMENTE',
+    cta_link: '#',
+  },
+  {
+    id: '5',
+    title: 'Série A+',
+    description: 'Conteúdo exclusivo com análise profunda',
+    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
+    image: 'https://placehold.co/1200x400/1f3a7d/fff?text=Serie+A+Plus',
+    cta_text: 'ASSISTA GRATUITAMENTE',
+    cta_link: '#',
   },
 ];
 
 export function BandplayBanner() {
-  const [current, setCurrent] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
 
-  const prev = () => setCurrent((c) => (c === 0 ? slides.length - 1 : c - 1));
-  const next = () => setCurrent((c) => (c === slides.length - 1 ? 0 : c + 1));
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
 
-  const slide = slides[current];
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const scrollTo = useCallback(
+    (index: number) => {
+      if (emblaApi) emblaApi.scrollTo(index);
+    },
+    [emblaApi]
+  );
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+    setPrevBtnDisabled(!emblaApi.canScrollPrev());
+    setNextBtnDisabled(!emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   return (
-    <section className="relative overflow-hidden bg-[#0d0d2b] py-8">
-      <div className="mx-auto flex max-w-325 items-center px-4">
-        {/* Left arrow */}
-        <button
-          onClick={prev}
-          aria-label="Slide anterior"
-          className="mr-4 shrink-0 text-white/60 transition-colors hover:text-white"
-        >
-          <ChevronLeft className="h-8 w-8" />
-        </button>
+    <section className="w-full bg-slate-900">
+      <div className="mx-auto max-w-325">
+        <div className="relative overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {bannersMock.map((banner) => (
+              <Link
+                key={banner.id}
+                href={banner.cta_link}
+                className="relative min-w-full shrink-0"
+              >
+                {/* Background Image */}
+                <div
+                  className="absolute inset-0 z-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${banner.image})` }}
+                />
 
-        {/* Content */}
-        <div className="flex flex-1 flex-col items-center gap-6 md:flex-row md:items-center md:justify-between">
-          {/* Text */}
-          <div className="flex flex-col items-center text-center md:items-start md:text-left">
-            <BandplayLogo className="mb-2 h-5 w-auto" />
-            <h3 className="text-lg font-bold text-white">{slide.title}</h3>
-            <p className="mt-1 max-w-xs text-sm text-gray-300">
-              {slide.description}
-            </p>
-            <Link
-              href={slide.href}
-              className="mt-3 inline-block rounded bg-white px-5 py-2 text-xs font-bold tracking-wider text-[#0d0d2b] uppercase no-underline transition-opacity hover:opacity-90"
-            >
-              ASSISTA GRATUITAMENTE
-            </Link>
-          </div>
+                {/* Overlay escuro */}
+                <div className="absolute inset-0 z-10 bg-gradient-to-r from-slate-900 via-slate-900/50 to-transparent" />
 
-          {/* Team logos */}
-          <div className="flex items-center gap-4">
-            <img
-              src={slide.leftLogo}
-              alt=""
-              className="h-20 w-20 rounded-full object-contain md:h-28 md:w-28"
-            />
-            <span className="text-2xl font-bold text-white">X</span>
-            <img
-              src={slide.rightLogo}
-              alt=""
-              className="h-20 w-20 rounded-full object-contain md:h-28 md:w-28"
-            />
+                {/* Content */}
+                <div className="relative z-20 flex flex-col justify-center px-8 py-16 md:px-12 md:py-24">
+                  {/* Logo Bandplay */}
+                  <img
+                    src={banner.logo}
+                    alt="Bandplay"
+                    className="mb-6 h-10 w-auto"
+                  />
+
+                  {/* Title */}
+                  <h2 className="mb-4 font-sans text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+                    {banner.title}
+                  </h2>
+
+                  {/* Description */}
+                  <p className="mb-8 max-w-md text-lg text-gray-300">
+                    {banner.description}
+                  </p>
+
+                  {/* CTA Button */}
+                  <button className="w-fit bg-gradient-to-r from-teal-500 to-blue-600 px-8 py-3 font-bold text-white transition-opacity hover:opacity-90">
+                    {banner.cta_text}
+                  </button>
+                </div>
+
+                {/* Team/Event Logo - Right side */}
+                <div className="absolute right-8 bottom-12 z-20 h-32 w-32 md:right-12 md:bottom-16 md:h-40 md:w-40">
+                  <div className="flex h-full w-full items-center justify-center">
+                    <span className="text-6xl font-bold text-white/20 md:text-8xl">
+                      ×
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
 
-        {/* Right arrow */}
-        <button
-          onClick={next}
-          aria-label="Proximo slide"
-          className="ml-4 shrink-0 text-white/60 transition-colors hover:text-white"
-        >
-          <ChevronRight className="h-8 w-8" />
-        </button>
-      </div>
-
-      {/* Dots */}
-      <div className="mt-4 flex justify-center gap-1.5">
-        {slides.map((_, idx) => (
+        {/* Navigation Controls */}
+        <div className="flex items-center justify-between bg-slate-900 px-8 py-4 md:px-12">
+          {/* Previous Button */}
           <button
-            key={idx}
-            onClick={() => setCurrent(idx)}
-            aria-label={`Ir para slide ${idx + 1}`}
-            className={`h-2 w-2 rounded-full transition-colors ${
-              idx === current ? 'bg-white' : 'bg-white/30'
-            }`}
-          />
-        ))}
+            onClick={scrollPrev}
+            disabled={prevBtnDisabled}
+            aria-label="Banner anterior"
+            className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-white transition-colors hover:bg-white hover:text-slate-900 disabled:border-gray-600 disabled:text-gray-600 disabled:hover:bg-transparent disabled:hover:text-gray-600"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="flex gap-2">
+            {bannersMock.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollTo(index)}
+                aria-label={`Ir para banner ${index + 1}`}
+                className={`h-2 w-2 rounded-full transition-all ${
+                  index === selectedIndex ? 'bg-white' : 'bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Next Button */}
+          <button
+            onClick={scrollNext}
+            disabled={nextBtnDisabled}
+            aria-label="Próximo banner"
+            className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white text-white transition-colors hover:bg-white hover:text-slate-900 disabled:border-gray-600 disabled:text-gray-600 disabled:hover:bg-transparent disabled:hover:text-gray-600"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
       </div>
     </section>
   );
