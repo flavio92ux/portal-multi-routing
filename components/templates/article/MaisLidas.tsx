@@ -1,47 +1,32 @@
 import Link from 'next/link';
+import { mapMaisLidasApiToComponent, type MaisLidasItem } from '@/lib/mapper';
 
-interface MaisLidasItem {
-  id: number;
-  title: string;
-  href: string;
-  thumb?: string;
+const MAIS_LIDAS_API_URL =
+  'https://apiconteudo.bs.vibra.digital/?query={ga4(dateRanges:[{startDate:"yesterday",endDate:"today"}],limit:5,channel:"noticias",domain:"band"){url pageTitle}}';
+
+async function getMaisLidas(): Promise<MaisLidasItem[]> {
+  try {
+    const response = await fetch(MAIS_LIDAS_API_URL, {
+      next: {
+        revalidate: 86400, // 24 horas em segundos
+      },
+    });
+
+    if (!response.ok) {
+      console.error('Erro ao buscar mais lidas:', response.statusText);
+      return [];
+    }
+
+    const data = await response.json();
+    return mapMaisLidasApiToComponent(data);
+  } catch (error) {
+    console.error('Erro ao buscar mais lidas:', error);
+    return [];
+  }
 }
 
-const maisLidasMock: MaisLidasItem[] = [
-  {
-    id: 1,
-    title:
-      'Policia do Reino Unido prende ex-principe Andrew, irmao de rei Charles III',
-    href: '#',
-    thumb:
-      'https://img.band.com.br/image/2026/02/25/bombeiros-atuam-em-resgate-em-area-soterrada-de-juiz-de-fora-12928_300x168.jpg',
-  },
-  {
-    id: 2,
-    title:
-      'Fim da escala 6x1: proposta de reducao de jornada pros abriu nas conversoes',
-    href: '#',
-  },
-  {
-    id: 3,
-    title:
-      'Video: Neres bloqueou zagueiros, invadiu a area adversa e cobrou de chegancamento',
-    href: '#',
-  },
-  {
-    id: 4,
-    title:
-      'Trio assassino que adolescente capaz de matar descrito "lamentavel e triste"',
-    href: '#',
-  },
-  {
-    id: 5,
-    title: 'STF abre acao contra Eduardo Bolsonaro por obstrucao de justica',
-    href: '#',
-  },
-];
-
-export function MaisLidas() {
+export async function MaisLidas() {
+  const maisLidasItems = await getMaisLidas();
   return (
     <aside className="w-full">
       <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
@@ -53,15 +38,15 @@ export function MaisLidas() {
         </div>
 
         {/* Featured image for first item */}
-        {maisLidasMock[0]?.thumb && (
+        {maisLidasItems[0]?.thumb && (
           <Link
-            href={maisLidasMock[0].href}
+            href={maisLidasItems[0].href}
             className="relative block px-4 py-3 no-underline"
           >
             <div className="relative overflow-hidden rounded-lg">
               <img
-                src={maisLidasMock[0].thumb}
-                alt={maisLidasMock[0].title}
+                src={maisLidasItems[0].thumb}
+                alt={maisLidasItems[0].title}
                 className="h-40 w-full object-cover"
               />
               {/* Badge */}
@@ -74,7 +59,7 @@ export function MaisLidas() {
 
         {/* Articles List */}
         <ol className="divide-y divide-gray-200">
-          {maisLidasMock.map((item) => (
+          {maisLidasItems.map((item) => (
             <li key={item.id}>
               <Link
                 href={item.href}
