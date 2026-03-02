@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import {
@@ -9,10 +11,14 @@ import {
   type RelatedVideoItem,
 } from '@/lib/mappers/relatedVideosMapper';
 
-const RELATED_VIDEOS_API =
-  'https://api.bs.vibra.digital/api/v1/BandVideo?sort=-createdAt&limit=8&config.order.data.tags.id.keyword=videos-bora-brasil';
-
 export function RelatedVideos() {
+  const pathname = usePathname();
+  const firstLevelPath = pathname.split('/').filter(Boolean)[0];
+
+  const RELATED_VIDEOS_API =
+    'https://api.bs.vibra.digital/api/v1/BandVideo?sort=-createdAt&limit=8&config.order.data.tags.id.keyword=videos-' +
+    firstLevelPath;
+
   const [videos, setVideos] = useState<RelatedVideoItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -126,9 +132,11 @@ export function RelatedVideos() {
                 className="group relative min-w-0 flex-[0_0_calc(50%-8px)] shrink-0 no-underline sm:flex-[0_0_calc(33.333%-11px)] lg:flex-[0_0_calc(25%-12px)]"
               >
                 <div className="relative overflow-hidden rounded">
-                  <img
+                  <Image
                     src={video.thumb}
                     alt={video.title}
+                    width={640}
+                    height={360}
                     className="aspect-video w-full object-cover transition-transform group-hover:scale-105"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/40">

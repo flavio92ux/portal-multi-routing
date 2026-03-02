@@ -21,6 +21,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'www.band.com.br',
       },
+      {
+        protocol: 'https',
+        hostname: 'assets.spalla.io',
+      },
     ],
   },
 };
