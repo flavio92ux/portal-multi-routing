@@ -4,57 +4,17 @@ import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
+import {
+  mapRelatedVideosToItems,
+  type RelatedVideoItem,
+} from '@/lib/mappers/relatedVideosMapper';
 
-interface VideoItem {
-  id: string;
-  title: string;
-  date: string;
-  thumb: string;
-  href: string;
-}
-
-const videosMock: VideoItem[] = [
-  {
-    id: '1',
-    title:
-      'Santos com Maldo Soares, com os melhores eventos para o seu fim de semana',
-    date: '25/04/2025 - 14:31',
-    thumb: 'https://placehold.co/320x200/333/fff?text=Video+1',
-    href: '#',
-  },
-  {
-    id: '2',
-    title: 'Pacientes denunciam larvas na comida da UPA em BH',
-    date: '26/03/2024 - 17:10',
-    thumb: 'https://placehold.co/320x200/333/fff?text=Video+2',
-    href: '#',
-  },
-  {
-    id: '3',
-    title:
-      'Caso Povel: medico que retirou orgaos de crianca viva em 2000 e preso',
-    date: '16/05/2023 - 10:46',
-    thumb: 'https://placehold.co/320x200/333/fff?text=Video+3',
-    href: '#',
-  },
-  {
-    id: '4',
-    title:
-      'Wallison recebe proposta quase 3 vezes maior e pode deixar o Cruzeiro',
-    date: '08/10/2023 - 09:41',
-    thumb: 'https://placehold.co/320x200/333/fff?text=Video+4',
-    href: '#',
-  },
-  {
-    id: '5',
-    title: 'Oinegue: No Brasil, depredar pode ser um bom negócio',
-    date: '25/02/2026 - 20:49',
-    thumb: 'https://placehold.co/320x200/333/fff?text=Video+5',
-    href: '#',
-  },
-];
+const RELATED_VIDEOS_API =
+  'https://api.bs.vibra.digital/api/v1/BandVideo?sort=-createdAt&limit=8&config.order.data.tags.id.keyword=videos-bora-brasil';
 
 export function RelatedVideos() {
+  const [videos, setVideos] = useState<RelatedVideoItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
@@ -88,6 +48,47 @@ export function RelatedVideos() {
     };
   }, [emblaApi, onSelect]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(RELATED_VIDEOS_API);
+        const data = await res.json();
+        const mappedVideos = mapRelatedVideosToItems(data);
+        setVideos(mappedVideos);
+      } catch (error) {
+        console.error('Failed to fetch related videos:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section className="bg-[#f5f5f5] py-8">
+        <div className="mx-auto max-w-325 px-4">
+          <div className="mb-5 h-6 w-40 animate-pulse rounded bg-gray-300" />
+          <div className="flex gap-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="flex-[0_0_calc(25%-12px)] shrink-0 animate-pulse"
+              >
+                <div className="aspect-video w-full rounded bg-gray-300" />
+                <div className="mt-2 h-4 w-full rounded bg-gray-300" />
+                <div className="mt-1 h-3 w-24 rounded bg-gray-300" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (videos.length === 0) return null;
+
   return (
     <section className="bg-[#f5f5f5] py-8">
       <div className="mx-auto max-w-325 px-4">
@@ -118,7 +119,7 @@ export function RelatedVideos() {
         {/* Carrossel */}
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex gap-4">
-            {videosMock.map((video) => (
+            {videos.map((video) => (
               <Link
                 key={video.id}
                 href={video.href}

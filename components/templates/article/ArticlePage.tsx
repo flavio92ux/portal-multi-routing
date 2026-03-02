@@ -1,6 +1,6 @@
 import { SocialShareSidebar } from './SocialShareSidebar';
 import { MaisLidas } from './MaisLidas';
-import { RelatedVideos } from './RelatedVideos';
+import { RelatedVideosWrapper } from './RelatedVideosWrapper';
 import { Article } from '@/types/article';
 import { ArticleBody } from './ArticleBody';
 import { Breadcrumb } from './Breadcrumb';
@@ -76,7 +76,7 @@ export default function ArticlePage({ data }: { data: Article }) {
       <BandplayBannerWrapper />
 
       {/* Related videos */}
-      <RelatedVideos />
+      <RelatedVideosWrapper />
     </div>
   );
 }
