@@ -28,7 +28,8 @@ interface BandplayHighlightsApiResponse {
   items: BandplayHighlightApiItem[];
 }
 
-const BANDPLAY_LOGO = 'https://img.band.com.br/image/2024/01/31/bandplay-logo-171516.png';
+const BANDPLAY_LOGO =
+  'https://www.band.com.br/assets/bandplay/BandPlay-Logo.png';
 
 export function mapBandplayHighlightsToBanner(
   apiResponse: BandplayHighlightsApiResponse
