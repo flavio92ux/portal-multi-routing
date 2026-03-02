@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'pubimg.band.com.br',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.band.com.br',
+      },
     ],
   },
 };
