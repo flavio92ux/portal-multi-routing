@@ -1,74 +1,66 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
+import {
+  mapBandplayHighlightsToBanner,
+  type BandplayBannerItem,
+} from '@/lib/mappers/bandplayHighlightsMapper';
 
-interface BannerItem {
-  id: string;
-  title: string;
-  description: string;
-  logo: string;
-  image: string;
-  cta_text: string;
-  cta_link: string;
-}
-
-const bannersMock: BannerItem[] = [
-  {
-    id: '1',
-    title: 'Liga Saudita',
-    description: 'Assista Al Fateh x Damac em partida válida pela Liga Saudita',
-    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
-    image: 'https://placehold.co/1200x400/1f3a7d/fff?text=Liga+Saudita+1',
-    cta_text: 'ASSISTA GRATUITAMENTE',
-    cta_link: '#',
-  },
-  {
-    id: '2',
-    title: 'Libertadores 2026',
-    description: 'Acompanhe os melhores momentos da Libertadores',
-    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
-    image: 'https://placehold.co/1200x400/1f3a7d/fff?text=Libertadores+2026',
-    cta_text: 'ASSISTA GRATUITAMENTE',
-    cta_link: '#',
-  },
-  {
-    id: '3',
-    title: 'Campeonato Brasileiro',
-    description: 'Os melhores gols e lances do Brasileirão',
-    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
-    image: 'https://placehold.co/1200x400/1f3a7d/fff?text=Brasileirao',
-    cta_text: 'ASSISTA GRATUITAMENTE',
-    cta_link: '#',
-  },
-  {
-    id: '4',
-    title: 'Futebol Internacional',
-    description: 'Grandes ligas europeias ao vivo',
-    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
-    image:
-      'https://placehold.co/1200x400/1f3a7d/fff?text=Football+Internacional',
-    cta_text: 'ASSISTA GRATUITAMENTE',
-    cta_link: '#',
-  },
-  {
-    id: '5',
-    title: 'Série A+',
-    description: 'Conteúdo exclusivo com análise profunda',
-    logo: 'https://placehold.co/80x80/1f3a7d/fff?text=Bandplay',
-    image: 'https://placehold.co/1200x400/1f3a7d/fff?text=Serie+A+Plus',
-    cta_text: 'ASSISTA GRATUITAMENTE',
-    cta_link: '#',
-  },
-];
+const BANDPLAY_HIGHLIGHTS_API =
+  'https://api.bs.vibra.digital/api/v1/BandplayHighlights?sort=order&category=64e633c46a456746845107b5&limit=10';
 
 export function BandplayBanner() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(false);
+  const [banners, setBanners] = useState<BandplayBannerItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Fetch data when component becomes visible
+  useEffect(() => {
+    if (hasFetched) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasFetched) {
+          setHasFetched(true);
+          setIsLoading(true);
+
+          fetch(BANDPLAY_HIGHLIGHTS_API)
+            .then((res) => res.json())
+            .then((data) => {
+              const mappedBanners = mapBandplayHighlightsToBanner(data);
+              setBanners(mappedBanners);
+            })
+            .catch((error) => {
+              console.error('Failed to fetch Bandplay highlights:', error);
+            })
+            .finally(() => {
+              setIsLoading(false);
+            });
+        }
+      },
+      {
+        rootMargin: '200px',
+        threshold: 0,
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasFetched]);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -104,12 +96,27 @@ export function BandplayBanner() {
     };
   }, [emblaApi, onSelect]);
 
+  // Show loading skeleton or nothing while loading
+  if (isLoading || banners.length === 0) {
+    return (
+      <section ref={containerRef} className="w-full bg-slate-900">
+        <div className="mx-auto max-w-325">
+          <div className="flex h-64 items-center justify-center md:h-80">
+            {isLoading && (
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent" />
+            )}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="w-full bg-slate-900">
+    <section ref={containerRef} className="w-full bg-slate-900">
       <div className="mx-auto max-w-325">
         <div className="relative overflow-hidden" ref={emblaRef}>
           <div className="flex">
-            {bannersMock.map((banner) => (
+            {banners.map((banner) => (
               <Link
                 key={banner.id}
                 href={banner.cta_link}
@@ -176,7 +183,7 @@ export function BandplayBanner() {
 
           {/* Dots Indicator */}
           <div className="flex gap-2">
-            {bannersMock.map((_, index) => (
+            {banners.map((_, index) => (
               <button
                 key={index}
                 onClick={() => scrollTo(index)}

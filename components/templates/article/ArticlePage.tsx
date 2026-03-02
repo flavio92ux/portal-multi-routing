@@ -1,12 +1,17 @@
+import dynamic from 'next/dynamic';
 import { SocialShareSidebar } from './SocialShareSidebar';
 import { MaisLidas } from './MaisLidas';
-import { BandplayBanner } from './BandplayBanner';
 import { RelatedVideos } from './RelatedVideos';
 import { Article } from '@/types/article';
 import { ArticleBody } from './ArticleBody';
 import { Breadcrumb } from './Breadcrumb';
 import { AuthorInfo } from './AuthorInfo';
 import AdBlock from '@/components/ui/ad-block';
+
+const BandplayBanner = dynamic(
+  () => import('./BandplayBanner').then((mod) => mod.BandplayBanner),
+  { ssr: false }
+);
 
 export default function ArticlePage({ data }: { data: Article }) {
   const { content } = data;
