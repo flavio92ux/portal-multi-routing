@@ -31,7 +31,7 @@ export function mapMaisLidasApiToComponent(
   return apiResponse.data.ga4.map((item, index) => ({
     id: index + 1,
     title: item.pageTitle,
-    href: item.url,
+    href: item.url && item.url.replace('https://www.band.com.br', ''),
     // A API não retorna thumb, então deixamos undefined
     thumb: undefined,
   }));

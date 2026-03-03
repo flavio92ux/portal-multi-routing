@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { SocialShareSidebar } from './SocialShareSidebar';
 import { MaisLidas } from './MaisLidas';
 import { RelatedVideosWrapper } from './RelatedVideosWrapper';
@@ -8,29 +7,6 @@ import { Breadcrumb } from './Breadcrumb';
 import { AuthorInfo } from './AuthorInfo';
 import AdBlock from '@/components/ui/ad-block';
 import { BandplayBannerWrapper } from './BandplayBannerWrapper';
-
-function MaisLidasSkeleton() {
-  return (
-    <aside className="w-full">
-      <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-        <div className="border-t-primary border-t-10 px-4 py-3">
-          <div className="h-7 w-24 animate-pulse rounded bg-gray-200" />
-        </div>
-        <ol className="divide-y divide-gray-200">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <li key={i} className="flex items-start gap-4 px-4 py-4">
-              <div className="h-9 w-6 shrink-0 animate-pulse rounded bg-gray-200" />
-              <div className="flex-1 space-y-2">
-                <div className="h-4 w-full animate-pulse rounded bg-gray-200" />
-                <div className="h-4 w-3/4 animate-pulse rounded bg-gray-200" />
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </aside>
-  );
-}
 
 export default function ArticlePage({ data }: { data: Article }) {
   const { content } = data;
@@ -87,9 +63,7 @@ export default function ArticlePage({ data }: { data: Article }) {
             {/* Sidebar Direita */}
             <aside className="flex w-full shrink-0 flex-col gap-4 lg:w-77.5">
               <AdBlock width={300} height={250} />
-              <Suspense fallback={<MaisLidasSkeleton />}>
-                <MaisLidas />
-              </Suspense>
+              <MaisLidas />
               <div className="sticky top-1">
                 <AdBlock width={300} height={600} />
               </div>

@@ -1,17 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { mapMaisLidasApiToComponent, type MaisLidasItem } from '@/lib/mapper';
-import { getPageData } from '@/services/api';
 
 const MAIS_LIDAS_API_URL =
   'https://apiconteudo.bs.vibra.digital/?query={ga4(dateRanges:[{startDate:"yesterday",endDate:"today"}],limit:5,channel:"noticias",domain:"band"){url pageTitle}}';
 
+const REVALIDATE_24H = 86400; // 24 horas em segundos
+
 async function getMaisLidas(): Promise<MaisLidasItem[]> {
   try {
     const response = await fetch(MAIS_LIDAS_API_URL, {
-      next: {
-        revalidate: 86400, // 24 horas em segundos
-      },
+      next: { revalidate: REVALIDATE_24H },
     });
 
     if (!response.ok) {
@@ -27,17 +26,35 @@ async function getMaisLidas(): Promise<MaisLidasItem[]> {
   }
 }
 
+async function getFirstMaisLidasThumb(path: string): Promise<string> {
+  if (!path) return '';
+
+  console.log("Buscando API...")
+
+  const url = `${process.env.PROXY_VIBRA_ELASTIC}/api/v1/BandArticle/${path}`;
+
+  try {
+    const response = await fetch(url, {
+      next: { revalidate: REVALIDATE_24H },
+    });
+
+    if (!response.ok) return '';
+
+    const data = await response.json();
+    return data?.config?.order?.data?.image?.url || '';
+  } catch {
+    return '';
+  }
+}
+
 export async function MaisLidas() {
   const maisLidasItems = await getMaisLidas();
-  const urlFirst = maisLidasItems.length ? maisLidasItems[0].href : '';
 
-  const path = urlFirst.replace('https://www.band.com.br/', '');
-
-  const dataRaw = await getPageData(path);
-
-  const thumb = dataRaw?.config?.order?.data?.image?.url || '';
-
-  maisLidasItems[0].thumb = thumb;
+  if (maisLidasItems.length > 0) {
+    const urlFirst = maisLidasItems[0].href;
+    const path = urlFirst.replace('https://www.band.com.br/', '');
+    maisLidasItems[0].thumb = await getFirstMaisLidasThumb(path);
+  }
 
   return (
     <aside className="w-full">
