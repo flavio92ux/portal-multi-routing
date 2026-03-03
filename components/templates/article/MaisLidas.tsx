@@ -1,60 +1,59 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { mapMaisLidasApiToComponent, type MaisLidasItem } from '@/lib/mapper';
+import { unstable_cache } from 'next/cache';
+import { mapMaisLidasApiToComponent, type MaisLidasItem } from '@/lib/mappers/map-mais-lidas';
+import { getChannel } from '@/utils/getChannel';
 
-const MAIS_LIDAS_API_URL =
-  'https://apiconteudo.bs.vibra.digital/?query={ga4(dateRanges:[{startDate:"yesterday",endDate:"today"}],limit:5,channel:"noticias",domain:"band"){url pageTitle}}';
+function buildMaisLidasUrl(channel: string): string {
+  return `https://apiconteudo.bs.vibra.digital/?query={ga4(dateRanges:[{startDate:"yesterday",endDate:"today"}],limit:5,channel:"${channel}",domain:"band"){url pageTitle}}`;
+}
 
 const REVALIDATE_24H = 86400; // 24 horas em segundos
 
-async function getMaisLidas(): Promise<MaisLidasItem[]> {
-  try {
-    const response = await fetch(MAIS_LIDAS_API_URL, {
-      next: { revalidate: REVALIDATE_24H },
-    });
+/**
+ * Função unificada para buscar dados e thumb com cache único.
+ * Isso garante que as duas APIs sejam tratadas como uma só entrada no cache.
+ */
+const getMaisLidasCompletas = unstable_cache(
+  async (channel: string): Promise<MaisLidasItem[]> => {
+    console.log(`--- [CACHE MISS] channel=${channel} ---`);
 
-    if (!response.ok) {
-      console.error('Erro ao buscar mais lidas:', response.statusText);
+    try {
+      // 1. Busca a lista das mais lidas para o channel
+      const response = await fetch(buildMaisLidasUrl(channel));
+      if (!response.ok) return [];
+
+      const data = await response.json();
+      const maisLidasItems = mapMaisLidasApiToComponent(data);
+
+      // 2. Busca a thumb apenas para o primeiro item, se existir
+      if (maisLidasItems.length > 0) {
+        const path = maisLidasItems[0].href;
+
+        const thumbUrl = `${process.env.PROXY_VIBRA_ELASTIC}/api/v1/BandArticle/${path}`;
+        const thumbRes = await fetch(thumbUrl);
+
+        if (thumbRes.ok) {
+          const thumbData = await thumbRes.json();
+          maisLidasItems[0].thumb = thumbData?.config?.order?.data?.image?.url || '';
+        }
+      }
+
+      return maisLidasItems;
+    } catch (error) {
+      console.error('Erro ao processar Mais Lidas:', error);
       return [];
     }
+  },
+  ['mais-lidas-completa-sidebar'],
+  { revalidate: REVALIDATE_24H }
+);
 
-    const data = await response.json();
-    return mapMaisLidasApiToComponent(data);
-  } catch (error) {
-    console.error('Erro ao buscar mais lidas:', error);
-    return [];
-  }
-}
+export async function MaisLidas({ path }: { path: string }) {
+  const channel = getChannel(path);
+  const maisLidasItems = await getMaisLidasCompletas(channel);
 
-async function getFirstMaisLidasThumb(path: string): Promise<string> {
-  if (!path) return '';
-
-  console.log("Buscando API...")
-
-  const url = `${process.env.PROXY_VIBRA_ELASTIC}/api/v1/BandArticle/${path}`;
-
-  try {
-    const response = await fetch(url, {
-      next: { revalidate: REVALIDATE_24H },
-    });
-
-    if (!response.ok) return '';
-
-    const data = await response.json();
-    return data?.config?.order?.data?.image?.url || '';
-  } catch {
-    return '';
-  }
-}
-
-export async function MaisLidas() {
-  const maisLidasItems = await getMaisLidas();
-
-  if (maisLidasItems.length > 0) {
-    const urlFirst = maisLidasItems[0].href;
-    const path = urlFirst.replace('https://www.band.com.br/', '');
-    maisLidasItems[0].thumb = await getFirstMaisLidasThumb(path);
-  }
+  if (!maisLidasItems || maisLidasItems.length === 0) return null;
 
   return (
     <aside className="w-full">
@@ -76,9 +75,10 @@ export async function MaisLidas() {
               <Image
                 src={maisLidasItems[0].thumb}
                 alt={maisLidasItems[0].title}
-                className="h-40 w-full object-cover"
+                className="h-40 w-full object-cover transition-transform hover:scale-105"
                 width={500}
                 height={160}
+                priority // Carrega a thumb mais rápido por ser importante na sidebar
               />
             </div>
           </Link>
@@ -92,7 +92,6 @@ export async function MaisLidas() {
                 href={item.href}
                 className="flex items-start gap-4 px-4 py-4 no-underline transition-colors hover:bg-gray-50"
               >
-                {/* Number */}
                 <span
                   className={`font-caladea shrink-0 text-4xl leading-none font-bold ${
                     item.id === 1 ? 'text-primary' : 'text-gray-300'
@@ -100,7 +99,6 @@ export async function MaisLidas() {
                 >
                   {item.id}
                 </span>
-                {/* Title */}
                 <span className="text-sm leading-snug font-medium text-slate-950">
                   {item.title}
                 </span>

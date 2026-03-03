@@ -1,5 +1,4 @@
 import { ArticleRaw } from '@/types/article-raw';
-import * as Sentry from '@sentry/nextjs';
 
 export async function getPageData(path: string): Promise<ArticleRaw | null> {
   const URL_FETCH = `${process.env.PROXY_VIBRA_ELASTIC}/api/v1/BandArticle/${path}`;
@@ -17,17 +16,6 @@ export async function getPageData(path: string): Promise<ArticleRaw | null> {
 
       console.error('[API ERROR] Fetch failed', errorContext);
 
-      Sentry.captureException(
-        new Error(
-          `API Fetch Failed: ${response.status} ${response.statusText}`
-        ),
-        {
-          contexts: {
-            api: errorContext,
-          },
-        }
-      );
-
       return null;
     }
 
@@ -43,12 +31,6 @@ export async function getPageData(path: string): Promise<ArticleRaw | null> {
     };
 
     console.error('[API ERROR] Failed to fetch page data', errorContext);
-
-    Sentry.captureException(error, {
-      contexts: {
-        api: errorContext,
-      },
-    });
 
     return null;
   }
