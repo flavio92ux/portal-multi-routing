@@ -1,6 +1,7 @@
+import { ArticleRaw } from '@/types/article-raw';
 import * as Sentry from '@sentry/nextjs';
 
-export async function getPageData(path: string): Promise<any> {
+export async function getPageData(path: string): Promise<ArticleRaw | null> {
   const URL_FETCH = `${process.env.PROXY_VIBRA_ELASTIC}/api/v1/BandArticle/${path}`;
 
   try {
