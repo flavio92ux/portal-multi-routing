@@ -1,8 +1,9 @@
 import { Article } from '@/types/article';
 import { htmlToBlocks } from '@/utils/htmlToBlocks';
 import { slugify } from '@/utils/slugify';
+import { ArticleRaw } from '@/types/article-raw';
 
-export function mapVibraToCleanArticle(vibraData: any): Article {
+export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
   const data = vibraData?.config?.order?.data ?? {};
   const seo = vibraData?.config?.seo ?? {};
   const cssPrimaryColorByTheme =

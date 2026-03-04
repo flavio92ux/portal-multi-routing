@@ -116,7 +116,8 @@ export type ArticleBlock =
   | ParagraphBlock
   | HeadingBlock
   | QuoteBlock
-  | ImageBlock;
+  | ImageBlock
+  | EmbedBlock;
 
 /* ============================================================
  * INLINE NODE
@@ -152,6 +153,14 @@ export interface ImageBlock {
   url: string;
   alt?: string;
   caption?: string;
+}
+
+export interface EmbedBlock {
+  type: 'embed';
+  /** URL canônica do embed (ex: https://www.youtube.com/embed/VIDEO_ID) */
+  url: string;
+  /** Provedor detectado — útil para renderização condicional */
+  provider?: 'youtube' | 'generic';
 }
 
 /* ============================================================

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { ArticleContent, ArticleBlock, InlineNode } from '@/types/article';
+import { LazyEmbed } from './LazyEmbed';
 import { ShareBar } from './ShareBar';
 import { Newsletter } from './Newsletter';
 import {
@@ -42,6 +43,7 @@ function renderInlineNodes(nodes: InlineNode[]) {
     return element || null;
   });
 }
+
 
 interface ArticleBodyProps {
   content: ArticleContent;
@@ -151,6 +153,14 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                       </figcaption>
                     )}
                   </figure>
+                );
+              case 'embed':
+                return (
+                  <LazyEmbed
+                    key={idx}
+                    url={articleBlock.url}
+                    provider={articleBlock.provider}
+                  />
                 );
               default:
                 return null;
