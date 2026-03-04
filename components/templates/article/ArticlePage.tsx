@@ -1,5 +1,6 @@
 import { SocialShareSidebar } from './SocialShareSidebar';
 import { MaisLidas } from './MaisLidas';
+import { MaisLidasWrapper } from './MaisLidasWrapper';
 import { RelatedVideosWrapper } from './RelatedVideosWrapper';
 import { Article } from '@/types/article';
 import { ArticleBody } from './ArticleBody';
@@ -63,7 +64,14 @@ export default function ArticlePage({ data }: { data: Article }) {
             {/* Sidebar Direita */}
             <aside className="flex w-full shrink-0 flex-col gap-4 lg:w-77.5">
               <AdBlock width={300} height={250} />
-              {/* <MaisLidas path={data.id} /> */}
+              {/* Desktop: SSR com cache */}
+              <div className="hidden lg:block">
+                <MaisLidas path={data.id} />
+              </div>
+              {/* Mobile: LazyLoad client-side (scroll abaixo do artigo) */}
+              <div className="lg:hidden">
+                <MaisLidasWrapper path={data.id} />
+              </div>
               <div className="sticky top-1">
                 <AdBlock width={300} height={600} />
               </div>

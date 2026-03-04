@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { unstable_cache } from 'next/cache';
-import { mapMaisLidasApiToComponent, type MaisLidasItem } from '@/lib/mappers/map-mais-lidas';
+import {
+  mapMaisLidasApiToComponent,
+  type MaisLidasItem,
+} from '@/lib/mappers/map-mais-lidas';
 import { getChannel } from '@/utils/getChannel';
 
 function buildMaisLidasUrl(channel: string): string {
@@ -35,7 +38,8 @@ const getMaisLidasCompletas = unstable_cache(
 
         if (thumbRes.ok) {
           const thumbData = await thumbRes.json();
-          maisLidasItems[0].thumb = thumbData?.config?.order?.data?.image?.url || '';
+          maisLidasItems[0].thumb =
+            thumbData?.config?.order?.data?.image?.url || '';
         }
       }
 
@@ -78,7 +82,6 @@ export async function MaisLidas({ path }: { path: string }) {
                 className="h-40 w-full object-cover transition-transform hover:scale-105"
                 width={500}
                 height={160}
-                priority // Carrega a thumb mais rápido por ser importante na sidebar
               />
             </div>
           </Link>
