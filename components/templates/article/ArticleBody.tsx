@@ -44,7 +44,6 @@ function renderInlineNodes(nodes: InlineNode[]) {
   });
 }
 
-
 interface ArticleBodyProps {
   content: ArticleContent;
 }
@@ -70,6 +69,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
           <img
             src={content.media.main.url}
             alt={content.media.main.alt || ''}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
             className="h-auto w-full rounded object-cover"
           />
           <figcaption className="text-cinza-secundario mt-2 flex items-start gap-2 text-xs">
