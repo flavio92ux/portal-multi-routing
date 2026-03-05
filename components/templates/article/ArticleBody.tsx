@@ -4,6 +4,7 @@ import { ArticleContent, ArticleBlock, InlineNode } from '@/types/article';
 import { LazyEmbed } from './LazyEmbed';
 import { ShareBar } from './ShareBar';
 import { Newsletter } from './Newsletter';
+import { RelatedTopics } from './RelatedTopics';
 import {
   injectAdBlocksEveryNParagraphs,
   AdBlockWithId,
@@ -189,6 +190,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
       {/* Newsletter (moved from parent) */}
       <div className="mt-8">
         <Newsletter />
+        <RelatedTopics tags={content.tags} />
       </div>
     </>
   );

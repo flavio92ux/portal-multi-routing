@@ -14,14 +14,6 @@ const topics = [
   'Bandshop',
 ];
 
-const relatedTopics = [
-  'band cidade minas',
-  'brasil urgente minas',
-  'jornal band minas',
-  'band minas',
-  'band eleições',
-];
-
 export function Newsletter() {
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [email, setEmail] = useState('');
@@ -90,7 +82,7 @@ export function Newsletter() {
               id="terms"
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
-              className="mt-1 flex-shrink-0"
+              className="mt-1 shrink-0"
             />
             <label htmlFor="terms" className="text-xs text-slate-950">
               Li e concordo com os{' '}
@@ -103,24 +95,6 @@ export function Newsletter() {
               </a>
             </label>
           </div>
-        </div>
-      </div>
-
-      {/* Related topics */}
-      <div className="mt-8">
-        <h4 className="text-primary mb-4 text-lg font-bold">
-          Tópicos relacionados
-        </h4>
-        <div className="flex flex-wrap gap-2">
-          {relatedTopics.map((topic) => (
-            <a
-              key={topic}
-              href="#"
-              className="bg-primary rounded px-4 py-2 text-xs font-bold text-white no-underline transition-opacity hover:opacity-90"
-            >
-              {topic}
-            </a>
-          ))}
         </div>
       </div>
     </div>
