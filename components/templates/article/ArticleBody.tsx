@@ -67,14 +67,13 @@ export function ArticleBody({ content }: ArticleBodyProps) {
       {/* Main image */}
       {content.media?.main && (
         <figure className="mb-6">
-          <img
-            src={content.media.main.url_webp}
+          <Image
+            src={content.media.main.url_webp || ''}
             alt={content.media.main.alt || ''}
             width={1200}
             height={675}
-            fetchPriority="high"
-            loading="eager"
-            decoding="async"
+            priority
+            sizes="(max-width: 1024px) 100vw, 900px"
             className="h-auto w-full rounded object-cover"
           />
           <figcaption className="text-cinza-secundario mt-2 flex items-start gap-2 text-xs">
