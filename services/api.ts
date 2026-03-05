@@ -7,7 +7,9 @@ const REVALIDATE_60S = 60;
 // Cache entre requests (persiste 60s no servidor)
 const _getPageData = unstable_cache(
   async (path: string): Promise<ArticleRaw | null> => {
-    const URL_FETCH = `${process.env.PROXY_VIBRA_ELASTIC}/api/v1/BandArticle/${path}`;
+    // Chama o proxy interno para evitar erro de certificado SSL na Vercel
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
+    const URL_FETCH = `${baseUrl}/api/vibra/v1/BandArticle/${path}`;
 
     try {
       const response = await fetch(URL_FETCH);
