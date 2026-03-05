@@ -171,7 +171,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
         </div>
       )}
 
-      <div className="my-7 flex justify-center">
+      <div className="my-7 hidden justify-center lg:flex">
         <Image
           src="https://img.band.com.br/image/2024/03/18/banner-whatsapp-82436.png"
           alt="Band"

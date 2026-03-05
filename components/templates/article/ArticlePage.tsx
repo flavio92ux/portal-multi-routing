@@ -30,12 +30,12 @@ export default function ArticlePage({ data }: { data: Article }) {
       {/* Main content area */}
       <main className="mx-auto w-full max-w-325 flex-1 px-4 lg:py-8">
         {/* Article title section */}
-        <h1 className="font-caladea mb-2 text-2xl leading-tight font-bold text-slate-950 md:text-3xl lg:text-5xl lg:leading-14.5">
+        <h1 className="font-caladea mb-2 text-2xl leading-[28px] font-bold text-slate-950 md:text-3xl lg:text-5xl lg:leading-14.5">
           {content.headline}
         </h1>
 
         {content.subheadline && (
-          <p className="text-cinza-secundario mb-4 text-sm leading-relaxed md:text-base lg:text-[20px] lg:leading-7.5">
+          <p className="text-cinza-secundario mb-4 text-sm leading-[20px] md:text-base lg:text-[20px] lg:leading-7.5">
             {content.subheadline}
           </p>
         )}
