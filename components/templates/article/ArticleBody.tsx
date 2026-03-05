@@ -70,6 +70,8 @@ export function ArticleBody({ content }: ArticleBodyProps) {
           <img
             src={content.media.main.url_webp}
             alt={content.media.main.alt || ''}
+            width={1200}
+            height={675}
             fetchPriority="high"
             loading="eager"
             decoding="async"
@@ -148,7 +150,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                     <img
                       src={articleBlock.url}
                       alt={articleBlock.alt || ''}
-                      className="w-full rounded"
+                      width={800}
+                      height={450}
+                      className="h-auto w-full rounded"
                     />
                     {articleBlock.caption && (
                       <figcaption className="text-cinza-secundario mt-2 text-center text-xs">
