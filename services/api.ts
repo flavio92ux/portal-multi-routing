@@ -7,7 +7,11 @@ const REVALIDATE_60S = 60;
 // Cache entre requests (persiste 60s no servidor)
 const _getPageData = unstable_cache(
   async (path: string): Promise<ArticleRaw | null> => {
+    console.log('url base', process.env.PROXY_VIBRA_ELASTIC);
+
     const URL_FETCH = `${process.env.PROXY_VIBRA_ELASTIC}/api/v1/BandArticle/${path}`;
+
+    console.log('url fetch', URL_FETCH);
 
     try {
       const response = await fetch(URL_FETCH);
