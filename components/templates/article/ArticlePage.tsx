@@ -68,7 +68,9 @@ export default function ArticlePage({ data }: { data: Article }) {
 
             {/* Sidebar Direita */}
             <aside className="flex w-full shrink-0 flex-col gap-4 lg:w-77.5">
-              <AdBlock width={300} height={250} />
+              <div className="hidden lg:block">
+                <AdBlock width={300} height={250} />
+              </div>
               {/* Desktop: SSR com cache */}
               <div className="hidden lg:block">
                 <MaisLidas path={data.id} />
