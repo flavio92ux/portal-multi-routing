@@ -710,6 +710,7 @@ export interface Image3 {
   filter: string;
   credit: string;
   url: string;
+  urlStr: string;
   hash: string;
   width: number;
   height: number;

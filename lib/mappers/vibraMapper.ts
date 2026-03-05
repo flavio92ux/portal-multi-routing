@@ -45,6 +45,7 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
             main: {
               type: 'image',
               url: data.image.url,
+              url_webp: seo.image?.urlStr || data.image.url,
               alt: data.image.title,
               caption: data.image.title,
               credit: data.image.credit,
