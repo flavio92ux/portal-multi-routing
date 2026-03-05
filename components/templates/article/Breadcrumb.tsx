@@ -11,18 +11,18 @@ export function Breadcrumb({ headline }: BreadcrumbProps) {
       className="bg-background flex justify-center py-6"
       aria-label="Breadcrumb"
     >
-      <div className="mx-auto max-w-325 px-4 py-2">
-        <ol className="text-cinza-secundario flex items-center gap-1.5 text-xs">
+      <div className="w-full px-[15px] py-2 lg:mx-auto lg:flex lg:justify-center lg:px-4">
+        <ol className="text-cinza-secundario flex min-w-0 items-center gap-1.5 text-xs">
           <li>
             <Link
               href="/band"
-              className="text-cinza-secundario hover:text-foreground text-[14px] leading-4 leading-[24px] no-underline"
+              className="text-cinza-secundario hover:text-foreground text-[14px] leading-[18px] no-underline lg:leading-[24px]"
             >
               Band
             </Link>
           </li>
           <li aria-hidden="true">{'>'}</li>
-          <li className="text-primary truncate text-[14px] leading-4.75 leading-[24px] font-bold no-underline">
+          <li className="text-primary min-w-0 truncate text-[14px] leading-[18px] font-bold no-underline lg:leading-[24px]">
             {headline}
           </li>
         </ol>
