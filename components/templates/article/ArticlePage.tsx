@@ -18,12 +18,17 @@ export default function ArticlePage({ data }: { data: Article }) {
     <div className="flex min-h-screen flex-col">
       <Breadcrumb headline={content.headline} />
 
-      <div className="flex justify-center">
-        <AdBlock width={970} height={250} />
+      <div className="flex justify-center pb-3 lg:pb-0">
+        <AdBlock
+          width={970}
+          height={250}
+          mobileWidth={320}
+          mobileHeight={100}
+        />
       </div>
 
       {/* Main content area */}
-      <main className="mx-auto w-full max-w-325 flex-1 px-4 py-8">
+      <main className="mx-auto w-full max-w-325 flex-1 px-4 lg:py-8">
         {/* Article title section */}
         <h1 className="font-caladea mb-2 text-2xl leading-tight font-bold text-slate-950 md:text-3xl lg:text-5xl lg:leading-14.5">
           {content.headline}

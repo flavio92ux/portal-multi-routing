@@ -8,7 +8,7 @@ interface BreadcrumbProps {
 export function Breadcrumb({ headline }: BreadcrumbProps) {
   return (
     <nav
-      className="bg-background flex justify-center py-6"
+      className="bg-background flex justify-center py-3"
       aria-label="Breadcrumb"
     >
       <div className="w-full px-[15px] py-2 lg:mx-auto lg:flex lg:justify-center lg:px-4">
