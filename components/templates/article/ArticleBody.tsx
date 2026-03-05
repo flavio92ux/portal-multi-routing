@@ -68,7 +68,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
       {content.media?.main && (
         <figure className="mb-6">
           <Image
-            src={content.media.main.url_webp || ''}
+            src={content.media.main.url || ''}
             alt={content.media.main.alt || ''}
             width={1200}
             height={675}
