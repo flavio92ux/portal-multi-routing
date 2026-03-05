@@ -87,6 +87,7 @@ export interface ArticleMediaItem {
   type: 'image' | 'video';
   url: string;
   url_webp?: string;
+  urlStr?: string;
   alt?: string;
   caption?: string;
   credit?: string;

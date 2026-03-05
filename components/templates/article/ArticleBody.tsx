@@ -68,7 +68,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
       {content.media?.main && (
         <figure className="mb-6">
           <img
-            src={content.media.main.url}
+            src={content.media.main.urlStr}
             alt={content.media.main.alt || ''}
             fetchPriority="high"
             loading="eager"
