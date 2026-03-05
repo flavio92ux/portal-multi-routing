@@ -27,7 +27,7 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
     content: {
       slug: slugify(data.title),
       kicker: data.editorias?.[0]?.name?.toUpperCase(),
-      headline: data.title,
+      headline: seo.title || data.title,
       subheadline: data.subTitle,
       author: {
         id: slugify(data.redactor || 'autor'),
