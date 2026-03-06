@@ -9,6 +9,7 @@ import {
   AdBlockWithId,
 } from '@/utils/injectAdBlocks';
 import AdBlock from '@/components/ui/ad-block';
+import { CustomTemplate } from './CustomTemplate';
 
 function renderInlineNodes(nodes: InlineNode[]) {
   if (!Array.isArray(nodes)) {
@@ -164,6 +165,10 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                     provider={articleBlock.provider}
                   />
                 );
+              case 'template':
+                return (
+                  <CustomTemplate key={idx} template={articleBlock.template} props={articleBlock.props} />
+                )
               default:
                 return null;
             }

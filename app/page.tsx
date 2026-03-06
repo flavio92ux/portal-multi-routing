@@ -50,6 +50,15 @@ export default function Home() {
         >
           Árvore de Grande Porte Cai na Avenida José
         </Link>
+        <Link
+          href={
+            'http://' +
+            process.env.NEXT_PUBLIC_PORTAL_HOSTNAME +
+            '/esportes/automobilismo/formula-1/noticias/confira-11-pontos-para-ficar-de-olho-na-temporada-de-2026-da-formula-1-202603041014'
+          }
+        >
+          Confira 11 pontos para ficar de olho na temporada de 2026 da Fórmula 1[Galeria de fotos]
+        </Link>
       </div>
     </div>
   );

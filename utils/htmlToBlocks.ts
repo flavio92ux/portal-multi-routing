@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio';
+import { normalizeTemplates } from './normalizer';
 
 interface InlineNode {
   type: 'text';
@@ -93,7 +94,8 @@ export function htmlToBlocks(html: string = '') {
   if (!html) return [];
 
   try {
-    const $ = cheerio.load(html);
+    const normalizedHtml = normalizeTemplates(html);
+    const $ = cheerio.load(normalizedHtml);
     const blocks: any[] = [];
 
     // Iterar sobre os elementos filhos diretos do body
@@ -145,6 +147,18 @@ export function htmlToBlocks(html: string = '') {
               blocks.push({ type: 'embed', url, provider });
             }
           }
+        }
+
+        if (tagName === 'CMS-TEMPLATE') {
+          const template = $el.attr('template');
+          const attributes = { ...$el.attr() };
+          delete attributes.template;
+
+          blocks.push({
+            type: 'template',
+            template,
+            props: attributes,
+          });
         }
       });
 
