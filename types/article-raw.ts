@@ -686,6 +686,7 @@ export interface Data12 {
   text: string;
   image: Image3;
   imageRepresentativeType: string;
+  textEmbed: string;
 }
 
 export interface Editoria {
