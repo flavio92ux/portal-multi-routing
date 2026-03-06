@@ -79,7 +79,7 @@ export default function ArticlePage({ data }: { data: Article }) {
               <div className="lg:hidden">
                 <MaisLidasWrapper path={data.id} />
               </div>
-              <div className="sticky top-1">
+              <div className="hidden lg:sticky lg:top-1">
                 <AdBlock width={300} height={600} />
               </div>
             </aside>
