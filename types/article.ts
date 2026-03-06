@@ -118,6 +118,7 @@ export type ArticleBlock =
   | QuoteBlock
   | ImageBlock
   | EmbedBlock
+  | CmsEmbedBlock
   | CustomTemplateBlock;
 
 /* ============================================================
@@ -162,6 +163,12 @@ export interface EmbedBlock {
   url: string;
   /** Provedor detectado — útil para renderização condicional */
   provider?: 'youtube' | 'generic';
+}
+
+export interface CmsEmbedBlock {
+  type: 'cms-embed';
+  url: string;
+  provider: string;
 }
 
 export interface CustomTemplateBlock {

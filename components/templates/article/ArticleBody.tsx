@@ -10,6 +10,7 @@ import {
 } from '@/utils/injectAdBlocks';
 import AdBlock from '@/components/ui/ad-block';
 import { CustomTemplate } from './CustomTemplate';
+import { CmsEmbed } from './CmsEmbed';
 
 function renderInlineNodes(nodes: InlineNode[]) {
   if (!Array.isArray(nodes)) {
@@ -55,9 +56,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
     () =>
       Array.isArray(content.body) && content.body.length > 0
         ? injectAdBlocksEveryNParagraphs(content.body, 3, {
-            width: 300,
-            height: 250,
-          })
+          width: 300,
+          height: 250,
+        })
         : [],
     [content.body]
   );
@@ -160,6 +161,14 @@ export function ArticleBody({ content }: ArticleBodyProps) {
               case 'embed':
                 return (
                   <LazyEmbed
+                    key={idx}
+                    url={articleBlock.url}
+                    provider={articleBlock.provider}
+                  />
+                );
+              case 'cms-embed':
+                return (
+                  <CmsEmbed
                     key={idx}
                     url={articleBlock.url}
                     provider={articleBlock.provider}
