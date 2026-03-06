@@ -7,6 +7,12 @@ import { Article } from '@/types/article';
 
 export const revalidate = 60;
 
+export async function generateStaticParams() {
+  return [];
+}
+
+export const dynamicParams = true;
+
 export default async function SlugPage({
   params,
 }: {
