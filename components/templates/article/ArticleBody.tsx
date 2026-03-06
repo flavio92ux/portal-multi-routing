@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { ArticleContent, ArticleBlock, InlineNode } from '@/types/article';
 import { LazyEmbed } from './LazyEmbed';
@@ -51,16 +51,14 @@ interface ArticleBodyProps {
 
 export function ArticleBody({ content }: ArticleBodyProps) {
   // Processa blocos com ads injetados após 1º parágrafo e depois a cada 3 parágrafos
-  const processedBlocks = useMemo(
-    () =>
-      Array.isArray(content.body) && content.body.length > 0
-        ? injectAdBlocksEveryNParagraphs(content.body, 3, {
-            width: 300,
-            height: 250,
-          })
-        : [],
-    [content.body]
-  );
+  // (useMemo removido — Server Components executam uma vez, hooks não são válidos em RSC)
+  const processedBlocks =
+    Array.isArray(content.body) && content.body.length > 0
+      ? injectAdBlocksEveryNParagraphs(content.body, 3, {
+          width: 300,
+          height: 250,
+        })
+      : [];
 
   return (
     <>
