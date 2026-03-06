@@ -15,7 +15,9 @@ const _getPageData = unstable_cache(
     console.log('url fetch', URL_FETCH);
 
     try {
-      const response = await fetch(URL_FETCH);
+      const response = await fetch(URL_FETCH, {
+        next: { revalidate: REVALIDATE_60S },
+      });
 
       if (!response.ok) {
         console.error('[API ERROR] Fetch failed', {

@@ -23,7 +23,9 @@ const getMaisLidasCompletas = unstable_cache(
 
     try {
       // 1. Busca a lista das mais lidas para o channel
-      const response = await fetch(buildMaisLidasUrl(channel));
+      const response = await fetch(buildMaisLidasUrl(channel), {
+        next: { revalidate: REVALIDATE_24H },
+      });
       if (!response.ok) return [];
 
       const data = await response.json();
@@ -34,7 +36,9 @@ const getMaisLidasCompletas = unstable_cache(
         const path = maisLidasItems[0].href;
 
         const thumbUrl = `${process.env.PROXY_VIBRA_ELASTIC}/api/v1/BandArticle/${path}`;
-        const thumbRes = await fetch(thumbUrl);
+        const thumbRes = await fetch(thumbUrl, {
+          next: { revalidate: REVALIDATE_24H },
+        });
 
         if (thumbRes.ok) {
           const thumbData = await thumbRes.json();
