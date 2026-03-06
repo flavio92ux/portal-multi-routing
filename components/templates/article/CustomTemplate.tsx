@@ -2,6 +2,7 @@ import { CustomTemplateBlock } from "@/types/article";
 import { GalleryTemplateAttributes } from "@/types/templates";
 import { galleryTemplate } from "@/utils/cms-template";
 import dynamic from "next/dynamic";
+import { OneFootballEmbed } from "./OneFootballEmbed";
 
 const Gallery = dynamic(
     () => import("./Gallery").then((mod) => mod.Gallery),
@@ -13,10 +14,18 @@ const Gallery = dynamic(
 );
 
 export async function CustomTemplate({ template, props }: CustomTemplateBlock) {
+    console.log(template, props)
     switch (template) {
         case 'galery': {
             const galleryData = await galleryTemplate(props as GalleryTemplateAttributes);
             return <Gallery galleryData={galleryData} />;
+        }
+        case 'embed-video-player': {
+            if (props.type === 'onefootball') {
+                return <OneFootballEmbed id={props.id} />
+            } else if (props.type === 'spalla') {
+                return <></>
+            }
         }
         default:
             return null;
