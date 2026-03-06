@@ -8,6 +8,8 @@ import { mapVibraToHeaderData } from '@/lib/mappers/menuMapper';
 import { Article } from '@/types/article';
 import { BandFooter } from '@/components/templates/footer/BandFooter';
 
+export const revalidate = 60;
+
 export default async function SlugLayout({
   children,
   params,
