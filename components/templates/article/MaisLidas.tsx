@@ -25,6 +25,7 @@ const getMaisLidasCompletas = unstable_cache(
       // 1. Busca a lista das mais lidas para o channel
       const response = await fetch(buildMaisLidasUrl(channel), {
         next: { revalidate: REVALIDATE_24H },
+        cache: 'force-cache',
       });
       if (!response.ok) return [];
 

@@ -7,6 +7,13 @@ import { Article } from '@/types/article';
 
 export const revalidate = 60;
 
+export async function generateStaticParams() {
+  // Opcional: buscar as notícias mais recentes para já deixar no cache
+  return [];
+}
+
+export const dynamicParams = true;
+
 export default async function SlugPage({
   params,
 }: {

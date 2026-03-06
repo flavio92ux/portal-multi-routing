@@ -17,6 +17,7 @@ const _getPageData = unstable_cache(
     try {
       const response = await fetch(URL_FETCH, {
         next: { revalidate: REVALIDATE_60S },
+        cache: 'force-cache',
       });
 
       if (!response.ok) {
