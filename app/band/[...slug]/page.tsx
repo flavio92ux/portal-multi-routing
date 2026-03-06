@@ -5,6 +5,8 @@ import { isValidArticleSlug } from '@/lib/url';
 import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
 import { Article } from '@/types/article';
 
+export const revalidate = 60;
+
 export default async function SlugPage({
   params,
 }: {

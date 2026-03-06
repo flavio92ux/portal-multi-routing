@@ -5,6 +5,7 @@ import { ArticleRaw } from '@/types/article-raw';
 const REVALIDATE_60S = 60;
 
 // Cache entre requests (persiste 60s no servidor)
+// Nota: unstable_cache inclui automaticamente os args da função (path) na chave de cache
 const _getPageData = unstable_cache(
   async (path: string): Promise<ArticleRaw | null> => {
     console.log('url base', process.env.PROXY_VIBRA_ELASTIC);
