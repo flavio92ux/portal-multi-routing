@@ -19,7 +19,7 @@ export default function ArticlePage({ data }: { data: Article }) {
       <Breadcrumb headline={content.headline} />
 
       <div className="flex justify-center">
-        <AdBlock width={970} height={250} />
+        <AdBlock width={970} height={250} name='Billboard01' />
       </div>
 
       {/* Main content area */}
@@ -63,7 +63,7 @@ export default function ArticlePage({ data }: { data: Article }) {
 
             {/* Sidebar Direita */}
             <aside className="flex w-full shrink-0 flex-col gap-4 lg:w-77.5">
-              <AdBlock width={300} height={250} />
+              <AdBlock width={300} height={250} name='Arroba' />
               {/* Desktop: SSR com cache */}
               <div className="hidden lg:block">
                 <MaisLidas path={data.id} />
@@ -73,7 +73,7 @@ export default function ArticlePage({ data }: { data: Article }) {
                 <MaisLidasWrapper path={data.id} />
               </div>
               <div className="sticky top-1">
-                <AdBlock width={300} height={600} />
+                <AdBlock width={300} height={600} name='HalfPage' />
               </div>
             </aside>
           </div>
