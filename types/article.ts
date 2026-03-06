@@ -49,6 +49,8 @@ export interface ArticleContent {
 
   body: ArticleBlock[];
 
+  textEmbed?: string;
+
   tags: ArticleTag[];
 
   related: RelatedArticle[];

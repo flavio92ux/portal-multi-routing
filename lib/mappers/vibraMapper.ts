@@ -53,6 +53,7 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
           }
         : undefined,
       body: htmlToBlocks(data.text) || [],
+      textEmbed: data.textEmbed || undefined,
       tags: (data.tags || []).map((tag: any) => ({
         label: tag.name,
         slug: slugify(tag.name),
