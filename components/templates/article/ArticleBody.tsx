@@ -13,7 +13,7 @@ import AdBlock from '@/components/ui/ad-block';
 
 function renderInlineNodes(nodes: InlineNode[]) {
   if (!Array.isArray(nodes)) {
-    return nodes;
+    return nodes; // a
   }
 
   return nodes.map((node, idx) => {
