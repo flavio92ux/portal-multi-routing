@@ -11,6 +11,10 @@ function buildMaisLidasUrl(channel: string): string {
   return `https://apiconteudo.bs.vibra.digital/?query={ga4(dateRanges:[{startDate:"yesterday",endDate:"today"}],limit:5,channel:"${channel}",domain:"band"){url pageTitle}}`;
 }
 
+const teste = 123;
+
+console.log(teste);
+
 const REVALIDATE_24H = 86400; // 24 horas em segundos
 
 /**
