@@ -103,7 +103,8 @@ export type ArticleBlock =
   | HeadingBlock
   | QuoteBlock
   | ImageBlock
-  | EmbedBlock;
+  | EmbedBlock
+  | CustomTemplateBlock;
 
 /* ============================================================
  * INLINE NODE
@@ -147,6 +148,12 @@ export interface EmbedBlock {
   url: string;
   /** Provedor detectado — útil para renderização condicional */
   provider?: 'youtube' | 'generic';
+}
+
+export interface CustomTemplateBlock {
+  type?: 'template';
+  template: string;
+  props: Record<string, any>;
 }
 
 /* ============================================================
