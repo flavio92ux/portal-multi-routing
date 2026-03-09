@@ -26,10 +26,10 @@ export default function RootLayout({
         } as React.CSSProperties
       }
     >
-      <Script
+      {/* <Script
         src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
         strategy="lazyOnload"
-      />
+      /> */}
       <body className={inter.className}>{children}</body>
     </html>
   );

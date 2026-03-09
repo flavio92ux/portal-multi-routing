@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
@@ -13,6 +13,17 @@ interface BandHeaderProps {
 }
 
 export function BandHeader({ headerData }: BandHeaderProps) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const script = document.createElement('script');
+      script.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { logo, navItems, liveStream, user, menuSections } = headerData;
 
