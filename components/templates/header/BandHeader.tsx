@@ -19,7 +19,7 @@ export function BandHeader({ headerData }: BandHeaderProps) {
       script.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
       script.async = true;
       document.head.appendChild(script);
-    }, 5000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
