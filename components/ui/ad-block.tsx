@@ -32,7 +32,8 @@ export const AdBlock: React.FC<AdBlockProps> = ({
   const heightStyle = normalizeSize(height);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !name || !widthStyle || !heightStyle) return;
+    if (typeof window === 'undefined' || !name || !widthStyle || !heightStyle)
+      return;
 
     window.googletag = window.googletag || { cmd: [] };
 
