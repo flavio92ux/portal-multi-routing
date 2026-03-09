@@ -14,14 +14,47 @@ interface BandHeaderProps {
 
 export function BandHeader({ headerData }: BandHeaderProps) {
   useEffect(() => {
-    const timer = setTimeout(() => {
+    let scriptLoaded = false;
+    let timer: NodeJS.Timeout;
+    const loadEvents = [
+      'scroll',
+      'touchstart',
+      'mousemove',
+      'click',
+      'keydown',
+    ];
+
+    const loadScript = () => {
+      if (scriptLoaded) return;
+      scriptLoaded = true;
+      clearTimeout(timer);
+
       const script = document.createElement('script');
       script.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
       script.async = true;
       document.head.appendChild(script);
-    }, 2500);
 
-    return () => clearTimeout(timer);
+      loadEvents.forEach((event) => {
+        window.removeEventListener(event, loadScript);
+      });
+    };
+
+    // Load script on user interaction
+    loadEvents.forEach((event) => {
+      window.addEventListener(event, loadScript, { once: true, passive: true });
+    });
+
+    // Fallback: load script after 4 seconds if no interaction occurs
+    timer = setTimeout(() => {
+      loadScript();
+    }, 4000);
+
+    return () => {
+      clearTimeout(timer);
+      loadEvents.forEach((event) => {
+        window.removeEventListener(event, loadScript);
+      });
+    };
   }, []);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
