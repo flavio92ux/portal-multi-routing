@@ -32,7 +32,7 @@ export function AdsProvider() {
     };
 
     // Opção A: Delay puro (3 segundos é o "sweet spot" para o Lighthouse)
-    const timer = setTimeout(injectGpt, 2500);
+    const timer = setTimeout(injectGpt, 3000);
 
     // Opção B: Carregar na primeira interação (melhor para UX)
     window.addEventListener('scroll', injectGpt, { passive: true });
