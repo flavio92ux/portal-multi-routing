@@ -56,9 +56,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
     () =>
       Array.isArray(content.body) && content.body.length > 0
         ? injectAdBlocksEveryNParagraphs(content.body, 3, {
-            width: 300,
-            height: 250,
-          })
+          width: 300,
+          height: 250,
+        })
         : [],
     [content.body]
   );
@@ -117,6 +117,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                   <AdBlock
                     width={block.__adConfig?.width || '100%'}
                     height={block.__adConfig?.height || 400}
+                    name={`InArticle-${idx}`}
                   />
                 </div>
               );
