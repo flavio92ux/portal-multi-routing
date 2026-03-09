@@ -24,6 +24,7 @@ export default function ArticlePage({ data }: { data: Article }) {
           height={250}
           mobileWidth={320}
           mobileHeight={100}
+          name='Billboard01'
         />
       </div>
 
@@ -69,7 +70,7 @@ export default function ArticlePage({ data }: { data: Article }) {
             {/* Sidebar Direita */}
             <aside className="flex w-full shrink-0 flex-col gap-4 lg:w-77.5">
               <div className="hidden lg:block">
-                <AdBlock width={300} height={250} />
+                <AdBlock width={300} height={250} name='Arroba' />
               </div>
               {/* Desktop: SSR com cache */}
               <div className="hidden lg:block">
@@ -80,18 +81,18 @@ export default function ArticlePage({ data }: { data: Article }) {
                 <MaisLidasWrapper path={data.id} />
               </div>
               <div className="hidden lg:sticky lg:top-1">
-                <AdBlock width={300} height={600} />
+                <AdBlock width={300} height={600} name='HalfPage' />
               </div>
             </aside>
-          </div>
-        </div>
-      </main>
+          </div >
+        </div >
+      </main >
 
       {/* Bandplay banner */}
-      <BandplayBannerWrapper />
+      < BandplayBannerWrapper />
 
       {/* Related videos */}
-      <RelatedVideosWrapper />
-    </div>
+      < RelatedVideosWrapper />
+    </div >
   );
 }

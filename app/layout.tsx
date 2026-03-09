@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Caladea } from 'next/font/google';
 import './globals.css';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 const caladea = Caladea({ weight: ['400', '700'], subsets: ['latin'] });
@@ -25,6 +26,10 @@ export default function RootLayout({
         } as React.CSSProperties
       }
     >
+      <Script
+        src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+        strategy="afterInteractive"
+      />
       <body className={inter.className}>{children}</body>
     </html>
   );
