@@ -27,7 +27,7 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
     content: {
       slug: slugify(data.title),
       kicker: data.editorias?.[0]?.name?.toUpperCase(),
-      headline: data.title,
+      headline: seo.title || data.title,
       subheadline: data.subTitle,
       author: {
         id: slugify(data.redactor || 'autor'),
@@ -45,6 +45,7 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
             main: {
               type: 'image',
               url: data.image.url,
+              url_webp: seo.image?.urlStr || data.image.url,
               alt: data.image.title,
               caption: data.image.title,
               credit: data.image.credit,
@@ -52,6 +53,7 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
           }
         : undefined,
       body: htmlToBlocks(data.text) || [],
+      textEmbed: data.textEmbed || undefined,
       tags: (data.tags || []).map((tag: any) => ({
         label: tag.name,
         slug: slugify(tag.name),

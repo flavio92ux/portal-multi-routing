@@ -17,7 +17,7 @@ export function AuthorInfo({ author, dates }: AuthorInfoProps) {
         {author.name}
       </p>
       {dates?.published_at && (
-        <p className="text-cinza text-[14px] leading-normal font-semibold">
+        <p className="text-cinza text-[12px] leading-normal font-semibold lg:text-[14px]">
           {formatDate(dates.published_at)}
           {dates.updated_at &&
             ` - Atualizado em ${formatDate(dates.updated_at)}`}

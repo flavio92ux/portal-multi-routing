@@ -5,6 +5,14 @@ import { isValidArticleSlug } from '@/lib/url';
 import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
 import { Article } from '@/types/article';
 
+export const revalidate = false;
+
+export async function generateStaticParams() {
+  return [];
+}
+
+export const dynamicParams = true;
+
 export default async function SlugPage({
   params,
 }: {

@@ -26,8 +26,8 @@ function TelegramIcon({ className }: { className?: string }) {
 
 export function ShareBar() {
   return (
-    <div className="flex items-center justify-between border-y border-gray-200 py-3">
-      <span className="text-sm font-bold text-foreground">Compartilhar</span>
+    <div className="hidden items-center justify-between border-y border-gray-200 py-3 lg:flex">
+      <span className="text-foreground text-sm font-bold">Compartilhar</span>
       <div className="flex items-center gap-2">
         <button
           aria-label="Compartilhar no WhatsApp"
