@@ -28,7 +28,7 @@ export default function RootLayout({
     >
       <Script
         src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       <body className={inter.className}>{children}</body>
     </html>
