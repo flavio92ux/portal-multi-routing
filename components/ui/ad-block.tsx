@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface AdBlockProps {
   width: number | string;
@@ -31,8 +31,44 @@ export const AdBlock: React.FC<AdBlockProps> = ({
   const widthStyle = normalizeSize(width);
   const heightStyle = normalizeSize(height);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
-    if (typeof window === 'undefined' || !name || !widthStyle || !heightStyle)
+    if (typeof window === 'undefined') return;
+
+    if (!('IntersectionObserver' in window)) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '0px' } // Pre-load slightly before coming into view
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (
+      !isVisible ||
+      typeof window === 'undefined' ||
+      !name ||
+      !widthStyle ||
+      !heightStyle
+    )
       return;
 
     window.googletag = window.googletag || { cmd: [] };
@@ -51,7 +87,7 @@ export const AdBlock: React.FC<AdBlockProps> = ({
       window.googletag.display(name);
       window.googletag.pubads().refresh();
     });
-  }, [widthStyle, heightStyle, name]);
+  }, [isVisible, widthStyle, heightStyle, name]);
 
   const AdInner = ({ w, h }: { w: string; h: string }) => (
     <div
@@ -82,7 +118,7 @@ export const AdBlock: React.FC<AdBlockProps> = ({
     const mobileHeightStyle = normalizeSize(mobileHeight);
 
     return (
-      <>
+      <div ref={containerRef} className="flex w-full justify-center">
         {/* Mobile */}
         <div className="lg:hidden">
           <AdInner w={mobileWidthStyle} h={mobileHeightStyle} />
@@ -91,11 +127,15 @@ export const AdBlock: React.FC<AdBlockProps> = ({
         <div className="hidden lg:block">
           <AdInner w={widthStyle} h={heightStyle} />
         </div>
-      </>
+      </div>
     );
   }
 
-  return <AdInner w={widthStyle} h={heightStyle} />;
+  return (
+    <div ref={containerRef} className="flex w-full justify-center">
+      <AdInner w={widthStyle} h={heightStyle} />
+    </div>
+  );
 };
 
 export default AdBlock;
