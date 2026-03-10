@@ -1,5 +1,4 @@
 import { formatDate } from '@/utils/formatDate';
-import Image from 'next/image';
 
 interface AuthorInfoProps {
   author: {
@@ -24,7 +23,7 @@ export function AuthorInfo({ author, dates }: AuthorInfoProps) {
     <div className="mb-6 flex items-center gap-3">
       {avatarUrl && (
         <div className="flex shrink-0 items-center justify-center">
-          <Image
+          <img
             src={avatarUrl}
             alt={author.name}
             width={120}
