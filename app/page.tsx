@@ -57,7 +57,18 @@ export default function Home() {
             '/esportes/automobilismo/formula-1/noticias/confira-11-pontos-para-ficar-de-olho-na-temporada-de-2026-da-formula-1-202603041014'
           }
         >
-          Confira 11 pontos para ficar de olho na temporada de 2026 da Fórmula 1[Galeria de fotos]
+          Confira 11 pontos para ficar de olho na temporada de 2026 da Fórmula
+          1[Galeria de fotos]
+        </Link>
+        <Link
+          href={
+            'http://' +
+            process.env.NEXT_PUBLIC_PORTAL_HOSTNAME +
+            '/esportes/automobilismo/formula-indy/noticias/indy-revela-tracado-do-freedom-250-nas-ruas-de-washington-202603100751'
+          }
+        >
+          Indy revela traçado do Freedom 250 nas ruas de Washington [Veja também
+          ]
         </Link>
       </div>
     </div>
