@@ -172,6 +172,6 @@ export interface ArticleTag {
 export interface RelatedArticle {
   id: string;
   title: string;
-  url: string;
-  thumb?: string;
+  href: string;
+  image: string;
 }

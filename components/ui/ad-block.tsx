@@ -75,65 +75,88 @@ export const AdBlock: React.FC<AdBlockProps> = ({
 
     window.googletag.cmd.push(function () {
       window.googletag?.pubads()?.disableInitialLoad();
-      window.googletag
-        .defineSlot(
-          '/6355419/Travel/Europe/France/Paris',
-          [width, height],
-          name
-        )
-        .addService(window.googletag.pubads());
+
+      const sizes: any[] = [];
+      if (mobileWidth && mobileHeight) {
+        sizes.push([Number(mobileWidth), Number(mobileHeight)]);
+      }
+      sizes.push([Number(width), Number(height)]);
+
+      const slot = window.googletag.defineSlot(
+        '/6355419/Travel/Europe/France/Paris',
+        sizes,
+        name
+      );
+
+      if (slot) {
+        if (mobileWidth && mobileHeight) {
+          const mapping = window.googletag
+            .sizeMapping()
+            .addSize([1024, 0], [[Number(width), Number(height)]])
+            .addSize([0, 0], [[Number(mobileWidth), Number(mobileHeight)]])
+            .build();
+          slot.defineSizeMapping(mapping);
+        }
+
+        slot.addService(window.googletag.pubads());
+      }
 
       window.googletag.enableServices();
       window.googletag.display(name);
-      window.googletag.pubads().refresh();
+
+      if (slot) {
+        window.googletag.pubads().refresh([slot]);
+      } else {
+        window.googletag.pubads().refresh();
+      }
     });
-  }, [isVisible, widthStyle, heightStyle, name]);
+  }, [
+    isVisible,
+    widthStyle,
+    heightStyle,
+    mobileWidth,
+    mobileHeight,
+    name,
+    width,
+    height,
+  ]);
 
-  const AdInner = ({ w, h }: { w: string; h: string }) => (
-    <div
-      className={`flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-100 ${className}`}
-      style={{ width: w, height: h }}
-    >
-      {/* <div className="text-center">
-        <p className="font-semibold text-gray-500">Espaço Publicitário</p>
-        <p className="text-sm text-gray-400">
-          {w} × {h}
-        </p>
-      </div> */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          width: '100%',
-          height: '100%',
-        }}
-      >
-        <div id={name} style={{ minWidth: w, minHeight: h }} />
-      </div>
-    </div>
-  );
-
-  if (mobileWidth && mobileHeight) {
-    const mobileWidthStyle = normalizeSize(mobileWidth);
-    const mobileHeightStyle = normalizeSize(mobileHeight);
-
-    return (
-      <div ref={containerRef} className="flex w-full justify-center">
-        {/* Mobile */}
-        <div className="lg:hidden">
-          <AdInner w={mobileWidthStyle} h={mobileHeightStyle} />
-        </div>
-        {/* Desktop */}
-        <div className="hidden lg:block">
-          <AdInner w={widthStyle} h={heightStyle} />
-        </div>
-      </div>
-    );
-  }
+  const mobileW = mobileWidth ? normalizeSize(mobileWidth) : widthStyle;
+  const mobileH = mobileHeight ? normalizeSize(mobileHeight) : heightStyle;
 
   return (
     <div ref={containerRef} className="flex w-full justify-center">
-      <AdInner w={widthStyle} h={heightStyle} />
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        #wrapper-${name} {
+          width: ${mobileW};
+          height: ${mobileH};
+        }
+        @media (min-width: 1024px) {
+          #wrapper-${name} {
+            width: ${widthStyle};
+            height: ${heightStyle};
+          }
+        }
+      `,
+        }}
+      />
+      <div
+        id={`wrapper-${name}`}
+        className={`flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-100 ${className}`}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <div id={name} />
+        </div>
+      </div>
     </div>
   );
 };
