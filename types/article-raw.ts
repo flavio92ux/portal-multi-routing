@@ -687,6 +687,34 @@ export interface Data12 {
   image: Image3;
   imageRepresentativeType: string;
   textEmbed: string;
+  relatedNews?: RelatedNewsRaw[];
+}
+
+export interface RelatedNewsRaw {
+  config: RelatedNewsConfig;
+  status: number;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+  dtAgendamento: string;
+  _id: string;
+}
+
+export interface RelatedNewsConfig {
+  order: RelatedNewsOrder;
+  live?: Live2;
+}
+
+export interface RelatedNewsOrder {
+  component: string;
+  data: RelatedNewsData;
+}
+
+export interface RelatedNewsData {
+  title: string;
+  subTitle?: string;
+  image: Image3;
+  imageRepresentativeType?: string;
 }
 
 export interface Editoria {

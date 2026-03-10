@@ -1,29 +1,9 @@
 import Link from 'next/link';
 
-const MOCKED_DATA = [
-  {
-    id: 1,
-    title:
-      'GP de Arlington da Indy: onde assistir, horários e programação completa',
-    href: '#',
-    image: 'https://picsum.photos/seed/indy1/500/300',
-  },
-  {
-    id: 2,
-    title:
-      'Indy adota sistema de volta única para classificação do GP de Arlington',
-    href: '#',
-    image: 'https://picsum.photos/seed/indy2/150/150',
-  },
-  {
-    id: 3,
-    title: 'Indy: confira o resultado da Etapa de Phoenix 2026',
-    href: '#',
-    image: 'https://picsum.photos/seed/indy3/150/150',
-  },
-];
+import { RelatedArticle } from '@/types/article';
 
-export function SeeMore() {
+export function SeeMore({ data }: { data?: RelatedArticle[] }) {
+  if (!data || data.length === 0) return null;
   return (
     <aside className="w-full">
       <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
@@ -37,7 +17,7 @@ export function SeeMore() {
         <hr className="border-gray-200" />
 
         <div className="flex flex-col">
-          {MOCKED_DATA.map((item, index) => {
+          {data.map((item, index) => {
             if (index === 0) {
               return (
                 <Link
@@ -64,9 +44,7 @@ export function SeeMore() {
                 key={item.id}
                 href={item.href}
                 className={`flex items-start gap-4 px-4 py-4 no-underline transition-colors hover:bg-gray-50 ${
-                  index !== MOCKED_DATA.length - 1
-                    ? 'border-b border-gray-200'
-                    : ''
+                  index !== data.length - 1 ? 'border-b border-gray-200' : ''
                 }`}
               >
                 <div className="relative shrink-0 overflow-hidden rounded-lg">

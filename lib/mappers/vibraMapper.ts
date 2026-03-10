@@ -58,7 +58,12 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
         label: tag.name,
         slug: slugify(tag.name),
       })),
-      related: [],
+      related: (data.relatedNews || []).map((news: any) => ({
+        id: news._id,
+        title: news.config?.order?.data?.title || '',
+        href: news.url ? `/${news.url}` : '#',
+        image: news.config?.order?.data?.image?.url || '',
+      })),
     },
   };
 }

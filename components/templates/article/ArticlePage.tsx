@@ -21,10 +21,10 @@ export default function ArticlePage({ data }: { data: Article }) {
 
       <div className="flex justify-center pb-3 lg:pb-0">
         <AdBlock
-          width={970}
-          height={250}
+          width={728}
+          height={90}
           mobileWidth={320}
-          mobileHeight={100}
+          mobileHeight={50}
           name="Billboard01"
         />
       </div>
@@ -71,7 +71,7 @@ export default function ArticlePage({ data }: { data: Article }) {
             {/* Sidebar Direita */}
             <aside className="flex w-full shrink-0 flex-col gap-4 lg:w-77.5">
               <div className="hidden lg:block">
-                <SeeMore />
+                <SeeMore data={content.related} />
               </div>
               <div className="hidden lg:block">
                 <AdBlock width={300} height={250} name="Arroba" />
@@ -84,8 +84,8 @@ export default function ArticlePage({ data }: { data: Article }) {
               <div className="lg:hidden">
                 <MaisLidasWrapper path={data.id} />
               </div>
-              <div className="hidden lg:sticky lg:top-1">
-                <AdBlock width={300} height={600} name="HalfPage" />
+              <div className="hidden lg:sticky lg:top-1 lg:block">
+                <AdBlock width={120} height={600} name="HalfPage" />
               </div>
             </aside>
           </div>
