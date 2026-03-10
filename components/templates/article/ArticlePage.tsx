@@ -88,7 +88,7 @@ export default function ArticlePage({ data }: { data: Article }) {
               <div className="lg:hidden">
                 <MaisLidasWrapper path={data.id} />
               </div>
-              <div className="hidden lg:sticky lg:top-1 lg:block">
+              <div className="hidden lg:sticky lg:top-20 lg:block">
                 <AdBlock width={120} height={600} name="HalfPage" />
               </div>
             </aside>

@@ -56,9 +56,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
     () =>
       Array.isArray(content.body) && content.body.length > 0
         ? injectAdBlocksEveryNParagraphs(content.body, 3, {
-          width: 300,
-          height: 250,
-        })
+            width: 300,
+            height: 250,
+          })
         : [],
     [content.body]
   );
@@ -187,8 +187,12 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 );
               case 'template':
                 return (
-                  <CustomTemplate key={idx} template={articleBlock.template} props={articleBlock.props} />
-                )
+                  <CustomTemplate
+                    key={idx}
+                    template={articleBlock.template}
+                    props={articleBlock.props}
+                  />
+                );
               default:
                 return null;
             }
