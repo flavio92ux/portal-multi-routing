@@ -9,6 +9,8 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
   const cssPrimaryColorByTheme =
     vibraData?.route?.map?.template?.config?.theme?.css[0]?.value ?? '';
 
+  const author = data.author && data.author.length > 0 ? data.author[0] : null;
+
   return {
     id: vibraData.id ?? vibraData._id,
     metadata: {
@@ -30,11 +32,10 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
       headline: seo.title || data.title,
       subheadline: data.subTitle,
       author: {
-        id: slugify(data.redactor || 'autor'),
-        name: data.redactor,
+        id: slugify(data.redactor || author?.name || 'autor'),
+        name: data.redactor || author?.name || 'Por Redação',
         role: 'Redação',
-        avatar: null,
-        twitter: null,
+        avatar: author?.image?.urlCrop || null,
       },
       dates: {
         published_at: vibraData.createdAt,

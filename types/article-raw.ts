@@ -688,6 +688,14 @@ export interface Data12 {
   imageRepresentativeType: string;
   textEmbed: string;
   relatedNews?: RelatedNewsRaw[];
+  author?: AuthorRaw[];
+}
+
+export interface AuthorRaw {
+  name: string;
+  id: string;
+  type: string;
+  image: Image3;
 }
 
 export interface RelatedNewsRaw {

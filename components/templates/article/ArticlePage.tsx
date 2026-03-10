@@ -51,8 +51,8 @@ export default function ArticlePage({ data }: { data: Article }) {
         {/* Two-column layout: article + sidebar */}
         <div className="relative">
           {/* Social share sidebar - Agora usando sticky corretamente */}
-          <div className="hidden md:block">
-            <div className="absolute top-0 -left-16 h-full">
+          <div className="hidden lg:block">
+            <div className="absolute top-0 -left-1 h-full">
               {' '}
               <div className="sticky top-20 w-12">
                 {' '}
@@ -61,7 +61,7 @@ export default function ArticlePage({ data }: { data: Article }) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 lg:flex-row">
+          <div className="flex flex-col gap-5 lg:flex-row lg:px-12">
             {/* Coluna da Esquerda: Conteúdo */}
             <div className="flex">
               <article>
@@ -85,10 +85,10 @@ export default function ArticlePage({ data }: { data: Article }) {
                 <MaisLidas path={data.id} />
               </div>
               {/* Mobile: LazyLoad client-side (scroll abaixo do artigo) */}
-              <div className="lg:hidden">
+              <div className="mb-3 lg:hidden">
                 <MaisLidasWrapper path={data.id} />
               </div>
-              <div className="hidden lg:sticky lg:top-1 lg:block">
+              <div className="hidden lg:sticky lg:top-20 lg:block">
                 <AdBlock width={120} height={600} name="HalfPage" />
               </div>
             </aside>

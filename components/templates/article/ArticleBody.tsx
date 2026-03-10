@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { ArticleContent, ArticleBlock, InlineNode } from '@/types/article';
 import { LazyEmbed } from './LazyEmbed';
-import { ShareBar } from './ShareBar';
 import { Newsletter } from './Newsletter';
 import { RelatedTopics } from './RelatedTopics';
 import {
@@ -56,9 +55,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
     () =>
       Array.isArray(content.body) && content.body.length > 0
         ? injectAdBlocksEveryNParagraphs(content.body, 3, {
-          width: 300,
-          height: 250,
-        })
+            width: 300,
+            height: 250,
+          })
         : [],
     [content.body]
   );
@@ -187,8 +186,12 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 );
               case 'template':
                 return (
-                  <CustomTemplate key={idx} template={articleBlock.template} props={articleBlock.props} />
-                )
+                  <CustomTemplate
+                    key={idx}
+                    template={articleBlock.template}
+                    props={articleBlock.props}
+                  />
+                );
               default:
                 return null;
             }
@@ -196,20 +199,10 @@ export function ArticleBody({ content }: ArticleBodyProps) {
         </div>
       )}
 
-      <div className="my-7 hidden justify-center lg:flex">
-        <Image
-          src="https://img.band.com.br/image/2024/03/18/banner-whatsapp-82436.png"
-          alt="Band"
-          width={750}
-          height={250}
-          className="h-auto w-full opacity-90"
-          loading="lazy"
-          priority={false}
-        />
-      </div>
+      {/* <WhatsappBanner /> */}
 
       {/* Share bar after first few paragraphs */}
-      <ShareBar />
+      {/* <ShareBar /> */}
 
       {/* Newsletter (moved from parent) */}
       <div className="mt-8">

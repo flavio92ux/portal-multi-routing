@@ -43,7 +43,7 @@ export function mapBandplayHighlightsToBanner(
     title: item.title,
     description: item.description,
     logo: BANDPLAY_LOGO,
-    image: item.image?.urlStr || item.image?.urlCrop || item.image?.url || '',
+    image: item.image?.url || item.image?.urlStr || item.image?.urlCrop || '',
     cta_text: item.more?.title?.toUpperCase() || 'ASSISTA',
     cta_link: item.more?.link || '#',
   }));
