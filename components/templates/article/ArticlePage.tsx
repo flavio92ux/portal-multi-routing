@@ -51,7 +51,7 @@ export default function ArticlePage({ data }: { data: Article }) {
         {/* Two-column layout: article + sidebar */}
         <div className="relative">
           {/* Social share sidebar - Agora usando sticky corretamente */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <div className="absolute top-0 -left-1 h-full">
               {' '}
               <div className="sticky top-20 w-12">
