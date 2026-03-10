@@ -13,7 +13,9 @@ interface AuthorInfoProps {
 
 export function AuthorInfo({ author, dates }: AuthorInfoProps) {
   const isRedacao = author.name.toLowerCase().includes('redação');
-  const avatarUrl = isRedacao ? '/logo_band.webp' : author.avatar;
+  const avatarUrl = isRedacao
+    ? 'https://flavio-franco-tester.fun/logo_band.webp'
+    : author.avatar;
 
   const renderDate = (dateStr: string) => {
     return formatDate(dateStr).replace(' - ', ' \u2022 ');
