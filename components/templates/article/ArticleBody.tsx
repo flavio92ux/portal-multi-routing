@@ -11,6 +11,7 @@ import {
 } from '@/utils/injectAdBlocks';
 import AdBlock from '@/components/ui/ad-block';
 import { CustomTemplate } from './CustomTemplate';
+import { WhatsappBanner } from './WhatsappBanner';
 
 function renderInlineNodes(nodes: InlineNode[]) {
   if (!Array.isArray(nodes)) {
@@ -200,20 +201,10 @@ export function ArticleBody({ content }: ArticleBodyProps) {
         </div>
       )}
 
-      <div className="my-7 hidden justify-center lg:flex">
-        <Image
-          src="https://img.band.com.br/image/2024/03/18/banner-whatsapp-82436.png"
-          alt="Band"
-          width={750}
-          height={250}
-          className="h-auto w-full opacity-90"
-          loading="lazy"
-          priority={false}
-        />
-      </div>
+      {/* <WhatsappBanner /> */}
 
       {/* Share bar after first few paragraphs */}
-      <ShareBar />
+      {/* <ShareBar /> */}
 
       {/* Newsletter (moved from parent) */}
       <div className="mt-8">
