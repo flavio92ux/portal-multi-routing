@@ -52,7 +52,7 @@ export default function ArticlePage({ data }: { data: Article }) {
         <div className="relative">
           {/* Social share sidebar - Agora usando sticky corretamente */}
           <div className="hidden md:block">
-            <div className="absolute top-0 -left-16 h-full">
+            <div className="absolute top-0 -left-1 h-full">
               {' '}
               <div className="sticky top-20 w-12">
                 {' '}
@@ -61,7 +61,7 @@ export default function ArticlePage({ data }: { data: Article }) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 lg:flex-row">
+          <div className="flex flex-col gap-5 lg:flex-row lg:px-12">
             {/* Coluna da Esquerda: Conteúdo */}
             <div className="flex">
               <article>

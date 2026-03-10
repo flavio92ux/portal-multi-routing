@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { ArticleContent, ArticleBlock, InlineNode } from '@/types/article';
 import { LazyEmbed } from './LazyEmbed';
-import { ShareBar } from './ShareBar';
 import { Newsletter } from './Newsletter';
 import { RelatedTopics } from './RelatedTopics';
 import {
@@ -11,7 +10,6 @@ import {
 } from '@/utils/injectAdBlocks';
 import AdBlock from '@/components/ui/ad-block';
 import { CustomTemplate } from './CustomTemplate';
-import { WhatsappBanner } from './WhatsappBanner';
 
 function renderInlineNodes(nodes: InlineNode[]) {
   if (!Array.isArray(nodes)) {
