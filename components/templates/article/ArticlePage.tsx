@@ -9,6 +9,7 @@ import { AuthorInfo } from './AuthorInfo';
 import AdBlock from '@/components/ui/ad-block';
 import { BandplayBannerWrapper } from './BandplayBannerWrapper';
 import { SeeMore } from './SeeMore';
+import { SeeMoreWrapper } from './SeeMoreWrapper';
 
 export default function ArticlePage({ data }: { data: Article }) {
   const { content } = data;
@@ -72,6 +73,9 @@ export default function ArticlePage({ data }: { data: Article }) {
             <aside className="flex w-full shrink-0 flex-col gap-4 lg:w-77.5">
               <div className="hidden lg:block">
                 <SeeMore data={content.related} />
+              </div>
+              <div className="lg:hidden">
+                <SeeMoreWrapper data={content.related} />
               </div>
               <div className="hidden lg:block">
                 <AdBlock width={300} height={250} name="Arroba" />
