@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { EmbedBlock } from '@/types/article';
+import dynamic from 'next/dynamic';
+
+const XEmbed = dynamic(() => import('./XEmbed').then((mod) => mod.XEmbed));
+const InstagramEmbed = dynamic(() => import('./InstagramEmbed').then((mod) => mod.InstagramEmbed));
 
 /**
- * Renderiza um embed (YouTube, etc.) com lazy loading real.
- * - O container 16:9 é montado imediatamente → sem layout shift
- * - O <iframe> só recebe o `src` quando o elemento está a 200px de entrar no viewport
+ * Renderiza um embed (YouTube, X, Instagram etc.) com lazy loading real via IntersectionObserver.
  * - Para o YouTube, carrega apenas a thumbnail inicialmente (facade), poupando banda e melhorando o Lighthouse.
+ * - Para o X/Instagram, aguarda chegar perto do viewport para renderizar o blockquote e os scripts pesados.
  */
 export function LazyEmbed({ url, provider }: Pick<EmbedBlock, 'url' | 'provider'>) {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -31,6 +34,34 @@ export function LazyEmbed({ url, provider }: Pick<EmbedBlock, 'url' | 'provider'
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  if (provider === 'twitter' || provider === 'x') {
+    return (
+      <figure ref={wrapperRef} className="my-6 flex w-full justify-center">
+        {isVisible ? (
+          <div className="w-full max-w-[550px] min-h-[400px]">
+             <XEmbed url={url} />
+          </div>
+        ) : (
+          <div className="h-[400px] w-full max-w-[550px] animate-pulse rounded-lg bg-gray-200" />
+        )}
+      </figure>
+    );
+  }
+
+  if (provider === 'instagram') {
+    return (
+      <figure ref={wrapperRef} className="my-6 flex w-full justify-center">
+        {isVisible ? (
+          <div className="w-full max-w-[540px] min-h-[500px]">
+             <InstagramEmbed url={url} />
+          </div>
+        ) : (
+          <div className="h-[500px] w-full max-w-[540px] animate-pulse rounded-lg bg-gray-200" />
+        )}
+      </figure>
+    );
+  }
 
   const isYoutube = provider === 'youtube' || url.includes('youtube.com') || url.includes('youtu.be');
 

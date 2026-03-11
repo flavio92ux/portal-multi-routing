@@ -10,8 +10,6 @@ import {
 } from '@/utils/injectAdBlocks';
 import AdBlock from '@/components/ui/ad-block';
 import { CustomTemplate } from './CustomTemplate';
-import { CmsEmbed } from './CmsEmbed';
-
 function renderInlineNodes(nodes: InlineNode[]) {
   if (!Array.isArray(nodes)) {
     return nodes;
@@ -192,7 +190,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 );
               case 'cms-embed':
                 return (
-                  <CmsEmbed
+                  <LazyEmbed
                     key={idx}
                     url={articleBlock.url}
                     provider={articleBlock.provider}
