@@ -64,7 +64,7 @@ export function BandplayBanner() {
 
   if (isLoading) {
     return (
-      <div className="flex h-64 items-center justify-center md:h-80">
+      <div className="flex min-h-[300px] items-center justify-center bg-slate-900 lg:h-[350px]">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent" />
       </div>
     );
@@ -77,34 +77,41 @@ export function BandplayBanner() {
       <div className="mx-auto max-w-325">
         <div className="relative overflow-hidden" ref={emblaRef}>
           <div className="flex">
-            {banners.map((banner) => (
+            {banners.map((banner, index) => (
               <Link
                 key={banner.id}
                 href={banner.cta_link}
-                className="relative min-w-full shrink-0"
+                className="relative flex min-h-[300px] min-w-full shrink-0 flex-col lg:h-[350px]"
               >
-                <div
-                  className="absolute inset-0 z-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${banner.image})` }}
-                />
-                <div className="absolute inset-0 z-10 bg-linear-to-r from-slate-900 via-slate-900/50 to-transparent" />
-                <div className="relative z-20 flex flex-col justify-center px-8 py-16 md:px-12 md:py-24">
-                  <div className="mb-6 w-fit">
+                <div className="absolute inset-0 z-0">
+                  <Image
+                    src={banner.image}
+                    alt={banner.title}
+                    fill
+                    sizes="100vw"
+                    quality={100}
+                    priority={index === 0}
+                    className="object-cover"
+                  />
+                </div>
+                <div className="absolute inset-0 z-10 bg-linear-to-r from-slate-900 via-slate-900/60 to-slate-900/10" />
+                <div className="relative z-20 flex h-full flex-col justify-center px-8 py-10 md:px-12">
+                  <div className="mb-4 w-fit">
                     <Image
                       src={banner.logo}
                       alt="Bandplay"
                       width={120}
                       height={48}
-                      className="h-12 w-auto"
+                      className="h-10 w-auto lg:h-12"
                     />
                   </div>
-                  <h2 className="mb-4 font-sans text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+                  <h2 className="mb-2 font-sans text-2xl font-bold text-white md:text-3xl lg:text-4xl">
                     {banner.title}
                   </h2>
-                  <p className="mb-8 max-w-md text-lg text-gray-300">
+                  <p className="mb-6 max-w-xl text-base text-gray-200 lg:text-lg">
                     {banner.description}
                   </p>
-                  <button className="w-fit bg-linear-to-r from-teal-500 to-blue-600 px-8 py-3 font-bold text-white transition-opacity hover:opacity-90">
+                  <button className="w-fit bg-linear-to-r from-teal-500 to-blue-600 px-6 py-2.5 font-bold text-white transition-opacity hover:opacity-90">
                     {banner.cta_text}
                   </button>
                 </div>

@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { ArticleContent, ArticleBlock, InlineNode } from '@/types/article';
 import { LazyEmbed } from './LazyEmbed';
-import { ShareBar } from './ShareBar';
 import { Newsletter } from './Newsletter';
+import { RelatedTopics } from './RelatedTopics';
 import {
   injectAdBlocksEveryNParagraphs,
   AdBlockWithId,
@@ -65,27 +65,43 @@ export function ArticleBody({ content }: ArticleBodyProps) {
 
   return (
     <>
-      {/* Main image */}
-      {content.media?.main && (
-        <figure className="mb-6">
-          <img
-            src={content.media.main.url}
-            alt={content.media.main.alt || ''}
-            fetchPriority="high"
-            loading="eager"
-            decoding="async"
-            className="h-auto w-full rounded object-cover"
-          />
-          <figcaption className="text-cinza-secundario mt-2 flex items-start gap-2 text-xs">
-            <span className="bg-foreground inline-block h-full w-0.5 shrink-0 self-stretch" />
-            <span>
-              {content.media.main.caption}
-              {content.media.main.credit &&
-                ` - Foto: ${content.media.main.credit}`}
-            </span>
-          </figcaption>
-        </figure>
-      )}
+      {/* Main media: textEmbed tem prioridade sobre a imagem principal */}
+      {content.textEmbed
+        ? (() => {
+            const match = content.textEmbed.match(/url="([^"]+)"/);
+            const embedUrl = match?.[1];
+            return embedUrl ? (
+              <div className="mb-6">
+                <LazyEmbed
+                  url={embedUrl}
+                  provider={
+                    embedUrl.includes('youtube') ? 'youtube' : 'generic'
+                  }
+                />
+              </div>
+            ) : null;
+          })()
+        : content.media?.main && (
+            <figure className="mb-6">
+              <Image
+                src={content.media.main.url || ''}
+                alt={content.media.main.alt || ''}
+                width={1200}
+                height={675}
+                priority
+                sizes="(max-width: 1024px) 100vw, 900px"
+                className="h-auto w-full rounded object-cover"
+              />
+              <figcaption className="text-cinza-secundario mt-2 flex items-start gap-2 text-xs">
+                <span className="bg-foreground inline-block h-full w-0.5 shrink-0 self-stretch" />
+                <span>
+                  {content.media.main.caption}
+                  {content.media.main.credit &&
+                    ` - Foto: ${content.media.main.credit}`}
+                </span>
+              </figcaption>
+            </figure>
+          )}
 
       {/* Body blocks */}
       {processedBlocks.length > 0 && (
@@ -101,6 +117,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                   <AdBlock
                     width={block.__adConfig?.width || '100%'}
                     height={block.__adConfig?.height || 400}
+                    name={`InArticle-${idx}`}
                   />
                 </div>
               );
@@ -149,7 +166,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                     <img
                       src={articleBlock.url}
                       alt={articleBlock.alt || ''}
-                      className="w-full rounded"
+                      width={800}
+                      height={450}
+                      className="h-auto w-full rounded"
                     />
                     {articleBlock.caption && (
                       <figcaption className="text-cinza-secundario mt-2 text-center text-xs">
@@ -176,8 +195,12 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 );
               case 'template':
                 return (
-                  <CustomTemplate key={idx} template={articleBlock.template} props={articleBlock.props} />
-                )
+                  <CustomTemplate
+                    key={idx}
+                    template={articleBlock.template}
+                    props={articleBlock.props}
+                  />
+                );
               default:
                 return null;
             }
@@ -185,24 +208,15 @@ export function ArticleBody({ content }: ArticleBodyProps) {
         </div>
       )}
 
-      <div className="my-7 flex justify-center">
-        <Image
-          src="https://img.band.com.br/image/2024/03/18/banner-whatsapp-82436.png"
-          alt="Band"
-          width={750}
-          height={250}
-          className="h-auto w-full opacity-90"
-          loading="lazy"
-          priority={false}
-        />
-      </div>
+      {/* <WhatsappBanner /> */}
 
       {/* Share bar after first few paragraphs */}
-      <ShareBar />
+      {/* <ShareBar /> */}
 
       {/* Newsletter (moved from parent) */}
       <div className="mt-8">
         <Newsletter />
+        <RelatedTopics tags={content.tags} />
       </div>
     </>
   );

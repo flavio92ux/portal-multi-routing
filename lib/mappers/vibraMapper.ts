@@ -9,6 +9,8 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
   const cssPrimaryColorByTheme =
     vibraData?.route?.map?.template?.config?.theme?.css[0]?.value ?? '';
 
+  const author = data.author && data.author.length > 0 ? data.author[0] : null;
+
   return {
     id: vibraData.id ?? vibraData._id,
     metadata: {
@@ -27,14 +29,13 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
     content: {
       slug: slugify(data.title),
       kicker: data.editorias?.[0]?.name?.toUpperCase(),
-      headline: data.title,
+      headline: seo.title || data.title,
       subheadline: data.subTitle,
       author: {
-        id: slugify(data.redactor || 'autor'),
-        name: data.redactor,
+        id: slugify(data.redactor || author?.name || 'autor'),
+        name: data.redactor || author?.name || 'Por Redação',
         role: 'Redação',
-        avatar: null,
-        twitter: null,
+        avatar: author?.image?.urlCrop || null,
       },
       dates: {
         published_at: vibraData.createdAt,
@@ -45,6 +46,7 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
             main: {
               type: 'image',
               url: data.image.url,
+              url_webp: seo.image?.urlStr || data.image.url,
               alt: data.image.title,
               caption: data.image.title,
               credit: data.image.credit,
@@ -52,11 +54,17 @@ export function mapVibraToCleanArticle(vibraData: ArticleRaw): Article {
           }
         : undefined,
       body: htmlToBlocks(data.text) || [],
+      textEmbed: data.textEmbed || undefined,
       tags: (data.tags || []).map((tag: any) => ({
         label: tag.name,
         slug: slugify(tag.name),
       })),
-      related: [],
+      related: (data.relatedNews || []).map((news: any) => ({
+        id: news._id,
+        title: news.config?.order?.data?.title || '',
+        href: news.url ? `/${news.url}` : '#',
+        image: news.config?.order?.data?.image?.url || '',
+      })),
     },
   };
 }

@@ -14,14 +14,6 @@ const topics = [
   'Bandshop',
 ];
 
-const relatedTopics = [
-  'band cidade minas',
-  'brasil urgente minas',
-  'jornal band minas',
-  'band minas',
-  'band eleições',
-];
-
 export function Newsletter() {
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [email, setEmail] = useState('');
@@ -36,11 +28,11 @@ export function Newsletter() {
   return (
     <div>
       {/* Newsletter Card */}
-      <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white">
+      <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white pb-10 sm:pb-0">
         {/* Top blue border */}
         <div className="bg-primary h-2" />
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <h3 className="text-primary mb-4 text-2xl font-bold">
             Newsletter Notícias
           </h3>
@@ -69,15 +61,15 @@ export function Newsletter() {
           </div>
 
           {/* Email input and button */}
-          <div className="mb-4 flex gap-3">
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row">
             <input
               type="email"
               placeholder="E-mail*"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="focus:border-primary focus:ring-primary flex-1 rounded border border-gray-300 px-4 py-3 text-sm text-slate-950 placeholder:text-gray-400 focus:ring-1 focus:outline-none"
+              className="focus:border-primary focus:ring-primary w-full flex-1 rounded border border-gray-300 px-4 py-3 text-sm text-slate-950 placeholder:text-gray-400 focus:ring-1 focus:outline-none"
             />
-            <button className="flex items-center gap-2 rounded bg-gray-400 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-gray-500">
+            <button className="flex w-full items-center justify-center gap-2 rounded bg-gray-400 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-gray-500 sm:w-auto">
               <Mail className="h-4 w-4" />
               Assinar grátis
             </button>
@@ -90,7 +82,7 @@ export function Newsletter() {
               id="terms"
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
-              className="mt-1 flex-shrink-0"
+              className="mt-1 shrink-0"
             />
             <label htmlFor="terms" className="text-xs text-slate-950">
               Li e concordo com os{' '}
@@ -103,29 +95,6 @@ export function Newsletter() {
               </a>
             </label>
           </div>
-        </div>
-
-        {/* Arial badge */}
-        <div className="absolute right-4 bottom-4 rounded bg-slate-950 px-2 py-1">
-          <span className="text-xs font-bold text-white">Arial</span>
-        </div>
-      </div>
-
-      {/* Related topics */}
-      <div className="mt-8">
-        <h4 className="text-primary mb-4 text-lg font-bold">
-          Tópicos relacionados
-        </h4>
-        <div className="flex flex-wrap gap-2">
-          {relatedTopics.map((topic) => (
-            <a
-              key={topic}
-              href="#"
-              className="bg-primary rounded px-4 py-2 text-xs font-bold text-white no-underline transition-opacity hover:opacity-90"
-            >
-              {topic}
-            </a>
-          ))}
         </div>
       </div>
     </div>
