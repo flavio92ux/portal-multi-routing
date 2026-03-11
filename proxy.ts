@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { isBand, isReceitas } from './utils/host';
 
 export function proxy(request: NextRequest) {
   const url = request.nextUrl;
   const hostname = request.headers.get('host');
 
-  if (hostname === process.env.NEXT_PUBLIC_RECIPES_HOSTNAME) {
+  if (isReceitas(hostname)) {
     url.pathname = `/band-receitas${url.pathname}`;
     return NextResponse.rewrite(url);
   }
 
-  if (hostname === process.env.NEXT_PUBLIC_PORTAL_HOSTNAME) {
+  if (isBand(hostname)) {
     url.pathname = `/band${url.pathname}`;
     return NextResponse.rewrite(url);
   }
