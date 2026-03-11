@@ -22,4 +22,21 @@ const normalizeTemplates = (html: string): string => {
     );
 }
 
-export { normalizeTemplates };
+const normalizeEmbed = (html: string): string => {
+    if (!html) return '';
+    return html.replace(
+        /\<p\>\[embed\]([^"]+)\[\/embed\]\<\/p\>/g,
+        (_, embedUrl) => {
+            return `<cms-embed embed-url="${embedUrl}"></cms-embed>`;
+        }
+    );
+}
+
+const normalizeHtml = (html: string): string => {
+    const normalizedTemplates = normalizeTemplates(html);
+    const normalizedEmbed = normalizeEmbed(normalizedTemplates);
+    const normalized = normalizedEmbed
+    return normalized;
+}
+
+export { normalizeHtml };

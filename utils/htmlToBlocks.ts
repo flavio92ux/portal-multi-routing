@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { normalizeTemplates } from './normalizer';
+import { normalizeHtml } from './normalizer';
 
 interface InlineNode {
   type: 'text';
@@ -94,7 +94,7 @@ export function htmlToBlocks(html: string = '') {
   if (!html) return [];
 
   try {
-    const normalizedHtml = normalizeTemplates(html);
+    const normalizedHtml = normalizeHtml(html);
     const $ = cheerio.load(normalizedHtml);
     const blocks: any[] = [];
 
@@ -158,6 +158,17 @@ export function htmlToBlocks(html: string = '') {
             type: 'template',
             template,
             props: attributes,
+          });
+        }
+
+        if (tagName === 'CMS-EMBED') {
+          const attributes = { ...$el.attr() };
+          const provider = attributes['embed-url']?.match(/(\w+)(?=\.com)/g)?.[0]
+
+          blocks.push({
+            type: 'cms-embed',
+            url: attributes['embed-url'],
+            provider
           });
         }
       });
