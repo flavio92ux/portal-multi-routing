@@ -1,5 +1,20 @@
-import { XEmbed } from "./XEmbed";
-import { InstagramEmbed } from "./InstagramEmbed";
+const xEmbed = dynamic(
+    () => import("./XEmbed").then((mod) => mod.XEmbed),
+    {
+        loading: () => (
+            <div className="w-full h-130 bg-gray-200 animate-pulse rounded-lg" />
+        ),
+    }
+);
+
+const InstagramEmbed = dynamic(
+    () => import("./InstagramEmbed").then((mod) => mod.InstagramEmbed),
+    {
+        loading: () => (
+            <div className="w-full h-130 bg-gray-200 animate-pulse rounded-lg" />
+        ),
+    }
+);
 
 export function CmsEmbed({ url, provider }: { url: string; provider: string }) {
     switch (provider) {
