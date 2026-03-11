@@ -70,6 +70,17 @@ export default function Home() {
           Indy revela traçado do Freedom 250 nas ruas de Washington [Veja também
           ]
         </Link>
+
+        <Link
+          href={
+            'http://' +
+            process.env.NEXT_PUBLIC_PORTAL_HOSTNAME +
+            '/esportes/memphis-reage-a-noticia-de-transferencia-e-manda-recado-ao-corinthians-202603081218'
+          }
+        >
+          Memphis reage a notícia de transferência e manda recado ao Corinthians
+          - Embed Twitter
+        </Link>
       </div>
     </div>
   );
