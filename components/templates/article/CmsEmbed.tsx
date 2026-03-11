@@ -1,3 +1,5 @@
+import dynamic from "next/dynamic";
+
 const xEmbed = dynamic(
     () => import("./XEmbed").then((mod) => mod.XEmbed),
     {
