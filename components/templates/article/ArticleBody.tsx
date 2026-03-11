@@ -56,9 +56,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
     () =>
       Array.isArray(content.body) && content.body.length > 0
         ? injectAdBlocksEveryNParagraphs(content.body, 3, {
-          width: 300,
-          height: 250,
-        })
+            width: 300,
+            height: 250,
+          })
         : [],
     [content.body]
   );
@@ -69,7 +69,12 @@ export function ArticleBody({ content }: ArticleBodyProps) {
       {content.textEmbed
         ? (() => {
             const match = content.textEmbed.match(/url="([^"]+)"/);
-            const embedUrl = match?.[1];
+            let embedUrl = match?.[1];
+
+            if (embedUrl) {
+              embedUrl = embedUrl.replace('https://youtu.be/', '');
+            }
+
             return embedUrl ? (
               <div className="mb-6">
                 <LazyEmbed
