@@ -148,7 +148,7 @@ export interface EmbedBlock {
   /** URL canônica do embed (ex: https://www.youtube.com/embed/VIDEO_ID) */
   url: string;
   /** Provedor detectado — útil para renderização condicional */
-  provider?: 'youtube' | 'generic';
+  provider?: 'youtube' | 'generic' | 'twitter' | 'x' | 'instagram' | string;
 }
 
 export interface CmsEmbedBlock {
