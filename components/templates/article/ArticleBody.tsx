@@ -41,6 +41,7 @@ function renderInlineNodes(nodes: InlineNode[]) {
         </a>
       );
     }
+    d;
 
     return element || null;
   });
@@ -56,9 +57,9 @@ export function ArticleBody({ content }: ArticleBodyProps) {
     () =>
       Array.isArray(content.body) && content.body.length > 0
         ? injectAdBlocksEveryNParagraphs(content.body, 3, {
-          width: 300,
-          height: 250,
-        })
+            width: 300,
+            height: 250,
+          })
         : [],
     [content.body]
   );
