@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-const xEmbed = dynamic(
+const XEmbed = dynamic(
     () => import("./XEmbed").then((mod) => mod.XEmbed),
     {
         loading: () => (
