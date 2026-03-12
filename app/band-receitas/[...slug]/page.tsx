@@ -2,8 +2,11 @@ import { notFound } from 'next/navigation';
 import { getPageData } from '@/services/api';
 import ArticlePage from '@/components/templates/article/ArticlePage';
 import { isValidArticleSlug } from '@/lib/url';
-import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
+import { mapVibraToCleanArticle, mapVibraToCleanRecipe } from '@/lib/mappers/vibraMapper';
 import { Article } from '@/types/article';
+import { getArticleType } from '@/utils/getArticleType';
+import { ArticleRaw } from '@/types/article-raw';
+import { Recipe, RecipeRaw } from '@/types/recipe';
 
 export const revalidate = false;
 
@@ -24,6 +27,11 @@ export default async function SlugPage({
 
   let dataRaw;
   const isArticle = isValidArticleSlug(path);
+  const articleType = getArticleType(path);
+
+  if (!articleType) {
+    return notFound();
+  }
 
   if (isArticle === true) {
     dataRaw = await getPageData(path);
@@ -35,5 +43,21 @@ export default async function SlugPage({
     return notFound();
   }
 
-  console.log(dataRaw)
+  switch (articleType) {
+    case 'BandArticle': {
+      const articleData: Article = mapVibraToCleanArticle(dataRaw as ArticleRaw);
+      return <ArticlePage data={articleData} />;
+    }
+    case 'BandReceitas': {
+      const recipeData: Recipe = mapVibraToCleanRecipe(dataRaw as RecipeRaw);
+      return (
+        <pre>
+          {JSON.stringify(recipeData, null, 2)}
+        </pre>
+      )
+    }
+    default:
+      return notFound();
+  }
+
 }

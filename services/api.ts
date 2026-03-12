@@ -4,10 +4,11 @@ import { ArticleRaw } from '@/types/article-raw';
 import { getArticleType } from '@/utils/getArticleType';
 import { getHostname, isReceitas } from '@/utils/host';
 import { buildEndpoint } from '@/utils/endpoint';
+import { RecipeRaw } from '@/types/recipe';
 
 // Nota: unstable_cache inclui automaticamente os args da função (path) na chave de cache
 const _getPageData = unstable_cache(
-  async (path: string, hostname?: string): Promise<ArticleRaw | null> => {
+  async (path: string, hostname?: string): Promise<ArticleRaw | RecipeRaw | null> => {
     console.log('url base', process.env.PROXY_VIBRA_ELASTIC);
 
     const articleType = getArticleType(path);

@@ -68,40 +68,41 @@ export function ArticleBody({ content }: ArticleBodyProps) {
       {/* Main media: textEmbed tem prioridade sobre a imagem principal */}
       {content.textEmbed
         ? (() => {
-            const match = content.textEmbed.match(/url="([^"]+)"/);
-            const embedUrl = match?.[1];
-            return embedUrl ? (
-              <div className="mb-6">
-                <LazyEmbed
-                  url={embedUrl}
-                  provider={
-                    embedUrl.includes('youtube') ? 'youtube' : 'generic'
-                  }
-                />
-              </div>
-            ) : null;
-          })()
-        : content.media?.main && (
-            <figure className="mb-6">
-              <Image
-                src={content.media.main.url || ''}
-                alt={content.media.main.alt || ''}
-                width={1200}
-                height={675}
-                priority
-                sizes="(max-width: 1024px) 100vw, 900px"
-                className="h-auto w-full rounded object-cover"
+          const match = content.textEmbed.match(/url="([^"]+)"/);
+          const embedUrl = match?.[1];
+          console.log(embedUrl)
+          return embedUrl ? (
+            <div className="mb-6">
+              <LazyEmbed
+                url={embedUrl}
+                provider={
+                  embedUrl.includes('youtube') ? 'youtube' : 'generic'
+                }
               />
-              <figcaption className="text-cinza-secundario mt-2 flex items-start gap-2 text-xs">
-                <span className="bg-foreground inline-block h-full w-0.5 shrink-0 self-stretch" />
-                <span>
-                  {content.media.main.caption}
-                  {content.media.main.credit &&
-                    ` - Foto: ${content.media.main.credit}`}
-                </span>
-              </figcaption>
-            </figure>
-          )}
+            </div>
+          ) : null;
+        })()
+        : content.media?.main && (
+          <figure className="mb-6">
+            <Image
+              src={content.media.main.url || ''}
+              alt={content.media.main.alt || ''}
+              width={1200}
+              height={675}
+              priority
+              sizes="(max-width: 1024px) 100vw, 900px"
+              className="h-auto w-full rounded object-cover"
+            />
+            <figcaption className="text-cinza-secundario mt-2 flex items-start gap-2 text-xs">
+              <span className="bg-foreground inline-block h-full w-0.5 shrink-0 self-stretch" />
+              <span>
+                {content.media.main.caption}
+                {content.media.main.credit &&
+                  ` - Foto: ${content.media.main.credit}`}
+              </span>
+            </figcaption>
+          </figure>
+        )}
 
       {/* Body blocks */}
       {processedBlocks.length > 0 && (

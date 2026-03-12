@@ -4,6 +4,7 @@ import ArticlePage from '@/components/templates/article/ArticlePage';
 import { isValidArticleSlug } from '@/lib/url';
 import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
 import { Article } from '@/types/article';
+import { ArticleRaw } from '@/types/article-raw';
 
 export const revalidate = false;
 
@@ -35,7 +36,7 @@ export default async function SlugPage({
     return notFound();
   }
 
-  const articleData: Article = mapVibraToCleanArticle(dataRaw);
+  const articleData: Article = mapVibraToCleanArticle(dataRaw as ArticleRaw);
 
   if (!articleData || !articleData.metadata || !articleData.metadata.type) {
     return notFound();

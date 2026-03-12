@@ -7,6 +7,7 @@ import { mapVibraToCleanArticle } from '@/lib/mappers/vibraMapper';
 import { mapVibraToHeaderData } from '@/lib/mappers/menuMapper';
 import { Article } from '@/types/article';
 import { BandFooter } from '@/components/templates/footer/BandFooter';
+import { ArticleRaw } from '@/types/article-raw';
 
 export default async function SlugLayout({
   children,
@@ -31,7 +32,7 @@ export default async function SlugLayout({
     return notFound();
   }
 
-  const articleData: Article = mapVibraToCleanArticle(dataRaw);
+  const articleData: Article = mapVibraToCleanArticle(dataRaw as ArticleRaw);
   const headerData = mapVibraToHeaderData(dataRaw);
 
   if (!articleData || !articleData.metadata || !articleData.metadata.theme) {
