@@ -789,3 +789,84 @@ export interface Live2 {
 export interface Slogan2 {
   component: string;
 }
+
+/* ============================================================
+ * VIDEO RAW TYPES
+ * ============================================================ */
+
+export interface VideoRaw {
+  _id: string;
+  route: Route;
+  config: VideoConfig;
+  status: number;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+  id: string;
+  '@created': string;
+  '@updated': string;
+}
+
+export interface VideoConfig {
+  order: VideoOrder;
+  seo?: Seo3;
+}
+
+export interface VideoOrder {
+  component: string;
+  data: VideoData;
+}
+
+export interface VideoData {
+  title: string;
+  description?: string;
+  tags?: Tag2[];
+  tagsCMS?: Tag2[];
+  video: VideoAsset;
+}
+
+export interface VideoAsset {
+  videoId: string;
+  directoryId?: string;
+  title: string;
+  tags?: string[];
+  credit?: string;
+  filter?: string;
+  hash?: string;
+  assets: VideoAssets;
+  source?: VideoSource;
+  status?: string;
+  duration?: number;
+  transcodeProgress?: number;
+  views?: number;
+  published?: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface VideoAssets {
+  iframe?: string;
+  player: string;
+  thumbnail: string;
+  endScreen?: string;
+  mp4?: {
+    '240p'?: string;
+    '360p'?: string;
+    '480p'?: string;
+    '720p'?: string;
+    '1080p'?: string;
+  };
+  hls?: string;
+  vtt?: string;
+  highlights?: boolean;
+  thumbPreview25?: string;
+  thumbPreview50?: string;
+  thumbPreview75?: string;
+}
+
+export interface VideoSource {
+  resolution?: string;
+  file?: string;
+  size?: number;
+  duration?: number;
+}

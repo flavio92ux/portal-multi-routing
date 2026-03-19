@@ -8,6 +8,9 @@ export interface Article {
   metadata: ArticleMetadata;
 
   content: ArticleContent;
+
+  /** Video-specific content (only present when metadata.type === 'video') */
+  videoContent?: VideoContent;
 }
 
 /* ============================================================
@@ -15,7 +18,7 @@ export interface Article {
  * ============================================================ */
 
 export interface ArticleMetadata {
-  type: 'article' | 'category' | 'home';
+  type: 'article' | 'video' | 'category' | 'home';
 
   title: string;
   description?: string;
@@ -54,6 +57,50 @@ export interface ArticleContent {
   tags: ArticleTag[];
 
   related: RelatedArticle[];
+}
+
+/* ============================================================
+ * VIDEO CONTENT
+ * ============================================================ */
+
+export interface VideoContent {
+  slug: string;
+  headline: string;
+  description?: string;
+
+  dates: ArticleDates;
+
+  video: VideoData;
+
+  tags: ArticleTag[];
+
+  relatedVideos: RelatedVideoItem[];
+}
+
+export interface VideoData {
+  videoId: string;
+  title: string;
+  duration?: number;
+  thumbnail: string;
+  player: string;
+  iframe?: string;
+  hls?: string;
+  mp4?: {
+    '240p'?: string;
+    '360p'?: string;
+    '480p'?: string;
+    '720p'?: string;
+    '1080p'?: string;
+  };
+}
+
+export interface RelatedVideoItem {
+  id: string;
+  title: string;
+  href: string;
+  thumb: string;
+  date?: string;
+  duration?: number;
 }
 
 /* ============================================================
