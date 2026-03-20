@@ -18,13 +18,19 @@ export function VideoSidebar({ tags }: VideoSidebarProps) {
   useEffect(() => {
     const fetchRelatedVideos = async () => {
       try {
-        // Use first tag to find related videos
-        const tagSlug = tags[0]?.slug || 'noticias';
-        const API_URL = `https://api.bs.vibra.digital/api/v1/BandVideo?sort=-createdAt&limit=5&config.order.data.tags.id.keyword=videos-${tagSlug}`;
+        // Build query params from all tag IDs
+        const tagParams = tags
+          .filter((tag) => tag.id)
+          .map((tag) => `config.order.data.tags.id.keyword=${tag.id}`)
+          .join('&');
+
+        const API_URL = tagParams
+          ? `https://api.bs.vibra.digital/api/v1/BandVideo?sort=-createdAt&limit=8&${tagParams}`
+          : `https://api.bs.vibra.digital/api/v1/BandVideo?sort=-createdAt&limit=8`;
 
         const res = await fetch(API_URL);
         const data = await res.json();
-        const mapped = mapApiRelatedVideos(data);
+        const mapped = mapApiRelatedVideos(data.items || data);
         setRelatedVideos(mapped);
       } catch (error) {
         console.error('Failed to fetch related videos:', error);

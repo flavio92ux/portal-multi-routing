@@ -109,6 +109,7 @@ export function mapVibraToCleanVideoArticle(vibraData: VideoRaw): Article {
       tags: (data.tags || []).map((tag: any) => ({
         label: tag.name,
         slug: slugify(tag.name),
+        id: tag.id,
       })),
       related: [],
     },
@@ -133,6 +134,7 @@ export function mapVibraToCleanVideoArticle(vibraData: VideoRaw): Article {
       tags: (data.tags || []).map((tag: any) => ({
         label: tag.name,
         slug: slugify(tag.name),
+        id: tag.id,
       })),
       relatedVideos: [],
     },

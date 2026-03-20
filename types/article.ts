@@ -217,6 +217,8 @@ export interface CustomTemplateBlock {
 export interface ArticleTag {
   label: string;
   slug: string;
+  /** Original tag ID from API (e.g., 'videos-ibge', 'videos-economia') */
+  id?: string;
 }
 
 /* ============================================================
