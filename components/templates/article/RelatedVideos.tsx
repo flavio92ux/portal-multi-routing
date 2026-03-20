@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -11,13 +10,34 @@ import {
   type RelatedVideoItem,
 } from '@/lib/mappers/relatedVideosMapper';
 
-export function RelatedVideos() {
-  const pathname = usePathname();
-  const firstLevelPath = pathname.split('/').filter(Boolean)[0];
+export interface VideoTag {
+  id: string;
+  name: string;
+}
 
-  const RELATED_VIDEOS_API =
-    'https://api.bs.vibra.digital/api/v1/BandVideo?sort=-createdAt&limit=8&config.order.data.tags.id.keyword=videos-' +
-    firstLevelPath;
+interface RelatedVideosProps {
+  tags?: VideoTag[];
+}
+
+export function RelatedVideos({ tags = [] }: RelatedVideosProps) {
+  // Constrói a URL da API com base nas tags do vídeo atual
+  const buildRelatedVideosUrl = () => {
+    const baseUrl =
+      'https://api.bs.vibra.digital/api/v1/BandVideo?sort=-createdAt&limit=8';
+
+    if (tags.length === 0) {
+      return baseUrl;
+    }
+
+    // Adiciona cada tag como parâmetro separado
+    const tagParams = tags
+      .map((tag) => `config.order.data.tags.id.keyword=${tag.id}`)
+      .join('&');
+
+    return `${baseUrl}&${tagParams}`;
+  };
+
+  const RELATED_VIDEOS_API = buildRelatedVideosUrl();
 
   const [videos, setVideos] = useState<RelatedVideoItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
